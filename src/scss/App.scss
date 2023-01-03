@@ -1,0 +1,223 @@
+@import './utils/_responsive-helpers';
+@import './utils/_responsive';
+@import './utils/_mixins.scss';
+@import './utils/_colors.scss';
+@import './utils/_typography.scss';
+
+@include media(x-small) {
+  .page {
+    display: grid;
+    //gap: 16px;
+    box-sizing: border-box;
+    grid-template-areas:
+            'header'
+            'main'
+            'footer';
+    grid-template-rows: auto 1fr auto;
+
+  }
+}
+@mixin main{
+  grid-area: main;
+  position: relative;
+  padding-left: padding(main);
+  padding-right: padding(main);
+  background: surface(1);
+  padding-bottom: 5rem; //to not get to badge menu
+  height: 100vh;
+  //margin: 0 auto;
+  max-width: 30rem;
+
+}
+@mixin surface-tint{
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+$borders-radius: (
+  global : 0.75em,
+  text-field : (4px 4px 0 0),
+  small : 4px,
+  medium:16px
+);
+$border-radius: 0.75em;
+$opacities: (
+        hover:8%,
+        focus:12%,
+        pressed:12%,
+        dragged:16%
+);
+$paddings: (
+  icon:.5em,
+  text:.5em,
+  small-media:(top:1em,sides:12px),
+  card:1em,
+  list:(
+    sides:1em
+  ),
+  trailing:(right:1em),
+  leading:(right:1em,top:0.5em),
+  main:1em,
+
+);
+$z-indexes: (
+        global: (
+                nav: 1001,
+                modal: 1002,
+                dialog: 1003,
+                blinder: 1000,
+                hoverContent: 1004,
+        ),
+
+        bar: (
+                body: 1,
+                actionBar: 2,
+                top: 3
+        )
+);
+$elevations:(
+        1:(0px 1px 3px 1px rgba(0, 0, 0, 0.15),
+          0px 1px 2px 0px rgba(0, 0, 0, 0.3)),
+
+        2:(0px 2px 6px 2px rgba(0, 0, 0, 0.15),
+          0px 1px 2px 0px rgba(0, 0, 0, 0.3)),
+
+        3:(0px 1px 3px 0px rgba(0, 0, 0, 0.3),
+          0px 4px 8px 3px rgba(0, 0, 0, 0.15)
+)
+);
+
+$surfaces:(
+    1:(linear-gradient(0deg, #FFFBFE, #FFFBFE),
+            linear-gradient(0deg, rgba(103, 80, 164, 0.05), rgba(103, 80, 164, 0.05))),
+
+    3:(linear-gradient(0deg, #FFFBFE, #FFFBFE),
+            linear-gradient(0deg, rgba(103, 80, 164, 0.11), rgba(103, 80, 164, 0.11)))
+
+);
+
+$sizes:(
+  icons : (
+      big: 24px,
+      small: (width:5px,height:10px),
+  ),
+  icons-container :40px,
+  shape : max(300px)
+);
+
+@function box-shadow($keys...) {
+  $value: $elevations;
+
+  @each $key in $keys {
+    $value: map-get($value, $key);
+  }
+  @return $value;
+}
+@function border-radius($keys...) {
+  $value : $borders-radius;
+  @each $key in $keys {
+    $value : map-get($value, $key);
+  }
+  @return $value;
+}
+
+@function surface($keys...) {
+  $value: $surfaces;
+  @each $key in $keys {
+    $value: map-get($value, $key);
+  }
+  @return $value;
+}
+
+@function z-index($keys...) {
+  $value: $z-indexes;
+
+  @each $key in $keys {
+    $value: map-get($value, $key);
+  }
+  @return $value;
+}
+
+@function padding($keys...) {
+  $value: $paddings;
+  @each $key in $keys {
+    $value:map-get($value, $key);
+  }
+  @return $value;
+}
+@function opacities($keys...) {
+  $value: $opacities;
+  @each $key in $keys {
+    $value:map-get($value, $key);
+  }
+  @return $value;
+}
+
+@function size($keys...) {
+  $value: $sizes;
+
+  @each $key in $keys {
+    // if key is a number, assume we want to do some math with it
+    @if (type-of($key) == number) {
+      // a unitless number (0.6, -1, 5) should multiply the current value
+      @if (unitless($key) == true) {
+        $value: $value * $key;
+
+        // otherwise, assume the number should be added
+      } @else {
+        $value: $value + $key;
+      }
+    }@else {
+    // otherwise, assume it's a string, and keep recursing as usual
+    $value: map-get($value, $key);
+    }
+  }
+@return $value;
+}
+//
+.icon-size-medium{
+  width: size(icons,big);
+  height: size(icons,big);
+}
+.icon-size-small{
+  width:size(icons,small,width);
+  height:size(icons,small,height)
+}
+.shape {
+  width: size(shape);
+  margin: 3rem auto;
+  display: block;
+}
+
+.blinder{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: z-index(global,blinder);
+  background-color: $scrim;
+}
+.hidden{
+  visibility: hidden;
+}
+
+.clickable{
+  cursor: pointer;
+}
+
+.modal{
+  z-index:z-index(global,modal);
+  position: relative;
+}
+
+.middle-align-container{
+  *{
+    display: block;
+    width: 100%;
+  }
+  margin: 0 auto;
+}
+
+//todo lists
