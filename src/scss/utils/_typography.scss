@@ -1,0 +1,85 @@
+@mixin font-display-medium{
+  //styleName: M3/display/medium;
+  font-family: Roboto, serif;
+  font-size: 45px;
+  font-weight: 400;
+  line-height: 52px;
+  letter-spacing: 0;
+  text-align: center;
+
+}
+@mixin font-body-large{
+  font-family: Roboto, serif;
+  font-size: 1em;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.5px
+}
+@mixin font-headline-small{
+  font-family: Roboto,sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: 0;
+  text-align: left;
+}
+
+.title-large{
+  font-size: 22px;
+  font-family: Roboto, serif;
+  line-height: 28px ;
+}
+@mixin font-title-medium{
+  font-family: 'Roboto', serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+  text-align:left;
+}
+@mixin font-body-small {
+  //styleName: M3/body/small;
+  font-family: Roboto, serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.4000000059604645px;
+  text-align: left;
+}
+@mixin font-body-medium{
+  font-family: Roboto, serif;
+  //font-weight: 400;
+  font-size: 0.875em;
+  font-style: normal;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+  text-align:center;
+}
+@mixin font-label-medium {
+  font-family: Roboto,serif;
+  font-size: 12px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+  align-content: center;
+}
+@mixin font-label-small {
+  font-family: Roboto,serif;
+  font-size: 11px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 1em;
+  letter-spacing: 0.5px;
+  //align-content: center;
+}
+@mixin font-label-large {
+  font-family: Roboto,serif;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+  align-content: center;
+}

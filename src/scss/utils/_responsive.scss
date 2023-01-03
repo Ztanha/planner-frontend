@@ -1,0 +1,69 @@
+$breakpointsMin: (
+        //small-handset:  0px,
+        //medium-handset:  360px,
+        //large-handset:  400px,
+        //small-tablet: 600px,
+        //large-tablet: 720px,
+        //desktop: 960px,
+        x-small : 0px,
+        small : 601px,
+        medium : 1025px,
+        large : 1441px,
+        x-large:1921px
+
+);
+$breakpointsMax:(
+        x-small : 600px,
+        small : 1024px,
+        medium :1440px,
+        large : 1920px,
+);
+//480, 600, 840, 960, 1280, 1440, and 1600dp.
+
+@mixin media($keys...){
+  @each $key in $keys {
+    @media (min-width: map-get($breakpointsMin,$key)) and (max-width: map-get($breakpointsMax , $key)) {
+      @content
+    }
+  }
+}
+
+//@mixin large-screen {
+//  @media screen and (min-width: 1450px){
+//    //only large screens
+//    @content;
+//  }
+//}
+//
+//@mixin desktop {
+//  @media screen and (min-width: 940px) { //desktop and more
+//    @content;
+//  }
+//}
+//
+//@mixin desktop-only {
+//  @media screen and (min-width: 940px) and (max-width: 1449.98px) { //only small desktops
+//    @content;
+//  }
+//}
+//
+//
+//@mixin tablet {
+//  @media screen and (min-width: 768px) { //tablet and more
+//    @content;
+//  }
+//}
+//
+//@mixin tablet-only {
+//  @media screen and (min-width: 768px) and (max-width: 991.98px)  { //only tablet
+//    @content;
+//  }
+//}
+//
+//
+//@mixin mobile {
+//  @media screen and (max-width: 424.98px) { //only mobile
+//    @content;
+//  }
+//}
+
