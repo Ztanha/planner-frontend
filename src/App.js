@@ -1,7 +1,7 @@
 import React from 'react';
 import {HashRouter} from 'react-router-dom';
 
-import {DataProvider} from "./DataContext.js";
+import {DataProvider} from "./ThemeContext.js";
 import './scss/App.scss';
 import './App.css';
 
