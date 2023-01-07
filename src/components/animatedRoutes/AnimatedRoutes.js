@@ -1,6 +1,6 @@
 import {Route, Routes, useLocation} from "react-router-dom";
 import Login from "../../views/login/login.js";
-import Home from "../../views/home/Home2.js";
+import Home from "../../views/home/Home.js";
 import DaySchedule from "../../views/home/DaySchedule.js";
 import Tasks from "../../views/tasks/Tasks.js";
 import Task from "../../views/task/Task.js";

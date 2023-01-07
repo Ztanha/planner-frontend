@@ -40,7 +40,7 @@ function ThemeProvider(props){
                 '    linear-gradient(0deg, rgba(208, 188, 255, 0.11), rgba(208, 188, 255, 0.11))'
         }
     };
-    const [ theme,setTheme ] = useState('light');
+    const [ theme,setTheme ] = useState(themes.light);
     return <ThemeContext.Provider {...props} value={[ theme,setTheme ]}/>
 }
 function useTheme(){

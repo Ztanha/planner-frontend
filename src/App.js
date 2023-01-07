@@ -1,7 +1,7 @@
 import React from 'react';
 import {HashRouter} from 'react-router-dom';
 
-import {DataProvider} from "./ThemeContext.js";
+import {ThemeProvider} from "./ThemeContext.js";
 import './scss/App.scss';
 import './App.css';
 
@@ -11,11 +11,11 @@ function App() {
 
     return (
         <div className="app">
-            <DataProvider>
+            <ThemeProvider>
                 <HashRouter>
                     <AnimatedRoutes/>
                 </HashRouter>
-            </DataProvider>
+            </ThemeProvider>
         </div>
     )
 }
