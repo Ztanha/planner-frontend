@@ -9,7 +9,7 @@ export default function ListItem(props) {
     const [ theme ]= useTheme();
     const [ state,setState ]= useState('default');
     let classes = typeof props.effects !== 'undefined' ? ' effects list-item-container ' : 'list-item-container';
-    classes = typeof props.click === "undefined" ? classes+' no-click-event': classes;
+    // classes = typeof props.click === "undefined" ? classes+' no-click-event': classes;
 
     const styles = {
         default:{

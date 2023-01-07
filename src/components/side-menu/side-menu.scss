@@ -1,0 +1,34 @@
+@import "src/scss/App";
+
+@include media(small,x-small){
+  .menu {
+    position: absolute;
+    right: 0;
+    //background-color: $surface;
+    z-index: z-index(global,nav);
+    .items-container{
+      //display: ;
+    }
+  }
+  .menu a{
+    display: block;
+    cursor: pointer;
+    padding: .8rem;
+  }
+  .menu a:hover{
+    //background-color: white;
+  }
+
+}
+
+@include media(x-small){
+  .menu {
+    width: 100%;
+  }
+}
+
+@include media(small) {
+  .items-container{
+    width: 80%;
+  }
+}
