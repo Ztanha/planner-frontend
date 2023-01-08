@@ -27,12 +27,14 @@ export default function SideMenu(props) {
                         <div id='items-container'>
                             { typeof props.sideMenuItems !== 'undefined'
                                 ? props.sideMenuItems.map((x,index)=>(
+
                                     <ListItem
                                         key={index}
                                         headline={x.title}
                                         effects={true}
                                         click={()=>redirect(x.url)}
                                     />
+
                                 ))
                                 : ''
                             }
