@@ -66,10 +66,13 @@ export default function TopNavBar(props) {
                 <span id='backIcon'><BackIcon /></span>
             </div>
             <div className='right-icons'>
-                <span id='homeIcon'
-                      onClick={ ()=>redirect('/home')}
-                ><HomeIcon/>
-                </span>
+                { !isHome.current
+                    ? <span id='homeIcon'
+                        onClick={ ()=>redirect('/home')}
+                        ><HomeIcon/>
+                    </span>
+                    : ''
+                }
                 <span onClick={ ()=>setMenuShow(!menuShow)}
                       id='dotsIcon'
                 ><DotsIcon/>
