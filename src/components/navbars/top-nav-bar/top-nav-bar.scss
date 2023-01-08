@@ -1,0 +1,69 @@
+@import "../../../scss/App";
+
+@mixin icons{
+  cursor: pointer;
+}
+
+.medium{
+  display: grid;
+  grid-template-areas:
+          'left-icons right-icons '
+          'title title';
+  grid-template-columns: auto auto;
+  .title{
+    @include font-headline-small;
+  }
+}
+
+.small{
+  display: grid;
+  grid-template-areas:
+          'left-icons title right-icons';
+  grid-template-columns: auto auto 1fr;
+  box-shadow: box-shadow(1);
+  .title{
+    @include font-title-medium;
+  }
+}
+
+.header{
+  display: grid;
+  width: 100%;
+  position: sticky;
+
+  top: 0;
+  z-index: z-index(bar,top);
+  padding: padding(small-media,top) padding(small-media,sides);
+  transition: all 0.2s ease;
+
+  .title{
+    grid-area: title;
+    padding-left: 2em;
+    .overline{
+      @include font-title-medium;
+      text-align: left;
+    }
+  }
+
+  .left-icons{
+    grid-area: left-icons;
+  }
+
+  .right-icons {
+    grid-area: right-icons;
+    text-align: right;
+  }
+
+  #backIcon{
+    @include icons
+  }
+  #dotsIcon{
+    @include icons;
+    padding: 0 2rem 0 1rem;
+  }
+  #homeIcon{
+    @include icons;
+    padding:0 1rem;
+  }
+}
+

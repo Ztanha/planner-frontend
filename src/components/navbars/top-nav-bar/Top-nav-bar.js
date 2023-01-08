@@ -58,9 +58,9 @@ export default function TopNavBar(props) {
     },[])
 
     return (<>
-        <div ref={main}
+        <div ref={ main }
              className='header medium'
-             style={headerStyle}
+             style={ headerStyle }
         >
             <div className='left-icons'>
                 <span id='backIcon'><BackIcon /></span>
