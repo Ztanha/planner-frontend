@@ -82,7 +82,6 @@ export default function Button(props) {
         >
             { props.children }
         </button>
-        <div></div>
     </div>
 }
 
