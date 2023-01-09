@@ -1,0 +1,12 @@
+@import '../../../scss/App.scss';
+.icon-container{
+  border-radius: 50%;
+  width: size(icons-container);
+  height: size(icons-container);
+  text-align: center;
+  vertical-align: middle;
+  margin: padding(icon);
+  svg{
+    height: 100%;
+  }
+}
