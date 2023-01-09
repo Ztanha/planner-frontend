@@ -1,7 +1,6 @@
 import './button.scss'
 
 import './button.scss'
-// import {useTheme} from "../../ThemeContext.js";
 import { useRef, useState} from "react";
 import {hexToRGB} from '../../../utilities/colors.js'
 import {useTheme} from "../../../ThemeContext.js";
