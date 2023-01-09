@@ -17,10 +17,12 @@ export default function StackedCard(props) {
                  {props.children}
              </div>
             <div className='buttons-container'>
-                {/*{props.buttons || ''}*/}
-                {/*{props.buttons.map(x=>(*/}
-                {/*    <Button></Button>*/}
-                {/*))}*/}
+                {props.buttons.map(x=>(
+                    <Button type={x.type}
+                            click={x.click}
+                    >{x.title}
+                    </Button>
+                ))}
             </div>
 
         </Card>)

@@ -69,10 +69,11 @@ export default function Button(props) {
         props.click();
     }
     return <div className='buttons'>
-        <button ref={button} className = { typeof props.size !== 'undefined'
-            ? props.type+' btn '+props.size
-            : props.type+' btn'
-        }
+        <button ref={button}
+                className = { typeof props.size !== 'undefined'
+                    ? props.type+' btn '+props.size
+                    : props.type+' btn'
+                }
                 onClick = { handleClick }
                 style={ buttonStyle }
                 onMouseEnter={()=>setState('hovered')}
