@@ -1,0 +1,17 @@
+@import '../../../scss/App.scss';
+
+  .content{
+    position: relative;
+    .buttons-container{
+      text-align: right;
+    }
+    .lists{
+      &:before{ //the upper line
+        content: '';
+        width: 80%;
+        right: 10%;
+        position: absolute;
+        border-bottom: 0.06em solid $outline-variant;
+      }
+    }
+  }
