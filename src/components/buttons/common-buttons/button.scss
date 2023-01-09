@@ -1,48 +1,24 @@
 @import '../../../scss/App.scss';
 .buttons{
   width: 100%;
-  //text-align: center;
   .btn{
     border-radius: 20px;
     @include font-label-large;
     position: relative;
     height: 40px;
     padding: 0 2em;
-    &:after{
-      @include surface-tint;
-      top: 0;
-      left: 0;
-      border-radius: $border-radius;
-    }
   }
   .big{
     width: 19em !important;
   }
   .filled{
-    color: $on-primary;
-    background-color: $primary;
     border: none;
   }
   .outlined{
     box-shadow: none;
-    //color: $outline;
   }
   .text{
     background-color: transparent;
     border: none;
-    color: $primary;
-
-    &:hover{
-      &:after {
-        background-color: $primary;
-        opacity: opacities(hover);
-      }
-    }
-    &:active{
-      &:after{
-        background-color: $primary;
-        opacity: opacities(pressed);
-      }
-    }
   }
 }

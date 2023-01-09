@@ -116,23 +116,24 @@ export default function Home() {
                                          title:'Add a task'
                                      }
                                 ]}
-                    >{ schedules.length >0
-                        ? schedules.map(schedule=>
-                            <ListItem headline={schedule.subject}
-                                      trailing={' '}
-                                      divider={'full'}
-                                      supportingText={<IconText
-                                          icon={<ClockIcon/>}
-                                          text={Time.decode(schedule.start)+
-                                              ' - '+
-                                              Time.decode(schedule.end)
-                                          }
-                                      />}
-                            />)
-                        : <ListItem supportingText={'No task yet'}
-                                    trailing={' '}
-                        />
-                    }
+                    >
+                        { schedules.length >0
+                            ? schedules.map(schedule=>
+                                <ListItem headline={schedule.subject}
+                                          trailing={' '}
+                                          divider={'full'}
+                                          supportingText={<IconText
+                                              icon={<ClockIcon/>}
+                                              text={Time.decode(schedule.start)+
+                                                  ' - '+
+                                                  Time.decode(schedule.end)
+                                              }
+                                          />}
+                                />)
+                            : <ListItem supportingText={'No task yet'}
+                                        trailing={' '}
+                            />
+                        }
                     </StackedCard>
                 </div>
             </div>
