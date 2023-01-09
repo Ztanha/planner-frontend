@@ -13,13 +13,13 @@ export default function ListItem(props) {
 
     const styles = {
         default:{
-            backgroundColor:theme.surface,
+            backgroundColor:props.backgroundColor || theme.surface,
         },
         hovered:{
-            backgroundColor:`rgba(${ formatColor(theme.onSurfaceVariant) }, .08)` ,
+            backgroundColor:`rgba(${ props.backgroundColor || formatColor( theme.onSurfaceVariant) }, .08)` ,
         },
         activated:{
-            backgroundColor:`rgba(${ formatColor(theme.onSurfaceVariant) }, .12)` ,
+            backgroundColor:`rgba(${ props.backgroundColor || formatColor(theme.onSurfaceVariant) }, .12)` ,
         }
     }
     const dividers = {
@@ -45,9 +45,6 @@ export default function ListItem(props) {
     return (<>
         <div className={ classes }
              onClick={ props.click }
-             style = {
-                    props.effects ? itemStyle : styles.default
-                }
              onMouseEnter={ ()=>setState('hovered') }
              onMouseLeave={ ()=>setState('default') }
              onMouseDown={ ()=>setState('activated') }
@@ -85,8 +82,14 @@ export default function ListItem(props) {
                 </div>
             </div>
         </div>
+        <div className={'bg-effects'}
+             style = {
+                 props.effects ? itemStyle : styles.default
+             }
+        />
         <div className='divider'
              style={borderStyle}
         />
+
     </>)
 }

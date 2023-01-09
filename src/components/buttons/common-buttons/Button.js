@@ -9,6 +9,7 @@ export default function Button(props) {
     const [ colors ] =useTheme();
     const [ state, setState ] = useState('default');
     let button = useRef();
+
     function formatColor(color) {
         if(typeof color === "string") {
             if(color.startsWith('#')) return hexToRGB(color)
