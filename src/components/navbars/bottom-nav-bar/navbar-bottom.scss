@@ -1,0 +1,25 @@
+@import '../../../scss/App';
+
+#footerContainer{
+
+  box-shadow: box-shadow(2);
+  position: fixed;
+  bottom: 0;
+  height :80px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: min(1fr) min(1fr) min(1fr) min(1fr);
+  z-index: z-index(bar,actionBar);
+  align-items: center;
+  transition: bottom 0.3s ease-out;
+  overflow: hidden;
+}
+
+#space{
+  bottom: 0;
+  height: 5rem;
+}
+.hide {
+  bottom: -80px !important;
+  transition: bottom 0.3s ease-out;
+}
