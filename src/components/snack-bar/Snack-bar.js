@@ -35,7 +35,9 @@ export default function SnackBar(props) {
                 </div>
                 <div className='icon'>
                     { props.closeAffordance
-                        ? <Close onClick={handleClose}/>
+                        ? <Close onClick={handleClose}
+                                 fill={theme.onInverseSurface}
+                        />
                         : ''
                     }
                 </div>
