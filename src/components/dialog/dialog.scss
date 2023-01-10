@@ -1,0 +1,26 @@
+@import "../../scss/App";
+#dialog-component{
+  z-index: z-index(global,dialog);
+  .dialog-container {
+    text-align: center;
+    .dialog-buttons{
+      display: flex;
+      padding: 24px 24px;
+      float: right;
+    }
+    .dialog-content{
+      padding-top: 16px;
+      padding-left: 24px;
+      padding-right: 24px;
+      @include font-body-medium;
+      text-align: left;
+    }
+    .dialog-title{
+      @include font-headline-small;
+      padding: 24px 24px 0 24px;
+      text-align: center;
+    }
+  }
+}
+
+
