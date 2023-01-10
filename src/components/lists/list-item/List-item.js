@@ -28,11 +28,14 @@ export default function ListItem(props) {
             margin: '0 0 0 1rem ',
         },
         inset:{
+            borderBottom:`1px solid ${theme.outline}`,
             margin: '0 0 0 1rem ',
             width:'80%'
         },
         middleInset:{
-            margin:'auto 0'
+            borderBottom:`1px solid ${theme.outline}`,
+            width:'85%',
+            margin: '0 auto',
         },
         withSubhead:{
             borderTop:`1px solid ${theme.outline}`,
