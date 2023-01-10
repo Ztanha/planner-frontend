@@ -63,18 +63,18 @@ $paddings: (
 );
 $z-indexes: (
         global: (
-                nav: 1001,
-                modal: 1002,
-                dialog: 1003,
+                nav: 1000,
+                modal: 1003,
+                dialog: 1004,
                 blinder: 1000,
-                hoverContent: 1004,
+                hoverContent: 1005,
                 fab:1001,
         ),
 
         bar: (
                 body: 1,
                 actionBar: 2,
-                top: 3
+                top: 1002
         )
 );
 $elevations:(
