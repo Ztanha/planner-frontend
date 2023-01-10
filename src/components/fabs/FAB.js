@@ -31,7 +31,7 @@ export default function FAB(props) {
             <div className='fb-bg-effect'
                  style={styles[state]}
             />
-            <div style={{zIndex:6}}>{props.icon}</div>
+            <div>{props.icon}</div>
         </div>
     </>)
 }
