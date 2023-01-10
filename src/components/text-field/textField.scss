@@ -23,6 +23,10 @@
       border: none;
       background-color: transparent;
       @include font-body-large;
+      margin-left: 1em;
+      &:focus{
+        outline: none;
+      }
     }
     .label-container{
       @include font-body-small;
