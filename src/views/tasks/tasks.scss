@@ -1,0 +1,7 @@
+@import '../../scss/App';
+.tasks-page{
+  @include main;
+}
+#newTaskBlinder{
+  @extend .blinder;
+}
