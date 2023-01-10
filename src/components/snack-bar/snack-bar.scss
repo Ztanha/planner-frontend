@@ -1,0 +1,47 @@
+@import "../../scss/App.scss";
+
+.snack-bar-component {
+  position: fixed;
+  bottom: 5rem;
+  display: grid;
+  //color: $inverse-on-surface;
+  @include font-body-medium;
+  align-items: center;
+  border-radius: border-radius(small);
+  vertical-align: center;
+  grid-template-areas:
+          'right-up icon'
+          's-text action';
+  box-shadow: box-shadow(3);
+  //background: $inverse-surface;
+  width: min(344px);
+  height: min(48px);
+  @include media(x-small){
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  @include media(small) {
+    margin-left: 1em;
+  }
+  .headline-container {
+    grid-area: right-up;
+    padding: 0 1em;
+    text-align: left;
+    align-self: center;
+  }
+  .icon{
+    grid-area: icon;
+    justify-self: end;
+    cursor: pointer;
+    padding: 6px 8px;
+    text-align: right;
+  }
+  .s-text-container {
+    grid-area: s-text;
+    padding: 0 1em;
+  }
+  .buttons-container {
+    grid-area: action;
+    padding: 6px .5em;
+  }
+}

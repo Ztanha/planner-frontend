@@ -19,6 +19,8 @@ function ThemeProvider(props){
             primaryContainer: '#EADDFF',
             onPrimaryContainer: '#21005D',
             error : '#B3261E',
+            inverseSurface:'#F3EFF4',
+            onInverseSurface:'#303034',
             surface3: `linear-gradient(0deg, #FFFBFE, #FFFBFE),` +
                 `linear-gradient(0deg, rgba(103, 80, 164, 0.11), rgba(103, 80, 164, 0.11))`
 
@@ -38,6 +40,8 @@ function ThemeProvider(props){
             primaryContainer: '#4F378B',
             onPrimaryContainer: '#EADDFF',
             error : '#F2B8B5',
+            inverseSurface:'#303034',
+            onInverseSurface:'#F3EFF4',
             surface3: 'linear-gradient(0deg, #1C1B1F, #1C1B1F),' +
                 '    linear-gradient(0deg, rgba(208, 188, 255, 0.11), rgba(208, 188, 255, 0.11))'
         }
