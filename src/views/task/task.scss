@@ -1,0 +1,10 @@
+@import "../../scss/App.scss";
+.task-page {
+  @include main;
+  .shape-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @include font-body-large
+  }
+}
