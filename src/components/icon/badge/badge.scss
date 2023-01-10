@@ -1,0 +1,47 @@
+@import "../../../scss/App.scss";
+//todo scrolling effect of navbar
+.navbar-icon{
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-left: padding( small-media,sides );
+  padding-right: padding( small-media,sides );
+  justify-self: center;
+
+  .title-container{
+    text-align: center;
+    @include font-label-small;
+    padding-top: padding(text);
+  }
+
+  @include media(x-small) {
+    .title-container {
+      display: none;
+    }
+  }
+  @include media(small,medium){
+    .title-container {
+      display: block;
+    }
+  }
+  .badge-shape-container{
+    width: 64px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    svg{
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+.active {
+  .title-container{
+    display: block !important;
+
+  }
+}
