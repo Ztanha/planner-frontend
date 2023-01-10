@@ -60,7 +60,8 @@ export default function Card(props) {
         >
             <div className={classes}
                  style={ cardStyle }
-            ><div onClick={()=>redirect(url)}>
+            >
+                <div onClick={()=>redirect(url)}>
                     <div className='content'>
                         {props.children}
                     </div>

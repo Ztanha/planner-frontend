@@ -44,7 +44,6 @@ export default function ListItem(props) {
 
     return (<>
         <div className={ classes }
-             style={{backgroundColor:theme.surface}}
              onClick={ props.click }
              onMouseEnter={ ()=>setState('hovered') }
              onMouseLeave={ ()=>setState('default') }
@@ -53,12 +52,9 @@ export default function ListItem(props) {
             { props.effects
                 ?
                     <div className={'bg-effects'}
-                         style = {
-                             // props.effects ? itemStyle : styles.default
-                             itemStyle
-                         }
+                         style = {itemStyle}
                     />
-                :''
+                : ''
             }
             <div className='content' style={{zIndex:'3'}}>
 
