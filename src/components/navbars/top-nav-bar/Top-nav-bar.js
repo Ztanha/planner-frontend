@@ -7,6 +7,7 @@ import {ReactComponent as BackIcon} from "../../../scss/icons/back.svg";
 import redirect from "../../../utilities/redirect.js";
 import {capitalizeFirstChar} from "../../../utilities/utilities.js";
 import {useTheme} from "../../../ThemeContext.js";
+import {goBack} from "../../../utilities/redirect.js";
 
 export default function TopNavBar(props) {
     const isHome = useRef((location.hash.slice(2).includes('home')))
@@ -63,7 +64,11 @@ export default function TopNavBar(props) {
              style={ headerStyle }
         >
             <div className='left-icons'>
-                <span id='backIcon'><BackIcon /></span>
+                <span id='backIcon'
+                      onClick={()=>goBack()}
+                >
+                    <BackIcon />
+                </span>
             </div>
             <div className='right-icons'>
                 { !isHome.current
