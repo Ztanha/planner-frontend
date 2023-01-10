@@ -1,0 +1,51 @@
+@import "../../scss/App.scss";
+
+.text-field-container {
+
+  //padding: 0 padding(input,sides);
+
+  .first-row {
+    padding: 8px 0;
+    //max-width: 346px;
+    display: grid;
+    border-radius: border-radius(text-field);
+    grid-template-areas:
+            'leading input trailing'
+            'text text text';
+    grid-template-columns: min-content auto max-content;
+  }
+  .middle-container {
+    grid-area: input;
+    display: flex;
+    flex-direction: column;
+    input{
+      width: 10em;
+      border: none;
+      background-color: transparent;
+      @include font-body-large;
+    }
+    .label-container{
+      @include font-body-small;
+    }
+
+  }
+  .leading{
+    grid-area: leading;
+    padding: 0 1em;
+    align-self: center;
+  }
+  .trailing{
+    grid-area: trailing;
+    align-self: center;
+    padding: 0 12px;
+    cursor: pointer;
+  }
+  .s-text-container{
+    grid-area: text;
+    @include font-body-small;
+    padding: 0 16px;
+    background-color: transparent;
+  }
+
+}
+//todo textfield and dialog
