@@ -13,13 +13,13 @@ export default function ListItem(props) {
 
     const styles = {
         default:{
-            backgroundColor:props.backgroundColor || theme.surface,
+            backgroundColor:'transparent',
         },
         hovered:{
-            backgroundColor:`rgba(${ props.backgroundColor || formatColor( theme.onSurfaceVariant) }, .08)` ,
+            backgroundColor:`rgba(${ formatColor( theme.onSurfaceVariant) }, .08)` ,
         },
         activated:{
-            backgroundColor:`rgba(${ props.backgroundColor || formatColor(theme.onSurfaceVariant) }, .12)` ,
+            backgroundColor:`rgba(${ formatColor(theme.onSurfaceVariant) }, .12)` ,
         }
     }
     const dividers = {
@@ -44,12 +44,24 @@ export default function ListItem(props) {
 
     return (<>
         <div className={ classes }
+             style={{backgroundColor:theme.surface}}
              onClick={ props.click }
              onMouseEnter={ ()=>setState('hovered') }
              onMouseLeave={ ()=>setState('default') }
              onMouseDown={ ()=>setState('activated') }
         >
-            <div className='content'>
+            { props.effects
+                ?
+                    <div className={'bg-effects'}
+                         style = {
+                             // props.effects ? itemStyle : styles.default
+                             itemStyle
+                         }
+                    />
+                :''
+            }
+            <div className='content' style={{zIndex:'3'}}>
+
                 <div className='leading'>
                     { props.leading }
                 </div>
@@ -82,11 +94,7 @@ export default function ListItem(props) {
                 </div>
             </div>
         </div>
-        <div className={'bg-effects'}
-             style = {
-                 props.effects ? itemStyle : styles.default
-             }
-        />
+
         <div className='divider'
              style={borderStyle}
         />
