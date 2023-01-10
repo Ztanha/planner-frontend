@@ -1,0 +1,29 @@
+@import '../../scss/App.scss';
+.fab {
+  cursor: pointer;
+  position: fixed;
+  bottom: 5rem;
+  right: 1em;
+  width: 56px;
+  height: 56px;
+  border-radius: border-radius(medium);
+  box-shadow: box-shadow(3);
+  text-align: center;
+
+  //background-color: $primary-container;
+  svg {
+    width: 24px !important;
+    height: 24px !important;
+    //fill: $primary !important;
+    margin-top: 14px;
+
+  }
+}
+.fb-bg-effect{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  border-radius: border-radius(medium);
+}
