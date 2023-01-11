@@ -107,25 +107,20 @@ export default function Home() {
                                                    icon={<IconAndBackground icon={<OnGoingTaskIcon/>}/>}
                                  />}
                                  title={'Ongoing Tasks'}
-                                 trailing={' '}
-                                 buttons={[
-                                     {
-                                         type:'text',
-                                         title:'See all'
-                                     },
-                                     {
-                                         type:'text',
-                                         title:'Add a task'
-                                     }
-                                ]}
+                                 trailing={
+                                    <Button type={'text'}
+                                           // click={}
+                                    >
+                                        See all
+                                    </Button>
+                                }
+                                 buttons={[]}
                     >
                         { schedules.data.length >0
                             ? schedules.data.map(schedule=>
                                 <ListItem headline={schedule.subject}
                                           key={schedule.id}
                                           trailing={' '}
-                                          divider={'full'}
-                                          borderType={'middleInset'}
                                           supportingText={<IconText
                                               icon={<ClockIcon/>}
                                               text={Time.decode(schedule.start).hour+':'+Time.decode(schedule.start).minute+
