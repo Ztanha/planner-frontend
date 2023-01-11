@@ -81,16 +81,17 @@ export default function ListItem(props) {
                         </div>
                         : ''
                     }
-                    { props.supportingText.length > 0
-                        ? (typeof props.supportingText === "object")
-                            ? props.supportingText.map(x=>
-                                <div className='supporting-text'>
-                                    { x }
-                                </div>
-                            )
-                            : <div className='supporting-text'>
+                    { typeof props.supportingText !== "undefined"
+                        ? ( typeof props.supportingText === "string")
+                            ? <div className='supporting-text'>
                                 { props.supportingText }
                             </div>
+                            : (props.supportingText.length > 1)
+                                ? props.supportingText.map(x=>
+                                    <div className='supporting-text'>
+                                        { x }
+                                    </div>)
+                                : props.supportingText
                         : ''
                     }
                 </div>
