@@ -29,6 +29,7 @@ export default function Home() {
     const dispatch = useDispatch();
     const today = dayTimestamp.getTimeStamp();
 
+    console.log(schedules.length)
     useEffect(()=>{
 
         if( fetchRan.current === false ) {
@@ -120,6 +121,7 @@ export default function Home() {
                         { schedules.length >0
                             ? schedules.map(schedule=>
                                 <ListItem headline={schedule.subject}
+                                          key={schedule.id}
                                           trailing={' '}
                                           divider={'full'}
                                           supportingText={<IconText
