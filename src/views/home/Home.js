@@ -29,7 +29,8 @@ export default function Home() {
     const dispatch = useDispatch();
     const today = dayTimestamp.getTimeStamp();
 
-    console.log(schedules.length)
+    console.log(schedules.data)
+    console.log(user)
     useEffect(()=>{
 
         if( fetchRan.current === false ) {
@@ -118,17 +119,18 @@ export default function Home() {
                                      }
                                 ]}
                     >
-                        { schedules.length >0
-                            ? schedules.map(schedule=>
+                        { schedules.data.length >0
+                            ? schedules.data.map(schedule=>
                                 <ListItem headline={schedule.subject}
                                           key={schedule.id}
                                           trailing={' '}
                                           divider={'full'}
+                                          borderType={'middleInset'}
                                           supportingText={<IconText
                                               icon={<ClockIcon/>}
-                                              text={Time.decode(schedule.start)+
+                                              text={Time.decode(schedule.start).hour+':'+Time.decode(schedule.start).minute+
                                                   ' - '+
-                                                  Time.decode(schedule.end)
+                                                  Time.decode(schedule.end).hour+':'+Time.decode(schedule.end).minute
                                               }
                                           />}
                                 />)

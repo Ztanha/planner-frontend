@@ -1,10 +1,12 @@
 import {createSlice} from "@reduxjs/toolkit";
 export const scheduleSlice = createSlice({
     name: 'schedules',
-    initialState:[],
+    initialState:{
+        data:''
+    },
     reducers:{
         schedulesLoaded : (state, action)=>{
-            state.schedules = action.payload
+            state.data = action.payload
         }
     }
 })

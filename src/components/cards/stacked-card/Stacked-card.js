@@ -17,9 +17,10 @@ export default function StackedCard(props) {
                  {props.children}
              </div>
             <div className='buttons-container'>
-                {props.buttons.map(x=>(
+                {props.buttons.map((x,index)=>(
                     <Button type={x.type}
                             click={x.click}
+                            key={index}
                     >{x.title}
                     </Button>
                 ))}
