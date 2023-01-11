@@ -29,8 +29,11 @@ export default function Home() {
     const dispatch = useDispatch();
     const today = dayTimestamp.getTimeStamp();
 
-    console.log(schedules.data)
-    console.log(user)
+    function getTime(start,end){
+        const s = Time.decode(start);
+        const e = Time.decode(end)
+        return s.hour+':'+s.minute+ ' - '+ e.hour+':'+e.minute
+    }
     useEffect(()=>{
 
         if( fetchRan.current === false ) {
@@ -123,10 +126,7 @@ export default function Home() {
                                           trailing={' '}
                                           supportingText={<IconText
                                               icon={<ClockIcon/>}
-                                              text={Time.decode(schedule.start).hour+':'+Time.decode(schedule.start).minute+
-                                                  ' - '+
-                                                  Time.decode(schedule.end).hour+':'+Time.decode(schedule.end).minute
-                                              }
+                                              text={getTime(schedule.start,schedule.end)}
                                           />}
                                 />)
                             : <ListItem supportingText={'No task yet'}
