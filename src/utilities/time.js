@@ -3,6 +3,7 @@ export class Time {
         if(time === -1 )return 0;
         if( time === 0 )return 0;
         let t = time.toString();
+        if(t.length === 3) t='0'+t
         return {
             hour : this.normalize(t.slice(0,2)),
             minute : this.normalize(t.slice(2))
