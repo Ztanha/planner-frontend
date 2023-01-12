@@ -87,8 +87,10 @@ export default function ListItem(props) {
                                 { props.supportingText }
                             </div>
                             : (props.supportingText.length > 1)
-                                ? props.supportingText.map(x=>
-                                    <div className='supporting-text'>
+                                ? props.supportingText.map( (x,index)=>
+                                    <div className='supporting-text'
+                                         key={index}
+                                    >
                                         { x }
                                     </div>)
                                 : props.supportingText

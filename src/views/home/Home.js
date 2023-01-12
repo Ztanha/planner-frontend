@@ -120,6 +120,7 @@ export default function Home() {
                                  buttons={[]}
                     >
                         { schedules.data.length >0
+
                             ? schedules.data.map(schedule=>
                                 <ListItem headline={schedule.subject}
                                           key={schedule.id}
