@@ -7,14 +7,6 @@ function TimeHandler(props){
     const tempStartValue = useRef();
     const tempEndValue = useRef();
 
-
-    function handleSave(){
-
-        props.onChange(tempStartValue.current,tempEndValue.current)
-        // props.setModalShow(false)
-
-    }
-
     function handleSwitch(){
         setFirstClockDisplay(!firstClockDisplay);
         setSecondClockDisplay(!secondClockDisplay);
@@ -28,7 +20,7 @@ function TimeHandler(props){
             setSecondClockDisplay(false);
         }
     },[props.modalShow])
-console.log(props.modalShow)
+
     return(<>
         { props.modalShow
             ?
@@ -63,7 +55,7 @@ console.log(props.modalShow)
                                 },
                                 {
                                     label:'Save',
-                                    onClick:handleSave
+                                    onClick:()=>props.onChange(tempStartValue.current,tempEndValue.current)
                                 }
                             ]}
                 />
