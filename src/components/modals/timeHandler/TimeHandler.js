@@ -10,9 +10,8 @@ function TimeHandler(props){
 
     function handleSave(){
 
-        props.setFirstClockValue(tempStartValue.current);
-        props.setSecondClockValue(tempEndValue.current)
-        props.setModalShow(false)
+        props.onChange(tempStartValue.current,tempEndValue.current)
+        // props.setModalShow(false)
 
     }
 
@@ -29,7 +28,7 @@ function TimeHandler(props){
             setSecondClockDisplay(false);
         }
     },[props.modalShow])
-
+console.log(props.modalShow)
     return(<>
         { props.modalShow
             ?
