@@ -11,14 +11,14 @@ function TimeHandler(props){
         setFirstClockDisplay(!firstClockDisplay);
         setSecondClockDisplay(!secondClockDisplay);
     }
+    function handleSave(){
+        props.onChange(tempStartValue.current,tempEndValue.current)
+    }
     useEffect(()=>{
-        if(props.modalShow === true){
-            setFirstClockDisplay(true);
-            setSecondClockDisplay(false);
-        }else{
-            setFirstClockDisplay(false);
-            setSecondClockDisplay(false);
-        }
+
+        setFirstClockDisplay(true); // to reset the order of the clocks
+        setSecondClockDisplay(false);
+
     },[props.modalShow])
 
     return(<>
@@ -55,7 +55,7 @@ function TimeHandler(props){
                                 },
                                 {
                                     label:'Save',
-                                    onClick:()=>props.onChange(tempStartValue.current,tempEndValue.current)
+                                    onClick:handleSave
                                 }
                             ]}
                 />
