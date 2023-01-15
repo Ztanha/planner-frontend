@@ -1,0 +1,95 @@
+@import '../../scss/App.scss';
+//.chip-component.selected {
+//    background-color: $secondary-container;
+//}
+.chip-component {
+  position: relative;
+  border-radius: 8px;
+  display: inline-block;
+  cursor: pointer;
+  //color: $on-surface-variant;
+  margin: 2px;
+  height: 2em;
+  box-shadow: none;
+  //background-color: $surface;
+  overflow: hidden;
+
+  .background-effects{
+    height: 100%;
+    &:active{
+      &:before{
+        @include surface-tint;
+        width: 3em;
+        height: 3em;
+        top: -5% !important;
+        right: 0;
+        border-radius: 50%;
+        background-color: $on-surface-variant !important;
+        opacity: opacities(focus);
+      }
+    }
+  }
+
+  .label{
+    padding: 0 8px;
+  }
+  &:before{
+    @include surface-tint;
+    border-radius: 8px;
+    right: 0;
+    bottom: 0;
+  }
+  &:hover{
+    &:before{
+      background-color: $primary !important;
+      opacity: opacities(hover) !important;
+    }
+  }
+  &:active{
+    &:before{
+      background-color: $on-surface-variant;
+      opacity: opacities(pressed);
+      transform: scale(50);
+    }
+  }
+  .filter{
+    border-radius: 8px;
+    position: relative;
+    //border: 1px solid $outline;
+    height: 100%;
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: center;
+    @include font-label-large;
+
+    .icon{
+      padding: 0 8px;
+      svg{
+        width: 18px !important;
+        height: 18px !important;
+        //fill: $on-surface-variant !important;
+      }
+    }
+  }
+  .filter.selected{
+
+    box-shadow: box-shadow(1);
+    border-radius: 8px;
+    border: none !important;
+    &:hover{
+
+    }
+  }
+  .suggestion {
+    box-shadow: none;
+    background-color: $surface;
+    .elevated {
+      box-shadow: box-shadow(1)
+    }
+    @include font-label-large;
+    color: $on-surface-variant;
+  }
+
+
+}
