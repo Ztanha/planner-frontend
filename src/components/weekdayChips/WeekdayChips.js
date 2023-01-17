@@ -12,7 +12,6 @@ function WeekdayChips(props) {
         const idx = weekDays.indexOf(label);
         props.setActiveDays( props.activeDays.replaceAt(idx,1-props.activeDays[idx]) );
     }
-    console.log(props.activeDays)
     return (
         <div id={'calendar'}>
             { weekDays.map((x,index)=>
