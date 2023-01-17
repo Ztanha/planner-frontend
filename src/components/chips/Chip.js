@@ -25,8 +25,7 @@ function Chip(props){
             },
         }
     }
-    let style = styles.filter.default;
-    style = {...style, ...styles[ props.type ][ chipState ]}
+    const style = {...styles.filter.default, ...styles[ props.type ][ chipState ]}
     return(
         <div className='chip-component'>
             <div className ='background-effects'>
