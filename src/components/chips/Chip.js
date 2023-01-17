@@ -2,12 +2,13 @@ import './chips.scss';
 import {ReactComponent as Tik} from "../../scss/icons/tik.svg";
 import {useState} from "react";
 import {useTheme} from "../../ThemeContext.js";
+import {formatColor} from "../../utilities/colors.js";
 
 //Types : assist , filter , input , suggestion
 function Chip(props){
 
     const [ theme ]= useTheme();
-    const [ state,setState ]=useState('default')
+    const [ chipState,setChipState ]=useState('default')
     const styles = {
         filter:{
             default:{
@@ -20,22 +21,22 @@ function Chip(props){
                 backgroundColor:theme.secondaryContainer,
             },
             hovered:{
-              backgroundColor:theme.primary,
+                backgroundColor:`rgba(${ formatColor( theme.primary) }, .08)`
             },
-
         }
     }
-    const style = {...styles[props.type]['default'],...styles[ props.type ][ props.state ]}
+    let style = styles.filter.default;
+    style = {...style, ...styles[ props.type ][ chipState ]}
     return(
         <div className='chip-component'>
             <div className ='background-effects'>
                 <div className={props.type}
                      style={ style }
                      onClick={ props.click }
-                     onMouseEnter={ ()=>setState('hovered') }
-                     onMouseLeave={ ()=>setState('default') }
+                     onMouseEnter={ ()=>setChipState('hovered') }
+                     onMouseLeave={ ()=>setChipState('default') }
                      // onMouseDown={ ()=>setState('selected') }
-                    >
+                >
                     { props.selected && props.type === 'filter'
                         ? <div className='icon'><Tik /></div>
                         : ''
