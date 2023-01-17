@@ -1,0 +1,9 @@
+.weekdays-container{
+  text-align: left;
+  #calendar{
+    display: grid;
+    grid-gap: .2em;
+    grid-template-columns: repeat( auto-fill, minmax(4em,auto) );
+    padding: 0 56px;
+  }
+}

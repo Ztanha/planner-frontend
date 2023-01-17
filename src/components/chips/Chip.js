@@ -14,7 +14,6 @@ function Chip(props){
             default:{
                 backgroundColor: theme.surface,
                 color:theme.onSurfaceVariant,
-                // border:`1px solid red`
                 border:`1px solid ${ theme.outline }`
             },
             selected:{
