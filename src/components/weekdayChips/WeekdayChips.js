@@ -3,7 +3,7 @@ import './weekdaysChips.scss'
 
 function WeekdayChips(props) {
     const weekDays = [ 'Su','Mo','Tu','We','Th','Sa','Fr' ];
-    function handleSelectDay(label) { //todo
+    function handleSelectDay(label) {
 
         String.prototype.replaceAt = function (index, replacement) {
             return this.substring(0, index) + replacement +
