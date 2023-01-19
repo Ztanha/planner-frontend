@@ -23,6 +23,7 @@ function TaskSubject(props) {
         props.setTask(taskObj.subject);
         setSuggestions([]);
     }
+    console.log(props.task)
     return (<>
         {
             editMode === true
@@ -32,6 +33,7 @@ function TaskSubject(props) {
                            label={'Task name'}
                            setValue={ checkValidation }
                            status={editStatus}
+                           value={props.task}
                 />
                 <AutoFiller suggestions={ suggestions }
                             clickEvent={ handleSelect }

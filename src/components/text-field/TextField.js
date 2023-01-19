@@ -15,6 +15,7 @@ export default function TextField(props) {
         props.setValue(e.target.value.trim())
     }
 
+    console.log('va:',props.value)
     useEffect(()=>{
         setInput(<input  defaultValue={props.value}
                          placeholder={props.placeholder || ''}
@@ -43,10 +44,7 @@ export default function TextField(props) {
                     {props.label}
                 </div>
                 {input}
-                {/*<input  ref={inp}*/}
-                {/*        placeholder={props.placeholder || ''}*/}
-                {/*        onChange={ handleValue }*/}
-                {/*/>*/}
+
             </div>
             <div className='trailing'>
                 {props.status === 'error'
