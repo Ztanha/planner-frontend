@@ -1,7 +1,7 @@
 @import "../../scss/App";
 #autoFillerBlinder{
   @extend .blinder;
-  //background-color: aquamarine;
+  background-color: transparent !important;
 }
 #suggestionsContainer{
   @extend .clickable;
