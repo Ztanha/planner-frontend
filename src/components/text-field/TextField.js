@@ -4,14 +4,23 @@ import {ReactComponent as Magnifier} from "../../scss/icons/magnifier.svg";
 import {ReactComponent as Notice} from "../../scss/icons/notice.svg";
 import {ReactComponent as Done} from "../../scss/icons/done.svg";
 import {useTheme} from "../../ThemeContext.js";
-import {useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 
 export default function TextField(props) {
-    const [theme]=useTheme()
+    const [theme]=useTheme();
+    const [ input,setInput ]=useState('');
     const inp = useRef();
+
     function handleValue(e) {
-        props.setValue(e.target.value)
+        props.setValue(e.target.value.trim())
     }
+
+    useEffect(()=>{
+        setInput(<input  defaultValue={props.value}
+                         placeholder={props.placeholder || ''}
+                         onChange={ handleValue }
+        />)
+    },[props.value])
 
     return(<div className='text-field-container'>
         <div className='first-row'
@@ -33,17 +42,18 @@ export default function TextField(props) {
                 <div className='label-container'>
                     {props.label}
                 </div>
-                <input  ref={inp}
-                        placeholder={props.placeholder || ''}
-                        onChange={ handleValue }
-                />
+                {input}
+                {/*<input  ref={inp}*/}
+                {/*        placeholder={props.placeholder || ''}*/}
+                {/*        onChange={ handleValue }*/}
+                {/*/>*/}
             </div>
             <div className='trailing'>
                 {props.status === 'error'
                     ? <Notice/>
                     : props.status === 'done'
                         ? <Done/>
-                        : <Unknown onClick={()=>inp.current.value = ''}/>
+                        : <Unknown onClick={()=>props.setValue('')}/>
                 }
             </div>
         </div>
