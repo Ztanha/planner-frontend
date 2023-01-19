@@ -95,7 +95,7 @@ export default function Automation(){
     }
     function checkInputs(){
         if (activeWeekdays.indexOf('1') === -1) {
-            handleDialog('dialog','Please select the days you want the auto schedule to repeat.')
+            handleDialog('dialog','Please select the days you want to repeat the auto schedule.')
             return false;
         }
         if( taskSubject.length === 0 ){
