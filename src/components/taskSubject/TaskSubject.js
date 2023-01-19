@@ -9,7 +9,7 @@ function TaskSubject(props) {
     const [ editStatus,setEditStatus ]=useState('');
 
     function checkValidation(value){
-        props.setValue(value);
+        props.setTask(value);
         setEditStatus('done')
     }
     return (<>
