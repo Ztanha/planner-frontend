@@ -9,24 +9,33 @@ function TaskSubject(props) {
     const [ editMode,setEditMode ]=useState(false);
     const [ editStatus,setEditStatus ]=useState('');
     const [ suggestions,setSuggestions ]=useState([])
-
-    console.log(suggestions)
+    const taskDefaultValue = useRef(props.task);
     function checkValidation(value){
-        setSuggestions( props.allTasks.filter(x=>x.subject.includes(value)) );
-        props.setTask(value);
+        if(value.length === 0) {
+            props.setTask(taskDefaultValue)
+        }else{
+            setSuggestions( props.allTasks.filter(x=>x.subject.includes(value)) );
+            props.setTask(value);
+        }
         setEditStatus('done')
+    }
+    function handleSelect(taskObj){
+        props.setTask(taskObj.subject);
+        setSuggestions([]);
     }
     return (<>
         {
             editMode === true
             ?<>
                 <TextField leading={ <Folder/> }
-                           placeholder={ props.task }
+                           placeholder={ taskDefaultValue.current }
                            label={'Task name'}
                            setValue={ checkValidation }
                            status={editStatus}
                 />
-                <AutoFiller suggestions={ suggestions }/>
+                <AutoFiller suggestions={ suggestions }
+                            clickEvent={ handleSelect }
+                />
 
             </>
             :
