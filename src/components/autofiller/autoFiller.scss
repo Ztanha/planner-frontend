@@ -1,0 +1,14 @@
+@import "../../scss/App";
+#autoFillerBlinder{
+  @extend .blinder;
+  //background-color: aquamarine;
+}
+#suggestionsContainer{
+  @extend .clickable;
+  z-index: z-index(bar,actionBar);
+  padding: 1em;
+  position: absolute;
+  background-color: antiquewhite;
+  width: fit-content;
+
+}
