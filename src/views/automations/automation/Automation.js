@@ -93,23 +93,43 @@ export default function Automation(){
             goBack()
         }
     }
+    function checkInputs(){
+        if (activeWeekdays.indexOf('1') === -1) {
+            handleDialog('dialog','Please select the days you want the auto schedule to repeat.')
+            return false;
+        }
+        if( taskSubject.length === 0 ){
+            handleDialog('dialog','Please fill the input related to subject of the task')
+            return false;
+        }
+    }
 
     async function handleSave() {
 
-        if (activeWeekdays.indexOf('1') === -1) {
-            alert('Please select the days you want the auto schedule to repeat.')
-            return;
-        }
+        if(checkInputs === false)return;
+        let t;
         const start = startTimeValue === '0000' ? -1 : startTimeValue;
         const end = endTimeValue === '0000' ? -1 : endTimeValue;
+        const task =allTasks.find(x=>x.subject === taskSubject);
+
+        if( task.length === 0 ){
+            const result = await TaskController.add(taskSubject, '');
+            if(result.status === "success"){
+                t= result.data[0];
+            } else {
+                handleDialog('dialog','Something went wrong!');
+            }
+        }else{
+            t = task;
+        }
 
         if (schedule.current !== undefined) {
             if( activeWeekdays === schedule.weekdays && start === schedule.start && end === schedule.end ){
                 await saveSchedule(schedule.plan_id);
 
             }
-        } else if (tId) {
-            const pId = await savePlan(start, end, tId);
+        } else {
+            const pId = await savePlan(start, end, t.Id);
             if(typeof pId === "number") await saveSchedule(pId);
             else handleDialog('dialog','Something went wrong!')
         }
@@ -121,11 +141,6 @@ export default function Automation(){
                 if(resp.status === "success") {
                     const allTasks = resp.data;
                     setAllTasks(allTasks);
-                    // if( tId !== null ) {
-                    //     const task = allTasks.find(x => x.id === Number(tId));
-                    //     if( Object.values(task).length >0 ) setTaskToLoad(task)
-                    //     else alert('not found!')
-                    // }
                 }
             })
             if( sId ){
@@ -215,7 +230,8 @@ export default function Automation(){
                             OK
                         </Button>
                     </>}
-            >{ dialogMsg }
+            >
+                { dialogMsg }
             </Dialog>
             <SnackBar show={ snackBarShow }
                       supportingText={ snackBarMsg }
