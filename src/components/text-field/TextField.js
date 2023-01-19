@@ -9,13 +9,10 @@ import React, {useEffect, useRef, useState} from "react";
 export default function TextField(props) {
     const [theme]=useTheme();
     const [ input,setInput ]=useState('');
-    const inp = useRef();
 
     function handleValue(e) {
         props.setValue(e.target.value.trim())
     }
-
-    console.log('va:',props.value)
     useEffect(()=>{
         setInput(<input  defaultValue={props.value}
                          placeholder={props.placeholder || ''}
