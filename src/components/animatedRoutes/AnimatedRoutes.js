@@ -4,7 +4,7 @@ import Home from "../../views/home/Home.js";
 import DaySchedule from "../../views/home/DaySchedule.js";
 import Tasks from "../../views/tasks/Tasks.js";
 import Task from "../../views/task/Task.js";
-import Automation from "../../views/automations/automation/Automation3.js";
+import Automation from "../../views/automations/automation/Automation.js";
 import NewSchedule from "../../views/schedules/new/newSchedule.js";
 import NewPlan from "../../views/newPlan/newPlan.js";
 import Automations from "../../views/automations/automations.js";
