@@ -23,7 +23,7 @@ function TaskSubject(props) {
         props.setTask(taskObj.subject);
         setSuggestions([]);
     }
-    console.log(props.task)
+
     return (<>
         {
             editMode === true
