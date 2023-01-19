@@ -1,7 +1,7 @@
 import './taskSubject.scss'
 import ListItem from "../lists/list-item/List-item.js";
 import {ReactComponent as Folder} from "../../scss/icons/folder.svg";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import TextField from "../text-field/TextField.js";
 
 function TaskSubject(props) {
@@ -9,25 +9,21 @@ function TaskSubject(props) {
     const [ editStatus,setEditStatus ]=useState('');
 
     function checkValidation(value){
-
-        if(props.allTasks.length > 0){
-            const t = props.allTasks.find( x=>x.subject === value );
-            if(t.length > 0) setEditStatus('error')
-            return;
-        }
         props.setValue(value);
         setEditStatus('done')
     }
     return (<>
         {
             editMode === true
-            ?
+            ?<>
                 <TextField leading={ <Folder/> }
                            placeholder={ props.task }
                            label={'Task name'}
                            setValue={ checkValidation }
                            status={editStatus}
                 />
+
+            </>
             :
                 <ListItem leading = { <Folder/> }
                           overline = { 'Task name' }

@@ -80,7 +80,7 @@ export default function Automation(){
         if (resp.status === 'success') {
             return resp.data[0];
         }else{
-            throw ('error')
+            handleDialog('dialog',resp.error)
         }
     }
     async function saveSchedule(pId) {
@@ -110,10 +110,9 @@ export default function Automation(){
             }
         } else if (tId) {
             const pId = await savePlan(start, end, tId);
-            await saveSchedule(pId);
-
+            if(typeof pId === "number") await saveSchedule(pId);
+            else handleDialog('dialog','Something went wrong!')
         }
-
     }
 
     useEffect(()=>{
