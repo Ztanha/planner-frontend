@@ -20,8 +20,9 @@ export default function Button(props) {
     const styles = {
         outline : {
             default:{
-
-                backgroundColor:'transparent'
+                backgroundColor:'transparent',
+                color: colors.primary,
+                border: `1px solid ${colors.primary}`
             },
             hovered:{
 

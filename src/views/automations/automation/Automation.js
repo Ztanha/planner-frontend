@@ -126,7 +126,7 @@ export default function Automation(){
     async function handleSave() {
 
         let result;
-        if(!checkInputs())return;
+        if(!checkInputs()) return;
         const start = startTimeValue === '0000' ? -1 : startTimeValue;
         const end = endTimeValue === '0000' ? -1 : endTimeValue;
         const taskId = getTask();
@@ -210,15 +210,26 @@ export default function Automation(){
                 <div className='weekdays-container'>
                     <ListItem leading = { <Calendar/> }
                               headline = {'Days'}
-                              divider={false}
+                              divider={ false}
                               trailing = {' '}
                     />
                     <WeekdayChips activeDays={ activeWeekdays }
                                   setActiveDays={ setActiveWeekdays }
                     />
-
                 </div>
+
                 <div className='save-button'>
+                    { schedule.current
+                        ?
+                        <Button type = { 'outline' }
+                                size = { 'big' }
+                                click = { handleSave }
+                        >
+                            Delete
+                        </Button>
+                        :
+                        ''
+                    }
                     <Button type = { 'filled' }
                             size = { 'big' }
                             click = { handleSave }
