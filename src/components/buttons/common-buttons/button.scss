@@ -2,6 +2,7 @@
 .buttons{
   width: 100%;
   .btn{
+    box-sizing: border-box;
     border-radius: 20px;
     @include font-label-large;
     position: relative;
