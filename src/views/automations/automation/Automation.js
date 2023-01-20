@@ -218,11 +218,10 @@ export default function Automation(){
                     />
                 </div>
 
-                <div className='main-btns'>
+                <div className={ schedule.current ? 'double main-btns': 'main-btns'}>
                     { schedule.current
                         ?
                         <Button type = { 'outline' }
-                                size = { 'big' }
                                 click = { handleSave }
                         >
                             Delete
@@ -231,7 +230,7 @@ export default function Automation(){
                         ''
                     }
                     <Button type = { 'filled' }
-                            size = { 'big' }
+                            size = { schedule.current ? '' :'big' }
                             click = { handleSave }
                     >Save
                     </Button>
