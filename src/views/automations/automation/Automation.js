@@ -41,6 +41,7 @@ export default function Automation(){
     const [allTasks,setAllTasks]=useState([]);
 
     function adjustTimingText(start, end){
+
         const startVal = Time.decode( start );
         const endVal = Time.decode( end );
         setTimingText(`From ${ startVal.hour%12 } : ${ startVal.minute } ${ startVal.hour > 12 ? 'pm' : 'am' }
@@ -60,6 +61,7 @@ export default function Automation(){
     }
 
     function handleTimeChange(start,end){
+
         const duration = Time.subtract(start,end);
 
         if( duration.hours !== '00' && duration.mins !== '00' ) {
@@ -86,15 +88,15 @@ export default function Automation(){
             else handleDialog('dialog',resp.error)
         }
     }
-    async function saveSchedule(pId) {
+    async function saveSchedule(pId,sId='') {
+        let resp;
+        if(sId){
+            return await AutoScheduleController.update( sId,activeWeekdays,pId );
 
-        const resp = await AutoScheduleController.add(pId, activeWeekdays);
-        if (resp.status !== "success") {
-            handleDialog( 'Something wrong happened!')
         }else{
-            handleDialog( 'snackBar','Saved!' )
-            goBack()
+            return await AutoScheduleController.add(pId, activeWeekdays);
         }
+
     }
     function checkInputs(){
 
@@ -106,21 +108,26 @@ export default function Automation(){
             handleDialog('dialog','Please fill the input related to subject of the task')
             return false;
         }
+        return true;
     }
-    async function saveTask(subject){
-        return await TaskController.add(subject, '');
+    async function getTask(){
+        const task = allTasks.find( x=>x.subject === taskSubject );
+        if( Object.values(task).length === 0 ) {
+            const result = await TaskController.add(taskSubject, '');
+            if(result.status === 'success') return result.data
+            else handleDialog('dialog','Something wrong happened!')
+            return;
+        }
+        return task.id
     }
 
     async function handleSave() {
 
-        if(checkInputs === false)return;
-        let taskId;
+        let result;
+        if(!checkInputs())return;
         const start = startTimeValue === '0000' ? -1 : startTimeValue;
         const end = endTimeValue === '0000' ? -1 : endTimeValue;
-        const task = allTasks.find( x=>x.subject === taskSubject );
-
-        if( Object.values(task).length === 0 ) taskId = await saveTask(taskSubject)
-        else taskId = task.id;
+        const taskId = getTask();
 
         if ( schedule.current !== undefined ) {
             let pId;
@@ -129,12 +136,18 @@ export default function Automation(){
             }else{
                 pId = await savePlan(start, end, taskId, schedule.plan_id);
             }
-            await AutoScheduleController.update( schedule.id,activeWeekdays,pId );
+
+            result = await saveSchedule(pId,schedule.id)
 
         } else {
             const pId = await savePlan(start, end, taskId);
-            if( typeof pId === "number" ) await saveSchedule( pId );
-            else handleDialog('dialog','Something went wrong!')
+            result = await saveSchedule( pId )
+        }
+        if (result.status !== "success") {
+            handleDialog( 'Something wrong happened!')
+        }else{
+            handleDialog( 'snackBar','Saved!' )
+            goBack()
         }
     }
 
