@@ -129,13 +129,14 @@ export default function Automation(){
 
             }
         } else {
-            const pId = await savePlan(start, end, t.Id);
-            if(typeof pId === "number") await saveSchedule(pId);
+            const pId = await savePlan(start, end, t.id);
+            if( typeof pId === "number" ) await saveSchedule( pId );
             else handleDialog('dialog','Something went wrong!')
         }
     }
 
     useEffect(()=>{
+
         if( pageFetch.current === false ){
             TaskController.getAll().then(resp=>{
                 if(resp.status === "success") {
@@ -156,15 +157,8 @@ export default function Automation(){
                 })
 
             }else if( tId ){
-                TaskController.get(tId).then(x=>{
-                    if (x.status === 'success') {
-                        const s = x.data[0];
-                        schedule.current = s;
-                        setTaskSubject(s.subject)
-                    }
-                })
-            }else {
-
+                const task = allTasks.find(x=>x.id === tId);
+                if( task.length > 0 ) setTaskSubject( task.subject )
             }
             pageFetch.current = true;
         }
