@@ -54,9 +54,11 @@ export default function Automation(){
         if(type === 'dialog') {
             setDialogMsg(text); //todo title
             setDialogShow(true);
-        }else {
+        }else if(type === 'snackBar') {
             setSnackBarMsg(text)
             setSnackBarShow(true)
+        }else{
+            console.log('dialog message type is not correct')
         }
     }
 
@@ -131,20 +133,20 @@ export default function Automation(){
 
         if ( schedule.current !== undefined ) {
             let pId;
-            if( start === schedule.start && end === schedule.end && schedule.subject === taskSubject ){
-                pId = schedule.plan_id;
+            if( start === schedule.current.start && end === schedule.current.end && schedule.current.subject === taskSubject ){
+                pId = schedule.current.plan_id;
             }else{
-                pId = await savePlan(start, end, taskId, schedule.plan_id);
+                pId = await savePlan(start, end, taskId, schedule.current.plan_id);
             }
 
-            result = await saveSchedule(pId,schedule.id)
+            result = await saveSchedule(pId,schedule.current.id)
 
         } else {
             const pId = await savePlan(start, end, taskId);
             result = await saveSchedule( pId )
         }
-        if (result.status !== "success") {
-            handleDialog( 'Something wrong happened!')
+        if (result.status === "error") {
+            handleDialog( 'dialog','Something wrong happened!')
         }else{
             handleDialog( 'snackBar','Saved!' )
             goBack()
@@ -164,6 +166,7 @@ export default function Automation(){
                 AutoScheduleController.get([sId]).then(x => {
                     if (x.status === 'success') {
                         const s = x.data[0];
+                        schedule.current = s;
                         setTaskSubject(s.subject)
                         setStartTimeValue(s.start)
                         setEndTimeValue(s.end)
