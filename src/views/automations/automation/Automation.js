@@ -149,7 +149,6 @@ export default function Automation(){
             handleDialog( 'dialog','Something wrong happened!')
         }else{
             handleDialog( 'snackBar','Saved!' )
-            goBack()
         }
     }
 
