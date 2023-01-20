@@ -21,6 +21,7 @@ import PlanController from "../../../controllers/PlanController.js";
 import {goBack} from "../../../utilities/redirect.js";
 import SnackBar from "../../../components/snack-bar/Snack-bar.js";
 import {TaskSubject} from "../../../components/taskSubject/TaskSubject.js";
+import ScheduleController from "../../../controllers/ScheduleController.js";
 
 export default function Automation(){
 
@@ -74,10 +75,11 @@ export default function Automation(){
         adjustTimingText(start,end)
         setTimeHandlerShow(false)
     }
-    async function savePlan( start,end,taskId ) {
+    async function savePlan( start,end,taskId,pId='' ) {
 
         const resp = await PlanController.add([taskId], start, end)
         if (resp.status === 'success') {
+            if( pId.length > 0 ) PlanController.delete(pId)
             return resp.data[0];
         }else{
             handleDialog('dialog',resp.error)
@@ -124,10 +126,13 @@ export default function Automation(){
         }
 
         if (schedule.current !== undefined) {
-            if( activeWeekdays === schedule.weekdays && start === schedule.start && end === schedule.end ){
-                await saveSchedule(schedule.plan_id);
-
+            let pId;
+            if( start === schedule.start && end === schedule.end && schedule.subject === taskSubject ){
+                pId = schedule.plan_id;
+            }else{
+                pId = await savePlan(start, end, t.id,schedule.plan_id);
             }
+            await AutoScheduleController.update(schedule.id,activeWeekdays,pId);
         } else {
             const pId = await savePlan(start, end, t.id);
             if( typeof pId === "number" ) await saveSchedule( pId );
