@@ -133,6 +133,7 @@ export default function Automation(){
                 pId = await savePlan(start, end, t.id,schedule.plan_id);
             }
             await AutoScheduleController.update(schedule.id,activeWeekdays,pId);
+
         } else {
             const pId = await savePlan(start, end, t.id);
             if( typeof pId === "number" ) await saveSchedule( pId );
