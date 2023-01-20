@@ -75,12 +75,15 @@ export default function Automation(){
     }
     async function savePlan( start,end,taskId,pId='' ) {
 
-        const resp = await PlanController.add([taskId], start, end)
-        if (resp.status === 'success') {
-            if( pId.length > 0 ) PlanController.delete(pId)
-            return resp.data[0];
+        let resp;
+        if(pId){
+            resp = await PlanController.update(pId,start, end,[taskId])
+            if (resp.status === 'success') return pId;
+            else handleDialog('dialog',resp.error)
         }else{
-            handleDialog('dialog',resp.error)
+            resp = await PlanController.add([taskId], start, end)
+            if (resp.status === 'success') return resp.data[0]
+            else handleDialog('dialog',resp.error)
         }
     }
     async function saveSchedule(pId) {
@@ -111,27 +114,25 @@ export default function Automation(){
     async function handleSave() {
 
         if(checkInputs === false)return;
-        let t;
+        let taskId;
         const start = startTimeValue === '0000' ? -1 : startTimeValue;
         const end = endTimeValue === '0000' ? -1 : endTimeValue;
-        const task =allTasks.find(x=>x.subject === taskSubject);
+        const task = allTasks.find( x=>x.subject === taskSubject );
 
-        if( task.length === 0 ) await saveTask(taskSubject)
-        else t = task;
+        if( Object.values(task).length === 0 ) taskId = await saveTask(taskSubject)
+        else taskId = task.id;
 
-        if (schedule.current !== undefined) {
-            let pId,tId;
+        if ( schedule.current !== undefined ) {
+            let pId;
             if( start === schedule.start && end === schedule.end && schedule.subject === taskSubject ){
                 pId = schedule.plan_id;
             }else{
-                if( schedule.subject === taskSubject ) tId = await saveTask(taskSubject)
-                else tId = t.id
-                pId = await savePlan(start, end, tId, schedule.plan_id);
+                pId = await savePlan(start, end, taskId, schedule.plan_id);
             }
             await AutoScheduleController.update( schedule.id,activeWeekdays,pId );
 
         } else {
-            const pId = await savePlan(start, end, t.id);
+            const pId = await savePlan(start, end, taskId);
             if( typeof pId === "number" ) await saveSchedule( pId );
             else handleDialog('dialog','Something went wrong!')
         }
