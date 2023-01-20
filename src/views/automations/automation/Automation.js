@@ -94,6 +94,7 @@ export default function Automation(){
         }
     }
     function checkInputs(){
+
         if (activeWeekdays.indexOf('1') === -1) {
             handleDialog('dialog','Please select the days you want to repeat the auto schedule.')
             return false;
@@ -115,19 +116,15 @@ export default function Automation(){
         const end = endTimeValue === '0000' ? -1 : endTimeValue;
         const task =allTasks.find(x=>x.subject === taskSubject);
 
-        if( task.length === 0 ){
-            await saveTask(taskSubject)
-
-        }else{
-            t = task;
-        }
+        if( task.length === 0 ) await saveTask(taskSubject)
+        else t = task;
 
         if (schedule.current !== undefined) {
             let pId,tId;
             if( start === schedule.start && end === schedule.end && schedule.subject === taskSubject ){
                 pId = schedule.plan_id;
             }else{
-                if(schedule.subject === taskSubject) tId = await saveTask(taskSubject)
+                if( schedule.subject === taskSubject ) tId = await saveTask(taskSubject)
                 else tId = t.id
                 pId = await savePlan(start, end, tId, schedule.plan_id);
             }
