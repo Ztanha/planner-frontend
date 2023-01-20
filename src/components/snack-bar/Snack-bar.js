@@ -18,7 +18,7 @@ export default function SnackBar(props) {
                 handleClose();
                 if( typeof props.onAfterShow !== "undefined") props.onAfterShow();
 
-            },1000)
+            },3000)
         }
 
     },[props.show])
