@@ -218,7 +218,7 @@ export default function Automation(){
                     />
                 </div>
 
-                <div className='buttons'>
+                <div className='main-btns'>
                     { schedule.current
                         ?
                         <Button type = { 'outline' }
