@@ -20,7 +20,7 @@ export default function Button(props) {
     const styles = {
         outline : {
             default:{
-                backgroundColor:'transparent',
+                backgroundColor:colors.surface,
                 color: colors.primary,
                 border: `1px solid ${colors.primary}`
             },
