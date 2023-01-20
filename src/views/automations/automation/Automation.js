@@ -6,7 +6,6 @@ import {ReactComponent as Plus} from "../../../scss/icons/plus.svg";
 import {useParams} from "react-router-dom";
 import {AutoScheduleController} from "../../../controllers/AutoScheduleController.js";
 import Button from "../../../components/buttons/common-buttons/Button.js";
-import {ReactComponent as Folder} from "../../../scss/icons/folder.svg";
 import {ReactComponent as Calendar} from "../../../scss/icons/today-tasks.svg";
 import {ReactComponent as Clock} from "../../../scss/icons/clock.svg";
 import {ReactComponent as Notice} from "../../../scss/icons/notice.svg";
@@ -21,7 +20,6 @@ import PlanController from "../../../controllers/PlanController.js";
 import {goBack} from "../../../utilities/redirect.js";
 import SnackBar from "../../../components/snack-bar/Snack-bar.js";
 import {TaskSubject} from "../../../components/taskSubject/TaskSubject.js";
-import ScheduleController from "../../../controllers/ScheduleController.js";
 
 export default function Automation(){
 
@@ -105,6 +103,9 @@ export default function Automation(){
             return false;
         }
     }
+    async function saveTask(subject){
+        return await TaskController.add(subject, '');
+    }
 
     async function handleSave() {
 
@@ -115,24 +116,22 @@ export default function Automation(){
         const task =allTasks.find(x=>x.subject === taskSubject);
 
         if( task.length === 0 ){
-            const result = await TaskController.add(taskSubject, '');
-            if(result.status === "success"){
-                t= result.data[0];
-            } else {
-                handleDialog('dialog','Something went wrong!');
-            }
+            await saveTask(taskSubject)
+
         }else{
             t = task;
         }
 
         if (schedule.current !== undefined) {
-            let pId;
+            let pId,tId;
             if( start === schedule.start && end === schedule.end && schedule.subject === taskSubject ){
                 pId = schedule.plan_id;
             }else{
-                pId = await savePlan(start, end, t.id,schedule.plan_id);
+                if(schedule.subject === taskSubject) tId = await saveTask(taskSubject)
+                else tId = t.id
+                pId = await savePlan(start, end, tId, schedule.plan_id);
             }
-            await AutoScheduleController.update(schedule.id,activeWeekdays,pId);
+            await AutoScheduleController.update( schedule.id,activeWeekdays,pId );
 
         } else {
             const pId = await savePlan(start, end, t.id);
