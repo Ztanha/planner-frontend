@@ -83,19 +83,13 @@ export default function Automation(){
     }
     async function savePlan( start,end,taskId,pId='' ) {
 
-        let resp;
         if(pId){
-            resp = await PlanController.update(pId,start, end,[taskId])
-            if (resp.status === 'success') return pId;
-            else handleDialog('dialog',resp.error)
+            return await PlanController.update(pId,start, end,[taskId])
         }else{
-            resp = await PlanController.add([taskId], start, end)
-            if (resp.status === 'success') return resp.data[0]
-            else handleDialog('dialog',resp.error)
+            return await PlanController.add([taskId], start, end)
         }
     }
     async function saveSchedule(pId,sId='') {
-        let resp;
         if(sId){
             return await AutoScheduleController.update( sId,activeWeekdays,pId );
 
@@ -140,14 +134,24 @@ export default function Automation(){
             if( start === schedule.current.start && end === schedule.current.end && schedule.current.subject === taskSubject ){
                 pId = schedule.current.plan_id;
             }else{
-                pId = await savePlan(start, end, taskId, schedule.current.plan_id);
+                const planResult =  await savePlan(start, end, taskId, schedule.current.plan_id);
+                if(planResult.status === 'success') {
+                    pId = planResult.data[0]
+                } else {
+                    handleDialog('snackBar',planResult.error)
+                    return;
+                }
             }
 
             result = await saveSchedule(pId,schedule.current.id)
 
         } else {
-            const pId = await savePlan(start, end, taskId);
-            result = await saveSchedule( pId )
+            const pResult = await savePlan(start, end, taskId);
+            if (pResult.status === 'success'){
+                result = await saveSchedule( pResult.data )
+            } else {
+                handleDialog('snackBar',pResult.error)
+            }
         }
         if (result.status === "error") {
             handleDialog( 'dialog','Something wrong happened!')
