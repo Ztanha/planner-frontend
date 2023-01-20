@@ -84,7 +84,7 @@ export default function Automation(){
     async function savePlan( start,end,taskId,pId='' ) {
 
         if(pId){
-            return await PlanController.update(pId,start, end,[taskId])
+            return await PlanController.update(pId, start, end, taskId)
         }else{
             return await PlanController.add([taskId], start, end)
         }
@@ -127,7 +127,7 @@ export default function Automation(){
         if(!checkInputs()) return;
         const start = startTimeValue === '0000' ? -1 : startTimeValue;
         const end = endTimeValue === '0000' ? -1 : endTimeValue;
-        const taskId = getTask();
+        const taskId = await getTask();
 
         if ( schedule.current !== undefined ) {
             let pId;
