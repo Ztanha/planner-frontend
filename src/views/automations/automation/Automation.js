@@ -61,6 +61,10 @@ export default function Automation(){
             console.log('dialog message type is not correct')
         }
     }
+    async function handleDelete() {
+        await AutoScheduleController.delete(schedule.current.id);
+        //todo are you sure dialog
+    }
 
     function handleTimeChange(start,end){
 
@@ -222,7 +226,8 @@ export default function Automation(){
                     { schedule.current
                         ?
                         <Button type = { 'outline' }
-                                click = { handleSave }
+                                click = { handleDelete }
+                                style={{minWidth:'7em'}}
                         >
                             Delete
                         </Button>
@@ -230,8 +235,8 @@ export default function Automation(){
                         ''
                     }
                     <Button type = { 'filled' }
-                            size = { schedule.current ? '' :'big' }
                             click = { handleSave }
+                            style={ schedule.current ? {minWidth:'7em'} : {minWidth:'100%'}}
                     >Save
                     </Button>
                 </div>

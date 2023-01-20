@@ -77,7 +77,7 @@ export default function Button(props) {
                     : props.type+' btn'
                 }
                 onClick = { handleClick }
-                style={ buttonStyle }
+                style={ {...props.style,...buttonStyle }}
                 onMouseEnter={()=>setState('hovered')}
                 onMouseLeave={()=>setState('default')}
                 onMouseDown={()=>setState('activated')}
