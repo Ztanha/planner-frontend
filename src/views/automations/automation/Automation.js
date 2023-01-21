@@ -108,7 +108,7 @@ export default function Automation(){
             handleDialog('dialog','Please select the days you want to repeat the auto schedule.')
             return false;
         }
-        if( taskSubject.length === 0 ){
+        if( taskSubject.length === 0 && !tId){
             handleDialog('dialog','Please fill the input related to subject of the task')
             return false;
         }

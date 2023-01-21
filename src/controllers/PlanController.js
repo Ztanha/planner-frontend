@@ -13,7 +13,7 @@ export default class PlanController {
         })
 
         if(resp.status === 'success') {
-            return SystemMessage.sendData(resp.data);
+            return SystemMessage.sendData(resp.data[0]);
 
         }else{
             return SystemMessage.error('Sorry! Something went wrong');
