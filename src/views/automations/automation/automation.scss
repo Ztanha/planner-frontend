@@ -12,13 +12,13 @@
     }
   }
   .double{
-
-  }
-  .main-btns{
     display: grid;
     grid-auto-flow: column;
     grid-gap: 1rem;
     justify-content: space-evenly;
+  }
+  .main-btns{
+
     max-width: 50%;
     margin: 2rem auto;
     .buttons{

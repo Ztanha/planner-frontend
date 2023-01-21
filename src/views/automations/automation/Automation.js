@@ -259,7 +259,7 @@ export default function Automation(){
                     }
                     <Button type = { 'filled' }
                             click = { handleSave }
-                            style={ schedule.current ? {minWidth:'7em'} : {minWidth:'100%'}}
+                            style={ schedule.current ? {minWidth:'7em'} : {width:'100%'}}
                     >Save
                     </Button>
                 </div>
