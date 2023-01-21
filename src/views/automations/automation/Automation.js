@@ -246,7 +246,7 @@ export default function Automation(){
                 />
                 <div className='weekdays-container'>
                     <ListItem leading = { <Calendar/> }
-                              headline = {'Days'}
+                              overline = {'Days'}
                               divider={ false}
                               trailing = {' '}
                     />
