@@ -7,8 +7,8 @@ export default class PlanController {
 
         let resp = await fetchWithToken('plans/', {
             tasksIds: tasksIds,
-            start: start,
-            end: end,
+            start: Number(start),
+            end: Number(end),
             _method:'PUT'
         })
 
@@ -36,8 +36,8 @@ export default class PlanController {
 
         let resp = await fetchWithToken('plans/', {
             planId: pId,
-            start: start,
-            end: end,
+            start: Number(start),
+            end: Number(end),
             taskId: taskId, //can be null in case we don't want to change tId
             _method:'PUT'
         })

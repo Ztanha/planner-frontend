@@ -175,11 +175,13 @@ export default function Automation(){
                 AutoScheduleController.get([sId]).then(x => {
                     if (x.status === 'success') {
                         const s = x.data[0];
+                        const sTime = Time.decodeToString(s.start);
+                        const eTime = Time.decodeToString(s.end);
                         schedule.current = s;
                         setTaskSubject(s.subject)
-                        setStartTimeValue(Time.decodeToString(s.start))
-                        setEndTimeValue(Time.decodeToString(s.end))
-                        adjustTimingText(s.start,s.end)
+                        setStartTimeValue( sTime )
+                        setEndTimeValue( eTime )
+                        adjustTimingText( sTime,eTime )
                         setActiveWeekdays(s.weekdays)
                     }
                 })
