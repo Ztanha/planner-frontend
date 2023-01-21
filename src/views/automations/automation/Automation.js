@@ -17,7 +17,6 @@ import {Time} from "../../../utilities/time.js";
 import {WeekdayChips} from "../../../components/weekdayChips/WeekdayChips.js";
 import Dialog from "../../../components/dialog/Dialog.js";
 import PlanController from "../../../controllers/PlanController.js";
-import {goBack} from "../../../utilities/redirect.js";
 import SnackBar from "../../../components/snack-bar/Snack-bar.js";
 import {TaskSubject} from "../../../components/taskSubject/TaskSubject.js";
 
@@ -185,14 +184,17 @@ export default function Automation(){
                         setActiveWeekdays(s.weekdays)
                     }
                 })
-
-            }else if( tId ){
-                const task = allTasks.find(x=>x.id === tId);
-                if( task.length > 0 ) setTaskSubject( task.subject )
             }
             pageFetch.current = true;
         }
-    },[pageFetch])
+    },[pageFetch,sId])
+
+    useEffect(()=>{
+        if(allTasks.length >0 && tId ) {
+            const task = allTasks.find(x=>x.id === Number(tId));
+            if( typeof task !== 'undefined') setTaskSubject( task.subject )
+        }
+    },[tId,allTasks])
 
     return (
         <motion.div initial={{ width: 0 }}
