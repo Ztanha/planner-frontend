@@ -190,26 +190,17 @@ export default function Automation(){
             }else if( tId ){
                 TaskController.get(tId).then(x=>{
                     if(x.status === 'success') {
-                        // setTaskSubject(x.data.subject);
                         task.current = x.data;
                         console.log('task:',x.data);
                     }else{
-
+                        //todo
                     }
                 })
-                // const task = tasks.find(x=>x.id === Number(tId));
-                // if( typeof task !== 'undefined')
-                //     setTaskSubject( task.subject )
             }
             pageFetch.current = true;
         }
     },[pageFetch,setTaskSubject,sId,tId,setActiveWeekdays,schedule,setTaskSubject,setStartTimeValue,setEndTimeValue])
 
-    // useEffect(()=>{
-    //     if(allTasks.length >0 && tId ) {
-    //
-    //     }
-    // },[tId,allTasks])
     return (
         <motion.div initial={{ width: 0 }}
                         animate={{ width:'100%' }}
