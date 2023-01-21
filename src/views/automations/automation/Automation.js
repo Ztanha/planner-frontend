@@ -191,7 +191,6 @@ export default function Automation(){
                 TaskController.get(tId).then(x=>{
                     if(x.status === 'success') {
                         task.current = x.data;
-                        console.log('task:',x.data);
                     }else{
                         //todo
                     }
