@@ -26,7 +26,7 @@ export default function Automation(){
     const [ timingText,setTimingText ] = useState('Ex. from 9 am to 10 am');
     const [ startTimeValue,setStartTimeValue ] = useState('0000');
     const [ endTimeValue,setEndTimeValue ] = useState('0000');
-    const [ activeWeekdays,setActiveWeekdays ] = useState('');
+    const [ activeWeekdays,setActiveWeekdays ] = useState('0000000');
     const [ dialogMsg,setDialogMsg ] = useState('');
     const [ snackBarMsg,setSnackBarMsg ] = useState('');
     const schedule = useRef();
@@ -164,10 +164,11 @@ export default function Automation(){
     useEffect(()=>{
 
         if( pageFetch.current === false ){
+            let tasks;
             TaskController.getAll().then(resp=>{
                 if(resp.status === "success") {
-                    const allTasks = resp.data;
-                    setAllTasks(allTasks);
+                    tasks = resp.data;
+                    setAllTasks(tasks);
                 }
             })
             if( sId ){
@@ -184,25 +185,27 @@ export default function Automation(){
                         setActiveWeekdays(s.weekdays)
                     }
                 })
+            }else if( tId && tasks ){
+                const task = tasks.find(x=>x.id === Number(tId));
+                if( typeof task !== 'undefined') setTaskSubject( task.subject )
             }
             pageFetch.current = true;
         }
-    },[pageFetch,sId])
+    },[pageFetch,setTaskSubject,sId,tId,setActiveWeekdays,schedule,setTaskSubject,setStartTimeValue,setEndTimeValue])
 
-    useEffect(()=>{
-        if(allTasks.length >0 && tId ) {
-            const task = allTasks.find(x=>x.id === Number(tId));
-            if( typeof task !== 'undefined') setTaskSubject( task.subject )
-        }
-    },[tId,allTasks])
-
+    // useEffect(()=>{
+    //     if(allTasks.length >0 && tId ) {
+    //
+    //     }
+    // },[tId,allTasks])
+    console.log(sId)
     return (
         <motion.div initial={{ width: 0 }}
                         animate={{ width:'100%' }}
                         exit={{ x: window.innerWidth,transition:{ duration: 0.1} }}
                         className='page'
         >
-            <TopNavBar headline={ sId !== null ? 'Automation' :'New Automation' }>
+            <TopNavBar headline={ sId ? 'Automation' :'New Automation' }>
                 <ListItem headline={'something'}
                   leading={ <Plus/> }
                 />
