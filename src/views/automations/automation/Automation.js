@@ -9,6 +9,7 @@ import Button from "../../../components/buttons/common-buttons/Button.js";
 import {ReactComponent as Calendar} from "../../../scss/icons/today-tasks.svg";
 import {ReactComponent as Clock} from "../../../scss/icons/clock.svg";
 import {ReactComponent as Notice} from "../../../scss/icons/notice.svg";
+import {ReactComponent as Folder} from "../../../scss/icons/folder.svg";
 import './automation.scss'
 import BottomNavBar from "../../../components/navbars/bottom-nav-bar/Bottom-nav-bar.js";
 import TaskController from "../../../controllers/TasksController.js";
@@ -30,6 +31,7 @@ export default function Automation(){
     const [ dialogMsg,setDialogMsg ] = useState('');
     const [ snackBarMsg,setSnackBarMsg ] = useState('');
     const schedule = useRef();
+    const task = useRef();
     const tId = params.tId || '';
     const sId = params.sId || '';
     const pageFetch = useRef(false);
@@ -185,9 +187,19 @@ export default function Automation(){
                         setActiveWeekdays(s.weekdays)
                     }
                 })
-            }else if( tId && tasks ){
-                const task = tasks.find(x=>x.id === Number(tId));
-                if( typeof task !== 'undefined') setTaskSubject( task.subject )
+            }else if( tId ){
+                TaskController.get(tId).then(x=>{
+                    if(x.status === 'success') {
+                        // setTaskSubject(x.data.subject);
+                        task.current = x.data;
+                        console.log('task:',x.data);
+                    }else{
+
+                    }
+                })
+                // const task = tasks.find(x=>x.id === Number(tId));
+                // if( typeof task !== 'undefined')
+                //     setTaskSubject( task.subject )
             }
             pageFetch.current = true;
         }
@@ -198,7 +210,6 @@ export default function Automation(){
     //
     //     }
     // },[tId,allTasks])
-    console.log(sId)
     return (
         <motion.div initial={{ width: 0 }}
                         animate={{ width:'100%' }}
@@ -211,13 +222,22 @@ export default function Automation(){
                 />
             </TopNavBar>
             <div className='automation-page'>
-                { taskSubject
-                    ? <TaskSubject task={ taskSubject }
-                                   setTask={ setTaskSubject }
-                                   allTasks={ allTasks }
+                { task.current
+                    ? <ListItem overline = {'Task name'}
+                                supportingText = {task.current?.subject}
+                                divider={true}
+                                leading={<Folder/>}
+                                trailing = {' '}
+
                     />
-                    : ''
+                    : taskSubject
+                        ? <TaskSubject task={ taskSubject }
+                                       setTask={ setTaskSubject }
+                                       allTasks={ allTasks }
+                        />
+                        : ''
                 }
+
                 <ListItem leading = { <Clock/> }
                           headline = { 'Timing' }
                           supportingText = { timingText }
