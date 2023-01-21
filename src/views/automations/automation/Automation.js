@@ -31,10 +31,11 @@ export default function Automation(){
     const [ dialogMsg,setDialogMsg ] = useState('');
     const [ snackBarMsg,setSnackBarMsg ] = useState('');
     const schedule = useRef();
-    const task = useRef();
+    // const task = useRef();
     const tId = params.tId || '';
     const sId = params.sId || '';
     const pageFetch = useRef(false);
+    const [task,setTask]= useState({}) //when there is a tId
     const [taskSubject,setTaskSubject] = useState('');
     const [timeHandlerShow,setTimeHandlerShow]= useState(false);
     const [dialogShow,setDialogShow]= useState(false);
@@ -45,8 +46,8 @@ export default function Automation(){
 
         const startVal = Time.decode( start );
         const endVal = Time.decode( end );
-        setTimingText(`From ${ startVal.hour%12 } : ${ startVal.minute } ${ startVal.hour > 12 ? 'pm' : 'am' }
-        to ${ endVal.hour%12 } : ${ endVal.minute } ${ endVal.hour > 12 ? 'pm' : 'am' }`)
+        setTimingText(`From ${ startVal.hour } : ${ startVal.minute } 
+        to ${ endVal.hour } : ${ endVal.minute }`)
     }
 
     function handleDialog( type='dialog',text ,title=null ) {
@@ -113,7 +114,8 @@ export default function Automation(){
         }
         return true;
     }
-    async function getTask(){
+    async function getTaskId(){
+
         const task = allTasks.find( x=>x.subject === taskSubject );
         if( Object.values(task).length === 0 ) {
             const result = await TaskController.add(taskSubject, '');
@@ -130,7 +132,7 @@ export default function Automation(){
         if(!checkInputs()) return;
         const start = startTimeValue === '0000' ? -1 : startTimeValue;
         const end = endTimeValue === '0000' ? -1 : endTimeValue;
-        const taskId = await getTask();
+        const taskId = tId || await getTaskId();
 
         if ( schedule.current !== undefined ) {
             let pId;
@@ -190,7 +192,7 @@ export default function Automation(){
             }else if( tId ){
                 TaskController.get(tId).then(x=>{
                     if(x.status === 'success') {
-                        task.current = x.data;
+                        setTask(x.data);
                     }else{
                         //todo
                     }
@@ -212,9 +214,9 @@ export default function Automation(){
                 />
             </TopNavBar>
             <div className='automation-page'>
-                { task.current
+                { Object.values(task).length > 0
                     ? <ListItem overline = {'Task name'}
-                                supportingText = {task.current?.subject}
+                                supportingText = {task.subject}
                                 divider={true}
                                 leading={<Folder/>}
                                 trailing = {' '}
