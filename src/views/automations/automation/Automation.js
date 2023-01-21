@@ -239,7 +239,7 @@ export default function Automation(){
                 }
 
                 <ListItem leading = { <Clock/> }
-                          headline = { 'Timing' }
+                          overline = { 'Timing' }
                           supportingText = { timingText }
                           divider={ true }
                           click={ ()=>setTimeHandlerShow(true) }
