@@ -68,6 +68,8 @@ export default function Automation(){
 
     function handleTimeChange(start,end){
 
+        console.log('start:',start)
+        console.log('end:',end)
         const duration = Time.subtract(start,end);
 
         if( duration.hours !== '00' && duration.mins !== '00' ) {
@@ -136,7 +138,7 @@ export default function Automation(){
             }else{
                 const planResult =  await savePlan(start, end, taskId, schedule.current.plan_id);
                 if(planResult.status === 'success') {
-                    pId = planResult.data[0]
+                    pId = planResult.data
                 } else {
                     handleDialog('snackBar',planResult.error)
                     return;
@@ -175,8 +177,8 @@ export default function Automation(){
                         const s = x.data[0];
                         schedule.current = s;
                         setTaskSubject(s.subject)
-                        setStartTimeValue(s.start)
-                        setEndTimeValue(s.end)
+                        setStartTimeValue(Time.decodeToString(s.start))
+                        setEndTimeValue(Time.decodeToString(s.end))
                         adjustTimingText(s.start,s.end)
                         setActiveWeekdays(s.weekdays)
                     }

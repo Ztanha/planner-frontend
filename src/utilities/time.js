@@ -1,4 +1,9 @@
 export class Time {
+    static decodeToString(time){
+        let t = time.toString();
+        if(t.length === 3) t='0'+t
+        return t
+    }
     static decode(time){
         if(time === -1 )return 0;
         if( time === 0 )return 0;

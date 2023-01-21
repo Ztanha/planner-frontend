@@ -42,7 +42,7 @@ export default class PlanController {
             _method:'PUT'
         })
         if(resp.status === 'success') {
-            return SystemMessage.success('');
+            return SystemMessage.success(pId);
 
         }else{
             return SystemMessage.error('Sorry! Something went wrong');

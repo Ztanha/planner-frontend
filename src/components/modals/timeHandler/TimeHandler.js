@@ -27,6 +27,8 @@ function TimeHandler(props){
             <>
                 <TimePicker onChange={ value=>{tempStartValue.current = value} }
                             show={ firstClockDisplay }
+                            clockWidth={'200'}
+                            width={'300'}
                             theme={'light'}
                             defaultValue={ props.firstClockValue }
                             hide={ ()=>props.setModalShow(false) }
