@@ -31,7 +31,6 @@ export default function Automation(){
     const [ dialogMsg,setDialogMsg ] = useState('');
     const [ snackBarMsg,setSnackBarMsg ] = useState('');
     const schedule = useRef();
-    // const task = useRef();
     const tId = params.tId || '';
     const sId = params.sId || '';
     const pageFetch = useRef(false);
