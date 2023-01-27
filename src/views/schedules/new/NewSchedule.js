@@ -39,9 +39,15 @@ export default function NewSchedule() {
     function clickEvent() {
 
     }
-    function handleTimeChange() {
-        // timestampToDay(date)
-        setTimingText( timeDurationToText( startTimeValue,endTimeValue ) )
+    function handleTimeChange(sValue,eValue) {
+        setStartTimeValue( sValue );
+        setEndTimeValue( eValue );
+        const text = (sValue !== '0000')
+            ? ` ${Time.encode(sValue)} ${ (eValue !== '0000') 
+                ? ('to'+ Time.encode(eValue)) 
+                : '' } `
+            : '';
+        if(text.length > 0)setTimingText( text );
     }
     function handleSave() {
         let start = document.getElementById('start').value;
@@ -126,7 +132,7 @@ export default function NewSchedule() {
                 }
                 <ListItem leading = { <Clock/> }
                           overline = { 'Timing' }
-                          supportingText = { timingText }
+                          supportingText = { startTimeValue ? Time.encode(startTimeValue) : timingText }
                           divider={ true }
                           click={ ()=>setTimeHandlerShow(true) }
                 />
