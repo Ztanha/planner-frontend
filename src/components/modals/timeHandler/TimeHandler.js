@@ -50,6 +50,7 @@ function TimeHandler(props){
                             top={'0'}
                             defaultValue={ props.secondClockValue }
                             hide={ ()=>props.setModalShow(false) }
+                            style={{backgroundColor:'#0000'}}
                             buttons={[
                                 {
                                     label:'Back',
