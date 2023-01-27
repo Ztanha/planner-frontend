@@ -54,7 +54,7 @@ export function timestampToDay(timestamp) {
     const temp = new Date(timestamp);
     return `${temp.getFullYear()} ${ months[temp.getMonth()].slice(0,3) } ${temp.getDate()}`
 }
-function timeDurationToText(sTimestamp, endTimestamp){
+export function timeDurationToText(sTimestamp, endTimestamp){
 
     const startVal = Time.decode( sTimestamp );
     const endVal = Time.decode( endTimestamp );
