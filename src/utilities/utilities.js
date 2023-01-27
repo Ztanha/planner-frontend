@@ -1,3 +1,6 @@
+const days = ['Mo','Tu','We','Th','Fr','Sa','Su'];
+const weekday= ["Sun","Mon","Tue","Wed","Thu","Fri","Sau"];
+
 export default function hardCopy(arr){
 
     return JSON.parse(JSON.stringify(arr))
@@ -18,7 +21,7 @@ export function codeWeekdays(days){
 }
 export function decodeWeekdays(weekdays){
 
-    const days = ['Mo','Tu','We','Th','Fr','Sa','Su'];
+
     let temp=[];
     weekdays.split('').forEach((x,index)=>{
         if(x==='1'){
@@ -47,6 +50,8 @@ export function capitalizeFirstChar(string){
 
 export function timestampToDay(timestamp) {
 
+    const months= ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
     const temp = new Date(timestamp);
-    return `${temp.getFullYear()} ${temp.getMonth()} ${temp.getDate()}}`
+    return `${temp.getFullYear()} ${ months[temp.getMonth()].slice(0,3) } ${temp.getDate()}`
 }

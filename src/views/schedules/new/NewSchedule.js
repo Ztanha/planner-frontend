@@ -21,6 +21,7 @@ import {TimeHandler} from "../../../components/modals/timeHandler/TimeHandler.js
 import Button from "../../../components/buttons/common-buttons/Button.js";
 import {useTheme} from "../../../ThemeContext.js";
 import DatePicker from "react-date-picker-material";
+import {timestampToDay} from "../../../utilities/utilities.js";
 
 
 export default function NewSchedule() {
@@ -39,7 +40,7 @@ export default function NewSchedule() {
 
     }
     function handleTimeChange() {
-
+        // timestampToDay(date)
     }
     function handleSave() {
         let start = document.getElementById('start').value;
@@ -131,7 +132,7 @@ export default function NewSchedule() {
                 <ListItem leading = { <Calendar/> }
                           overline = {'Date'}
                           divider= { true }
-                          // supportingText = { date || 'Click to select a date'}
+                          supportingText = { timestampToDay(date) }
                 />
                 <DatePicker show={ dateHandlerShow }
                             hide={ setDateHandlerShow }
