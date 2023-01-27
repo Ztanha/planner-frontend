@@ -13,6 +13,7 @@ function TimeHandler(props){
     }
     function handleSave(){
         props.onChange(tempStartValue.current,tempEndValue.current)
+        setSecondClockDisplay(false)
     }
     useEffect(()=>{
 
@@ -44,13 +45,14 @@ function TimeHandler(props){
                                 }
                             ]}
                 />
-                <TimePicker onChange={ value=>{tempEndValue.current = value} }
+                <TimePicker onChange={ value=>{ tempEndValue.current = value } }
                             show={ secondClockDisplay }
                             theme={'light'}
+                            clockWidth={'200'}
+                            width={'300'}
                             top={'0'}
                             defaultValue={ props.secondClockValue }
                             hide={ ()=>props.setModalShow(false) }
-                            style={{backgroundColor:'#0000'}}
                             buttons={[
                                 {
                                     label:'Back',
