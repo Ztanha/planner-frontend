@@ -43,10 +43,7 @@ export function capitalizeFirstChar(string){
 
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
-// export function getThePathName(){
-//     const url = location.href;
-//     return url.substring(url.lastIndexOf('/'));
-// }
+
 
 export function timestampToDay(timestamp) {
 
