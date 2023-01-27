@@ -1,0 +1,8 @@
+@import '../../../scss/App';
+.page-newSchedule{
+  @include main;
+  .s-btns{
+    max-width: 50%;
+    margin: 2em auto;
+  }
+}
