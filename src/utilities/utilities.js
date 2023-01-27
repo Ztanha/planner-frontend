@@ -1,3 +1,5 @@
+import {Time} from "./time.js";
+
 const days = ['Mo','Tu','We','Th','Fr','Sa','Su'];
 const weekday= ["Sun","Mon","Tue","Wed","Thu","Fri","Sau"];
 
@@ -51,4 +53,11 @@ export function timestampToDay(timestamp) {
 
     const temp = new Date(timestamp);
     return `${temp.getFullYear()} ${ months[temp.getMonth()].slice(0,3) } ${temp.getDate()}`
+}
+function timeDurationToText(sTimestamp, endTimestamp){
+
+    const startVal = Time.decode( sTimestamp );
+    const endVal = Time.decode( endTimestamp );
+    return `From ${ startVal.hour } : ${ startVal.minute } 
+        to ${ endVal.hour } : ${ endVal.minute }`
 }
