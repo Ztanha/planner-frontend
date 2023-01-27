@@ -21,7 +21,7 @@ import {TimeHandler} from "../../../components/modals/timeHandler/TimeHandler.js
 import Button from "../../../components/buttons/common-buttons/Button.js";
 import {useTheme} from "../../../ThemeContext.js";
 import DatePicker from "react-date-picker-material";
-import {timestampToDay} from "../../../utilities/utilities.js";
+import {timeDurationToText, timestampToDay} from "../../../utilities/utilities.js";
 
 
 export default function NewSchedule() {
@@ -34,13 +34,14 @@ export default function NewSchedule() {
     const [ startTimeValue,setStartTimeValue ] = useState('0000');
     const [ endTimeValue,setEndTimeValue ] = useState('0000');
     const [ timeHandlerShow,setTimeHandlerShow ]= useState(false);
-    const [ dateHandlerShow,setDateHandlerShow ]= useState(true);
+    const [ dateHandlerShow,setDateHandlerShow ]= useState(false);
     const fetchRan =useRef(false);
     function clickEvent() {
 
     }
     function handleTimeChange() {
         // timestampToDay(date)
+        setTimingText( timeDurationToText( startTimeValue,endTimeValue ) )
     }
     function handleSave() {
         let start = document.getElementById('start').value;
@@ -127,12 +128,13 @@ export default function NewSchedule() {
                           overline = { 'Timing' }
                           supportingText = { timingText }
                           divider={ true }
-                          // click={ ()=>setTimeHandlerShow(true) }
+                          click={ ()=>setTimeHandlerShow(true) }
                 />
                 <ListItem leading = { <Calendar/> }
                           overline = {'Date'}
                           divider= { true }
                           supportingText = { timestampToDay(date) }
+                          click={ ()=>setDateHandlerShow(true) }
                 />
                 <DatePicker show={ dateHandlerShow }
                             hide={ setDateHandlerShow }
