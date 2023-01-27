@@ -43,7 +43,7 @@ export default function NewSchedule() {
         setStartTimeValue( sValue );
         setEndTimeValue( eValue );
         const text = (sValue !== '0000')
-            ? ` ${Time.encode(sValue)} ${ (eValue !== '0000') 
+            ? ` ${Time.decode(sValue)} ${ (eValue !== '0000') 
                 ? ('to'+ Time.encode(eValue)) 
                 : '' } `
             : '';

@@ -58,6 +58,14 @@ export function timeDurationToText(sTimestamp, endTimestamp){
 
     const startVal = Time.decode( sTimestamp );
     const endVal = Time.decode( endTimestamp );
-    return `From ${ startVal.hour } : ${ startVal.minute } 
-        to ${ endVal.hour } : ${ endVal.minute }`
+
+    const text = (startVal !== '0000')
+        ? ` ${ startVal.hour } : ${ startVal.minute } 
+                ${ (endVal !== '0000')
+                            ? (`to ${ endVal.hour } : ${ endVal.minute }`)
+                            : '' 
+                } `
+        : '';
+
+    return text
 }
