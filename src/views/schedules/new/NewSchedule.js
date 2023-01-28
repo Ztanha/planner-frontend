@@ -104,29 +104,7 @@ export default function NewSchedule() {
         }
 
     },[tId,setTask,fetchRan])
-    // return (<div id='page-newSchedule'>
-    //     {/*<Header/>*/}
-    //     <div>
-    //         {tId !== undefined
-    //             ? <div>{task?.subject}</div>
-    //             : <TaskInput0 subject={task?.subject}
-    //                           clickEvent={clickEvent}
-    //             />
-    //         }
-    //         <div>
-    //             <h5>Timing</h5>
-    //             <label>From:</label><br/>
-    //             <input id='start' type='time'/><br/>
-    //             <label>To:</label><br/>
-    //             <input id='end' type='time'/>
-    //         </div>
-    //         <div>
-    //             <h5>Date:</h5>
-    //             <input type='date' id='date'/>
-    //         </div>
-    //         <button onClick={handleSave}>Save</button>
-    //     </div>
-    // </div>)
+
     return(
         <motion.div initial={{ width: 0 }}
                     animate={{ width:'100%' }}
