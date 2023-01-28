@@ -35,11 +35,23 @@ export default function NewSchedule() {
     const [ endTimeValue,setEndTimeValue ] = useState('0000');
     const [ timeHandlerShow,setTimeHandlerShow ]= useState(false);
     const [ dateHandlerShow,setDateHandlerShow ]= useState(false);
+    const [ dialogHandlerShow,setDialogHandlerShow ]= useState(false);
     const fetchRan =useRef(false);
     function clickEvent() {
 
     }
+    function onDateChange(date) {
+        const today = new date();
+        if( date >= today) {
+            setDate(date);
+            setDateHandlerShow(false);
+        }else{
+            //todo
+        }
+    }
     function handleTimeChange(sValue,eValue) {
+
+        console.log(sValue,eValue)
         setStartTimeValue( sValue );
         setEndTimeValue( eValue );
         const text = (sValue !== '0000')
@@ -111,9 +123,9 @@ export default function NewSchedule() {
     // </div>)
     return(
         <motion.div initial={{ width: 0 }}
-                       animate={{ width:'100%' }}
-                       exit={{ x: window.innerWidth,transition:{ duration: 0.1} }}
-                       className='page'
+                    animate={{ width:'100%' }}
+                    exit={{ x: window.innerWidth,transition:{ duration: 0.1} }}
+                    className='page'
         >
             <TopNavBar headline={ task ? (task?.subject || '') :'' }>
                 <ListItem headline={'something'}
@@ -147,7 +159,7 @@ export default function NewSchedule() {
                             date={ date }
                             style={{ top:'10px', fontFamily:'Roboto' ,zIndex:'1006' }}
                             setDate={ setDate }
-                            selectDate={ ()=>setDateHandlerShow(false) }
+                            selectDate={ onDateChange }
                 />
                 <div className='s-btns'>
                     <Button type = { 'filled' }

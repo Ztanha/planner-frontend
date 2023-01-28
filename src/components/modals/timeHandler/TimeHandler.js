@@ -15,12 +15,14 @@ function TimeHandler(props){
         props.onChange(tempStartValue.current,tempEndValue.current)
         setSecondClockDisplay(false)
     }
+
     useEffect(()=>{
 
+        console.log(props.modalShow)
         setFirstClockDisplay(true); // to reset the order of the clocks
         setSecondClockDisplay(false);
 
-    },[props.modalShow])
+    },[ props.modalShow ])
 
     return(<>
         { props.modalShow
