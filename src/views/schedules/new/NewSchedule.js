@@ -28,7 +28,7 @@ import Dialog from "../../../components/dialog/Dialog.js";
 export default function NewSchedule() {
     let {tId} = useParams() || '';
     // const [colors]=useTheme();
-    const today = new Date();
+    const today = new Date().getTime();
     const [ date,setDate ] = useState(today)
     const [task,setTask] = useState();
     const [ timingText,setTimingText ] = useState('Ex. from 9 am to 10 am');
@@ -47,9 +47,7 @@ export default function NewSchedule() {
         setDialogHandlerShow(true);
     }
     function onDateChange() {
-        const today = new Date().getTime();
         if( date >= today) {
-            setDate(date);
             setDateHandlerShow(false);
         }else{
             loadDialog('Wrong date value!','Oops')
@@ -105,6 +103,7 @@ export default function NewSchedule() {
 
     },[tId,setTask,fetchRan])
 
+    console.log(date)
     return(
         <motion.div initial={{ width: 0 }}
                     animate={{ width:'100%' }}
@@ -163,6 +162,9 @@ export default function NewSchedule() {
                 <Dialog show={ dialogHandlerShow }
                         hide={ setDialogHandlerShow }
                         title = { dialog.title }
+                        buttons = { <Button type={'filled'} onClick={ setDialogHandlerShow(false) }>
+                            OK
+                        </Button>}
                 >
                     { dialog.msg }
                 </Dialog>
