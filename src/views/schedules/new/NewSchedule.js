@@ -37,10 +37,13 @@ export default function NewSchedule() {
     const [ timeHandlerShow,setTimeHandlerShow ]= useState(false);
     const [ dateHandlerShow,setDateHandlerShow ]= useState(false);
     const [ dialogHandlerShow,setDialogHandlerShow ]= useState(false);
-    const [ dialogMsg,setDialogMsg ]= useState('');
+    const [ dialog,setDialog ]= useState('');
     const fetchRan =useRef(false);
-    function loadDialog(msg) {
-        setDialogMsg(msg);
+    function loadDialog(msg,title) {
+        setDialog({
+            msg : msg,
+            title : title
+        });
         setDialogHandlerShow(true);
     }
     function onDateChange(date) {
@@ -182,7 +185,7 @@ export default function NewSchedule() {
                 <Dialog show={ dialogHandlerShow }
                         hide={ setDialogHandlerShow }
                 >
-                    { dialogMsg }
+                    { dialog }
                 </Dialog>
             </div>
             <BottomNavBar/>
