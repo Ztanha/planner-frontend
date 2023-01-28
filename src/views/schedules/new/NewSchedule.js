@@ -46,7 +46,7 @@ export default function NewSchedule() {
         });
         setDialogHandlerShow(true);
     }
-    function onDateChange(date) {
+    function onDateChange() {
         const today = new Date().getTime();
         if( date >= today) {
             setDate(date);
