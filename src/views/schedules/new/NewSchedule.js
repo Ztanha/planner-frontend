@@ -47,12 +47,12 @@ export default function NewSchedule() {
         setDialogHandlerShow(true);
     }
     function onDateChange(date) {
-        const today = new date();
+        const today = new Date().getTime();
         if( date >= today) {
             setDate(date);
             setDateHandlerShow(false);
         }else{
-            loadDialog('Wrong date value!')
+            loadDialog('Wrong date value!','Oops')
         }
     }
     function handleTimeChange(sValue,eValue) {
