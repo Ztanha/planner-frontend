@@ -179,7 +179,11 @@ export default function NewSchedule() {
                              secondClockValue={ endTimeValue }
                              onChange={ handleTimeChange }
                 />
-                <Dialog />
+                <Dialog show={ dialogHandlerShow }
+                        hide={ setDialogHandlerShow }
+                >
+                    { dialogMsg }
+                </Dialog>
             </div>
             <BottomNavBar/>
 
