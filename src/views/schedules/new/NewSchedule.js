@@ -184,8 +184,9 @@ export default function NewSchedule() {
                 />
                 <Dialog show={ dialogHandlerShow }
                         hide={ setDialogHandlerShow }
+                        title = { dialog.title }
                 >
-                    { dialog }
+                    { dialog.msg }
                 </Dialog>
             </div>
             <BottomNavBar/>
