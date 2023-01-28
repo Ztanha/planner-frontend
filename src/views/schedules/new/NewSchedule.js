@@ -39,7 +39,7 @@ export default function NewSchedule() {
     const [ dialogHandlerShow,setDialogHandlerShow ]= useState(false);
     const [ dialog,setDialog ]= useState('');
     const fetchRan =useRef(false);
-    function loadDialog( msg,title,buttons ) {
+    function loadDialog( msg,title ) {
         setDialog({
             msg : msg,
             title : title
