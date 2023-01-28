@@ -39,7 +39,7 @@ export default function NewSchedule() {
     const [ dialogHandlerShow,setDialogHandlerShow ]= useState(false);
     const [ dialog,setDialog ]= useState('');
     const fetchRan =useRef(false);
-    function loadDialog(msg,title) {
+    function loadDialog( msg,title,buttons ) {
         setDialog({
             msg : msg,
             title : title
@@ -140,7 +140,7 @@ export default function NewSchedule() {
                 <DatePicker show={ dateHandlerShow }
                             hide={ setDateHandlerShow }
                             date={ date }
-                            style={{ top:'10px', fontFamily:'Roboto' ,zIndex:'1006' }}
+                            style={{ top:'10px', fontFamily:'Roboto' ,zIndex:1003 }}
                             setDate={ setDate }
                             selectDate={ onDateChange }
                 />
@@ -162,7 +162,9 @@ export default function NewSchedule() {
                 <Dialog show={ dialogHandlerShow }
                         hide={ setDialogHandlerShow }
                         title = { dialog.title }
-                        buttons = { <Button type={'filled'} onClick={ setDialogHandlerShow(false) }>
+                        buttons = { <Button type={'filled'}
+                                            click={ ()=>setDialogHandlerShow(false) }
+                        >
                             OK
                         </Button>}
                 >
