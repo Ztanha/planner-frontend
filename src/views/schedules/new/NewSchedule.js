@@ -22,6 +22,7 @@ import Button from "../../../components/buttons/common-buttons/Button.js";
 import {useTheme} from "../../../ThemeContext.js";
 import DatePicker from "react-date-picker-material";
 import {timeDurationToText, timestampToDay} from "../../../utilities/utilities.js";
+import Dialog from "../../../components/dialog/Dialog.js";
 
 
 export default function NewSchedule() {
@@ -36,9 +37,11 @@ export default function NewSchedule() {
     const [ timeHandlerShow,setTimeHandlerShow ]= useState(false);
     const [ dateHandlerShow,setDateHandlerShow ]= useState(false);
     const [ dialogHandlerShow,setDialogHandlerShow ]= useState(false);
+    const [ dialogMsg,setDialogMsg ]= useState('');
     const fetchRan =useRef(false);
-    function clickEvent() {
-
+    function loadDialog(msg) {
+        setDialogMsg(msg);
+        setDialogHandlerShow(true);
     }
     function onDateChange(date) {
         const today = new date();
@@ -46,7 +49,7 @@ export default function NewSchedule() {
             setDate(date);
             setDateHandlerShow(false);
         }else{
-            //todo
+            loadDialog('Wrong date value!')
         }
     }
     function handleTimeChange(sValue,eValue) {
@@ -176,6 +179,7 @@ export default function NewSchedule() {
                              secondClockValue={ endTimeValue }
                              onChange={ handleTimeChange }
                 />
+                <Dialog />
             </div>
             <BottomNavBar/>
 
