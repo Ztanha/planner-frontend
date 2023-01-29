@@ -29,9 +29,9 @@ export default function NewSchedule() {
     let {tId} = useParams() || '';
     // const [colors]=useTheme();
     const today = new Date();
-    const tomorrow = new Date(today).getTime();
+    const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
-    const [ date,setDate ] = useState(tomorrow)
+    const [ date,setDate ] = useState(tomorrow.getTime())
     const [task,setTask] = useState();
     const [ timingText,setTimingText ] = useState('Ex. from 9 am to 10 am');
     const [ startTimeValue,setStartTimeValue ] = useState('');
@@ -76,7 +76,7 @@ export default function NewSchedule() {
         setSnackBarMsg(msg)
         setSnackBarHandlerShow(true);
     }
-    function handleSave() {
+    async function handleSave() {
         let start = Time.encode( startTimeValue );
         let end = Time.encode( endTimeValue );
 
@@ -86,20 +86,18 @@ export default function NewSchedule() {
         }
         if( tId ) {
 
-            PlanController.add([tId],start,end).then(x=>{
-
-                if(x.status === 'success') {
-                    const pId = x.data[0];
-                    // ScheduleController.add([pId],dayTimestamp.inpFormatToTimeStamp(date))
-                    ScheduleController.add([pId],date)
-                        .then(resp=>{
-                            if(resp.status === 'success' )loadSnackbar('done')
-                        })
+            const planResp = await PlanController.add([tId],start,end);
+            if( planResp.status === 'success') {
+                const pId = planResp.data;
+                const schResp = ScheduleController.add([pId],date);
+                if( schResp.status === 'success') {
+                    loadSnackbar('Saved');
+                    return;
                 }
-            })
-        }else{
-            loadSnackbar( 'Something went wrong!' );
+            }
         }
+        loadSnackbar( 'Something went wrong!' );
+
     }
     useEffect(()=>{
         if(fetchRan.current === false) {
