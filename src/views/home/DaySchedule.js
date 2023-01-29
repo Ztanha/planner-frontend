@@ -7,7 +7,7 @@ import {normalizeDate, timeDurationToText, timestampToDay} from "../../utilities
 import {useParams} from "react-router-dom";
 import ListItem from "../../components/lists/list-item/List-item.js";
 import { ReactComponent as ThreeDots } from "../../scss/icons/threeDots.svg";
-import { ReactComponent as Calendar } from "../../scss/icons/event_repeat.svg";
+import { ReactComponent as EventIcon } from "../../scss/icons/event_repeat.svg";
 
 export default function DaySchedule () {
     const { date } = useParams();
@@ -120,7 +120,7 @@ export default function DaySchedule () {
             </div>
         </>
         <ListItem overline={ 'Date'}
-                  leading={ <Calendar /> }
+                  leading={ <EventIcon /> }
                   divider={ true }
                   supportingText={ timestampToDay(dayTimestamp) }
         />
