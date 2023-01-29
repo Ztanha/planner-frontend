@@ -7,13 +7,14 @@ import {normalizeDate, timeDurationToText} from "../../utilities/utilities.js";
 import {useParams} from "react-router-dom";
 import ListItem from "../../components/lists/list-item/List-item.js";
 import { ReactComponent as ThreeDots } from "../../scss/icons/threeDots.svg";
+import { ReactComponent as Calendar } from "../../scss/icons/event_repeat.svg";
 
 export default function DaySchedule () {
     const todayTimestamp = dayTimestamp.getTimeStamp();
     const { date } = useParams();
     const dateInp = useRef();
     const fetchRan = useRef(false);
-    const day = new Date(date * 1000);
+    const day = date ? new Date(date * 1000) : new Date().getTime();
     const [ input,setInput ] = useState('');
     const initialState = { schedules :[] }
     const [ state,dispatch ] = useReducer( reducer,initialState );
@@ -119,6 +120,10 @@ export default function DaySchedule () {
                 {input}
             </div>
         </>
+        <ListItem overline={ 'Date'}
+                  leading={ <Calendar /> }
+                  divider={ true }
+        />
         <div id='plans-container'>
             {state.schedules?.length >0
                 ? state.schedules.map(x=>
