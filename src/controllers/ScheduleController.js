@@ -59,7 +59,7 @@ export default class ScheduleController {
 
         let req = await fetchWithToken('schedules/', {
             plansIds:plansIds,
-            date:date,
+            date:Math.floor(date/1000),
             _method: 'PUT'
         })
         if (req.status === 'success') {
