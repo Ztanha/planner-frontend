@@ -54,18 +54,15 @@ export function timestampToDay(timestamp) {
     const temp = new Date(timestamp);
     return `${temp.getFullYear()} ${ months[temp.getMonth()].slice(0,3) } ${temp.getDate()}`
 }
-export function timeDurationToText(sTimestamp, endTimestamp){
-
-    const startVal = Time.decode( sTimestamp );
-    const endVal = Time.decode( endTimestamp );
-
-    const text = (startVal !== '0000')
-        ? ` ${ startVal.hour } : ${ startVal.minute } 
-                ${ (endVal !== '0000')
-                            ? (`to ${ endVal.hour } : ${ endVal.minute }`)
-                            : '' 
-                } `
-        : '';
+export function timeDurationToText(sValue, eValue){
+    let text;
+    sValue  = ( typeof sValue === 'string') ? sValue : sValue.toString();
+    eValue = ( typeof eValue === 'string') ? eValue : eValue.toString();
+    if( sValue.length === 4 && eValue.length === 4) {
+        text =`From ${ sValue.slice(0,2) }:${ sValue.slice(2) } to ${ eValue.slice(0,2) }:${ eValue.slice(2) }`
+    }else if( sValue.length === 4 ) {
+        text = `At ${ sValue.slice(0,2) }:${ sValue.slice(2) }`
+    }
 
     return text
 }

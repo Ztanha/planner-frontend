@@ -3,7 +3,7 @@ import ScheduleController from "../../controllers/ScheduleController.js";
 import redirect from "../../utilities/redirect.js";
 import dayTimestamp from "../../utilities/dayTimestamp.js";
 import ScheduleContainer2 from "../../components/scheduleContainer/ScheduleContainer2.js";
-import {normalizeDate} from "../../utilities/utilities.js";
+import {normalizeDate, timeDurationToText} from "../../utilities/utilities.js";
 import {useParams} from "react-router-dom";
 import ListItem from "../../components/lists/list-item/List-item.js";
 import { ReactComponent as ThreeDots } from "../../scss/icons/threeDots.svg";
@@ -124,7 +124,7 @@ export default function DaySchedule () {
                 ? state.schedules.map(x=>
                     <ListItem headline={ x.subject }
                               key={ x.id }
-                              supportingText={ 'time here'}
+                              supportingText={ timeDurationToText(x.start,x.end) }
                               leading={ <input type={ "checkbox" } checked={ x.done }/>}
                               trailing={ <ThreeDots/> }
                     />)
