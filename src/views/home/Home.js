@@ -113,7 +113,7 @@ export default function Home() {
                                  title={'Ongoing Tasks'}
                                  trailing={
                                     <Button type={'text'}
-                                           click={ ()=>redirect('day-schedule') }
+                                           click={ ()=>redirect('/day-schedule/') }
                                     >
                                         See all
                                     </Button>
