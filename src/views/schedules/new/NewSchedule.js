@@ -90,7 +90,7 @@ export default function NewSchedule() {
                     const pId = x.data[0];
                     ScheduleController.add([pId],dayTimestamp.inpFormatToTimeStamp(date))
                         .then(resp=>{
-                            if(resp.status === 'success' )alert('done')
+                            if(resp.status === 'success' )loadSnackbar('done')
                         })
                 }
             })
