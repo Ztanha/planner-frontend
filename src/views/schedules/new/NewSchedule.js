@@ -38,6 +38,8 @@ export default function NewSchedule() {
     const [ dateHandlerShow,setDateHandlerShow ]= useState(false);
     const [ dialogHandlerShow,setDialogHandlerShow ]= useState(false);
     const [ dialog,setDialog ]= useState('');
+    const [ snackBar,setSnackBar ] =useState();
+
     const fetchRan =useRef(false);
     function loadDialog( msg,title ) {
         setDialog({
