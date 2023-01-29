@@ -21,6 +21,7 @@ import IconText from "../../components/icon/icon&text/Icon&text.js";
 import {ReactComponent as ClockIcon} from "../../scss/icons/clock.svg";
 import {Time} from "../../utilities/time.js";
 import StackedCard from "../../components/cards/stacked-card/Stacked-card.js";
+import redirect from '../../utilities/redirect.js'
 
 export default function Home() {
     let fetchRan  = useRef(false);
@@ -112,7 +113,7 @@ export default function Home() {
                                  title={'Ongoing Tasks'}
                                  trailing={
                                     <Button type={'text'}
-                                           // click={}
+                                           click={ ()=>redirect('day-schedule') }
                                     >
                                         See all
                                     </Button>
