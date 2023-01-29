@@ -108,7 +108,7 @@ export default function DaySchedule () {
             //                 onChange={handleDateChange}
             // />)
             fetchRan.current = true;
-            getSchedules(day );
+            getSchedules(dayTimestamp );
         }
     },[ date,fetchRan.current ])
 
