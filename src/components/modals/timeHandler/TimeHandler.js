@@ -11,10 +11,13 @@ function TimeHandler(props){
         setFirstClockDisplay(!firstClockDisplay);
         setSecondClockDisplay(!secondClockDisplay);
     }
+    function singleTimeSave() {
+        props.onChange(tempStartValue.current,-1)
+        setFirstClockDisplay(false)
+    }
     function handleSave(){
         props.onChange(tempStartValue.current,tempEndValue.current)
         setSecondClockDisplay(false)
-        setFirstClockDisplay(false)
     }
 
     useEffect(()=>{
