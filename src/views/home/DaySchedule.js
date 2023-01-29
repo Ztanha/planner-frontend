@@ -10,14 +10,13 @@ import { ReactComponent as ThreeDots } from "../../scss/icons/threeDots.svg";
 import { ReactComponent as Calendar } from "../../scss/icons/event_repeat.svg";
 
 export default function DaySchedule () {
-    const todayTimestamp = dayTimestamp.getTimeStamp();
     const { date } = useParams();
     const dateInp = useRef();
     const fetchRan = useRef(false);
     const [ input,setInput ] = useState('');
+    const dayTimestamp = date ? new Date(date * 1000) : new Date().getTime();
     const initialState = { schedules :[] }
     const [ state,dispatch ] = useReducer( reducer,initialState );
-    const [ dayTimestamp,setDayTimestamp ] = useState()
 
     function reducer(state,action) {
         function sortSchedules(arr)
