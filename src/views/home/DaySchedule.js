@@ -3,7 +3,7 @@ import ScheduleController from "../../controllers/ScheduleController.js";
 import redirect from "../../utilities/redirect.js";
 import dayTimestamp from "../../utilities/dayTimestamp.js";
 import ScheduleContainer2 from "../../components/scheduleContainer/ScheduleContainer2.js";
-import {normalizeDate, timeDurationToText} from "../../utilities/utilities.js";
+import {normalizeDate, timeDurationToText, timestampToDay} from "../../utilities/utilities.js";
 import {useParams} from "react-router-dom";
 import ListItem from "../../components/lists/list-item/List-item.js";
 import { ReactComponent as ThreeDots } from "../../scss/icons/threeDots.svg";
@@ -102,13 +102,13 @@ export default function DaySchedule () {
 
         if( fetchRan.current === false )
         {
-            setInput(<input type='date'
-                            value={day.getFullYear()+'-'+normalizeDate(day.getMonth()+1)+'-'+normalizeDate(day.getDate())}
-                            ref={dateInp}
-                            onChange={handleDateChange}
-            />)
+            // setInput(<input type='date'
+            //                 value={day.getFullYear()+'-'+normalizeDate(day.getMonth()+1)+'-'+normalizeDate(day.getDate())}
+            //                 ref={dateInp}
+            //                 onChange={handleDateChange}
+            // />)
             fetchRan.current = true;
-            getSchedules((date) ? date : new Date().getTime() );
+            getSchedules(date );
         }
     },[ date,fetchRan.current ])
 
@@ -123,6 +123,7 @@ export default function DaySchedule () {
         <ListItem overline={ 'Date'}
                   leading={ <Calendar /> }
                   divider={ true }
+                  supportingText={ date ? timestampToDay(date) : '' }
         />
         <div id='plans-container'>
             {state.schedules?.length >0
