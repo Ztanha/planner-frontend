@@ -36,6 +36,7 @@ function TimeHandler(props){
                             defaultValue={ props.firstClockValue }
                             hide={ ()=>props.setModalShow(false) }
                             top={'0'}
+                            style={{ fontFamily:'Roboto' }}
                             buttons={[
                                 {
                                     label:'Cancel',
@@ -52,6 +53,7 @@ function TimeHandler(props){
                             theme={'light'}
                             clockWidth={'200'}
                             width={'300'}
+                            style={{ fontFamily:'Roboto' }}
                             top={'0'}
                             defaultValue={ props.secondClockValue }
                             hide={ ()=>props.setModalShow(false) }

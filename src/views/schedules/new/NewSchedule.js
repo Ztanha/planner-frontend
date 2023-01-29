@@ -16,7 +16,6 @@ import {ReactComponent as Clock} from "../../../scss/icons/clock.svg";
 import {ReactComponent as Folder} from "../../../scss/icons/folder.svg";
 import {ReactComponent as Calendar} from "../../../scss/icons/today-tasks.svg";
 import BottomNavBar from "../../../components/navbars/bottom-nav-bar/Bottom-nav-bar.js";
-import {TaskSubject} from "../../../components/taskSubject/TaskSubject.js";
 import {TimeHandler} from "../../../components/modals/timeHandler/TimeHandler.js";
 import Button from "../../../components/buttons/common-buttons/Button.js";
 import {useTheme} from "../../../ThemeContext.js";
@@ -32,8 +31,8 @@ export default function NewSchedule() {
     const [ date,setDate ] = useState(today)
     const [task,setTask] = useState();
     const [ timingText,setTimingText ] = useState('Ex. from 9 am to 10 am');
-    const [ startTimeValue,setStartTimeValue ] = useState('0000');
-    const [ endTimeValue,setEndTimeValue ] = useState('0000');
+    const [ startTimeValue,setStartTimeValue ] = useState('');
+    const [ endTimeValue,setEndTimeValue ] = useState('');
     const [ timeHandlerShow,setTimeHandlerShow ]= useState(false);
     const [ dateHandlerShow,setDateHandlerShow ]= useState(false);
     const [ dialogHandlerShow,setDialogHandlerShow ]= useState(false);
@@ -55,15 +54,17 @@ export default function NewSchedule() {
     }
     function handleTimeChange(sValue,eValue) {
 
-        console.log(sValue,eValue)
         setStartTimeValue( sValue );
         setEndTimeValue( eValue );
-        const text = (sValue !== '0000')
-            ? ` ${Time.decode(sValue)} ${ (eValue !== '0000') 
-                ? ('to'+ Time.encode(eValue)) 
-                : '' } `
-            : '';
-        if(text.length > 0)setTimingText( text );
+         if( sValue !== '0000' && eValue !== '0000') {
+             setTimingText(`From ${ sValue.slice(0,3) }:${ sValue.slice(2) } to ${ eValue.slice(0,3) }:${ eValue.slice(2) }}`)
+         }else if( sValue !== '0000') {
+             setTimingText( `At ${ sValue.slice(0,3) }:${ sValue.slice(2) }`)
+         }else {
+
+         }
+         setTimeHandlerShow(false)
+
     }
     function handleSave() {
         let start = document.getElementById('start').value;
