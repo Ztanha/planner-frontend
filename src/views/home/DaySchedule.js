@@ -8,6 +8,7 @@ import {useParams} from "react-router-dom";
 import ListItem from "../../components/lists/list-item/List-item.js";
 import { ReactComponent as ThreeDots } from "../../scss/icons/threeDots.svg";
 import { ReactComponent as EventIcon } from "../../scss/icons/event_repeat.svg";
+import { ReactComponent as Calendar } from "../../scss/icons/calendar.svg";
 
 export default function DaySchedule () {
     const { date } = useParams();
@@ -123,6 +124,7 @@ export default function DaySchedule () {
                   leading={ <EventIcon /> }
                   divider={ true }
                   supportingText={ timestampToDay(dayTimestamp) }
+                  trailing={ <Calendar/> }
         />
         <div id='plans-container'>
             {state.schedules?.length >0
