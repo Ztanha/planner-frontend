@@ -22,6 +22,7 @@ import {useTheme} from "../../../ThemeContext.js";
 import DatePicker from "react-date-picker-material";
 import {timeDurationToText, timestampToDay} from "../../../utilities/utilities.js";
 import Dialog from "../../../components/dialog/Dialog.js";
+import SnackBar from "../../../components/snack-bar/Snack-bar.js";
 
 
 export default function NewSchedule() {
@@ -67,26 +68,28 @@ export default function NewSchedule() {
          setTimeHandlerShow(false)
     }
     function handleSave() {
-        let start = document.getElementById('start').value;
-        let end = document.getElementById('end').value;
-        let date = document.getElementById('date').value;
+        let start = Time.encode( startTimeValue );
+        let end = Time.encode( endTimeValue );
 
-        start = Time.encode(start);
-        end = Time.encode(end);
-        if(date.length === 0 ){
-            alert('date input must be filled!')
+        if( date.length === 0 ){
+            loadDialog('Date input must be filled!','Oops!')
             return;
         }
-        PlanController.add([tId],start,end).then(x=>{
+        if( tId && startTimeValue.length === 4) {
 
-            if(x.status === 'success') {
-                const pId = x.data[0];
-                ScheduleController.add([pId],dayTimestamp.inpFormatToTimeStamp(date))
-                    .then(resp=>{
-                        if(resp.status === 'success' )alert('done')
-                })
-            }
-        })
+            PlanController.add([tId],start,end).then(x=>{
+
+                if(x.status === 'success') {
+                    const pId = x.data[0];
+                    ScheduleController.add([pId],dayTimestamp.inpFormatToTimeStamp(date))
+                        .then(resp=>{
+                            if(resp.status === 'success' )alert('done')
+                        })
+                }
+            })
+        }else{
+
+        }
     }
     useEffect(()=>{
         if(fetchRan.current === false) {
@@ -104,7 +107,6 @@ export default function NewSchedule() {
 
     },[tId,setTask,fetchRan])
 
-    console.log(date)
     return(
         <motion.div initial={{ width: 0 }}
                     animate={{ width:'100%' }}
@@ -164,13 +166,16 @@ export default function NewSchedule() {
                         hide={ setDialogHandlerShow }
                         title = { dialog.title }
                         buttons = { <Button type={'filled'}
-                                            click={ ()=>setDialogHandlerShow(false) }
-                        >
+                                            click={ ()=>setDialogHandlerShow(false)
+                                    }>
                             OK
                         </Button>}
                 >
                     { dialog.msg }
                 </Dialog>
+                <SnackBar>
+
+                </SnackBar>
             </div>
             <BottomNavBar/>
 
