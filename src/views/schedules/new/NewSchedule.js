@@ -89,7 +89,7 @@ export default function NewSchedule() {
             const planResp = await PlanController.add([tId],start,end);
             if( planResp.status === 'success') {
                 const pId = planResp.data;
-                const schResp = ScheduleController.add([pId],date);
+                const schResp = await ScheduleController.add([pId],date);
                 if( schResp.status === 'success') {
                     loadSnackbar('Saved');
                     return;
