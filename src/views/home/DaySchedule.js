@@ -14,7 +14,6 @@ export default function DaySchedule () {
     const { date } = useParams();
     const dateInp = useRef();
     const fetchRan = useRef(false);
-    const day = date ? new Date(date * 1000) : new Date().getTime();
     const [ input,setInput ] = useState('');
     const initialState = { schedules :[] }
     const [ state,dispatch ] = useReducer( reducer,initialState );
@@ -102,13 +101,14 @@ export default function DaySchedule () {
 
         if( fetchRan.current === false )
         {
+            const dayTimestamp = date ? new Date(date * 1000) : new Date().getTime();
             // setInput(<input type='date'
             //                 value={day.getFullYear()+'-'+normalizeDate(day.getMonth()+1)+'-'+normalizeDate(day.getDate())}
             //                 ref={dateInp}
             //                 onChange={handleDateChange}
             // />)
             fetchRan.current = true;
-            getSchedules(date );
+            getSchedules(day );
         }
     },[ date,fetchRan.current ])
 
