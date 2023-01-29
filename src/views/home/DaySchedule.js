@@ -12,6 +12,7 @@ import { ReactComponent as Calendar } from "../../scss/icons/event_repeat.svg";
 export default function DaySchedule () {
     const todayTimestamp = dayTimestamp.getTimeStamp();
     const { date } = useParams();
+    const dayTimestamp = date ? new Date(date * 1000) : new Date().getTime();
     const dateInp = useRef();
     const fetchRan = useRef(false);
     const [ input,setInput ] = useState('');
@@ -101,7 +102,6 @@ export default function DaySchedule () {
 
         if( fetchRan.current === false )
         {
-            const dayTimestamp = date ? new Date(date * 1000) : new Date().getTime();
             // setInput(<input type='date'
             //                 value={day.getFullYear()+'-'+normalizeDate(day.getMonth()+1)+'-'+normalizeDate(day.getDate())}
             //                 ref={dateInp}
