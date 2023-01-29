@@ -18,6 +18,8 @@ export default class ScheduleController {
     static async get(date1,date2='') {
 
         let resp;
+        date1 = Math.floor(date1/1000);
+        date2 = Math.floor(date2/1000);
 
         if(date1 === ''){
 
