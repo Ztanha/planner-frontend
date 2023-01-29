@@ -128,12 +128,7 @@ export default function DaySchedule () {
                               leading={ <input type={ "checkbox" } checked={ x.done }/>}
                               trailing={ <ThreeDots/> }
                     />)
-                    // <ScheduleContainer2 key={x.id}
-                    //                     schedule={x}
-                    //                     tick={tickSchedule}
-                    //                     dispatch={dispatch}
-                    //                     checkboxType={date <= todayTimestamp}
-                    // />)
+
                 :'Empty'
             }
         </div>
