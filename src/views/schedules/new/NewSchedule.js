@@ -38,7 +38,8 @@ export default function NewSchedule() {
     const [ dateHandlerShow,setDateHandlerShow ]= useState(false);
     const [ dialogHandlerShow,setDialogHandlerShow ]= useState(false);
     const [ dialog,setDialog ]= useState('');
-    const [ snackBar,setSnackBar ] =useState({});
+    const [ snackBarHandlerShow,setSnackBarHandlerShow ] =useState(false);
+    const [ snackBarMsg,setSnackBarMsg ] =useState('');
 
     const fetchRan =useRef(false);
     function loadDialog( msg,title ) {
@@ -69,6 +70,10 @@ export default function NewSchedule() {
          if(text)setTimingText(text)
          setTimeHandlerShow(false)
     }
+    function loadSnackbar(msg) {
+        setSnackBarMsg(msg)
+        setSnackBarHandlerShow(true);
+    }
     function handleSave() {
         let start = Time.encode( startTimeValue );
         let end = Time.encode( endTimeValue );
@@ -90,10 +95,7 @@ export default function NewSchedule() {
                 }
             })
         }else{
-            setSnackBar({
-                text: 'Something went wrong!',
-                show: true
-            })
+            loadSnackbar( 'Something went wrong!' );
         }
     }
     useEffect(()=>{
@@ -178,9 +180,15 @@ export default function NewSchedule() {
                 >
                     { dialog.msg }
                 </Dialog>
-                <SnackBar supportingText={ snackBar.text }
-                          show = { snackBar.show }
-                />
+                { snackBarHandlerShow === true
+                    ? <SnackBar supportingText={ snackBarMsg }
+                                show = { snackBarHandlerShow }
+                                setShow ={ setSnackBarHandlerShow }
+                                closeAffordance={ true }
+                    />
+                    : ''
+                }
+
             </div>
             <BottomNavBar/>
 

@@ -16,7 +16,7 @@
   box-shadow: box-shadow(3);
   //background: $inverse-surface;
   width: min(344px);
-  height: min(48px);
+  //height: min(48px);
   @include media(x-small){
     left: 50%;
     transform: translateX(-50%);
