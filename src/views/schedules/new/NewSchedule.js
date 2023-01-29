@@ -28,8 +28,10 @@ import SnackBar from "../../../components/snack-bar/Snack-bar.js";
 export default function NewSchedule() {
     let {tId} = useParams() || '';
     // const [colors]=useTheme();
-    const today = new Date().getTime();
-    const [ date,setDate ] = useState(today)
+    const today = new Date();
+    const tomorrow = new Date(today).getTime();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const [ date,setDate ] = useState(tomorrow)
     const [task,setTask] = useState();
     const [ timingText,setTimingText ] = useState('Ex. from 9 am to 10 am');
     const [ startTimeValue,setStartTimeValue ] = useState('');
@@ -88,7 +90,8 @@ export default function NewSchedule() {
 
                 if(x.status === 'success') {
                     const pId = x.data[0];
-                    ScheduleController.add([pId],dayTimestamp.inpFormatToTimeStamp(date))
+                    // ScheduleController.add([pId],dayTimestamp.inpFormatToTimeStamp(date))
+                    ScheduleController.add([pId],date)
                         .then(resp=>{
                             if(resp.status === 'success' )loadSnackbar('done')
                         })
