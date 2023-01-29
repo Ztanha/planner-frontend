@@ -54,17 +54,17 @@ export default function NewSchedule() {
     }
     function handleTimeChange(sValue,eValue) {
 
+        let text;
         setStartTimeValue( sValue );
         setEndTimeValue( eValue );
          if( sValue.length === 4 && eValue.length === 4) {
-             setTimingText(`From ${ sValue.slice(0,3) }:${ sValue.slice(2) } to ${ eValue.slice(0,3) }:${ eValue.slice(2) }}`)
-         }else if( sValue !== '0000') {
-             setTimingText( `At ${ sValue.slice(0,3) }:${ sValue.slice(2) }`)
-         }else {
 
+             text =`From ${ sValue.slice(0,2) }:${ sValue.slice(2) } to ${ eValue.slice(0,2) }:${ eValue.slice(2) }`
+         }else if( sValue.length === 4 ) {
+             text = `At ${ sValue.slice(0,3) }:${ sValue.slice(2) }`
          }
+         if(text)setTimingText(text)
          setTimeHandlerShow(false)
-
     }
     function handleSave() {
         let start = document.getElementById('start').value;
@@ -128,7 +128,7 @@ export default function NewSchedule() {
                 }
                 <ListItem leading = { <Clock/> }
                           overline = { 'Timing' }
-                          supportingText = { startTimeValue ? Time.encode(startTimeValue) : timingText }
+                          supportingText = { timingText }
                           divider={ true }
                           click={ ()=>setTimeHandlerShow(true) }
                 />

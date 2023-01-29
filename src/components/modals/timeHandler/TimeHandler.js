@@ -35,12 +35,11 @@ function TimeHandler(props){
                             theme={'light'}
                             defaultValue={ props.firstClockValue }
                             hide={ ()=>props.setModalShow(false) }
-                            top={'0'}
-                            style={{ fontFamily:'Roboto' }}
+                            style={{ fontFamily:'Roboto',top:'10px' }}
                             buttons={[
                                 {
-                                    label:'Cancel',
-                                    onClick:()=>props.setModalShow(false)
+                                    label:'Done',
+                                    onClick:()=>handleSave
                                 },
                                 {
                                     label:'Next',
@@ -53,8 +52,7 @@ function TimeHandler(props){
                             theme={'light'}
                             clockWidth={'200'}
                             width={'300'}
-                            style={{ fontFamily:'Roboto' }}
-                            top={'0'}
+                            style={{ fontFamily:'Roboto',top:'10px' }}
                             defaultValue={ props.secondClockValue }
                             hide={ ()=>props.setModalShow(false) }
                             buttons={[
