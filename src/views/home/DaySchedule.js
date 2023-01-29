@@ -124,7 +124,7 @@ export default function DaySchedule () {
                     <ListItem headline={ x.subject }
                               key={ x.id }
                               supportingText={ 'time here'}
-                              leading={ <input type={"checkbox"}/>}
+                              leading={ <input type={ "checkbox" } checked={ x.done }/>}
                     />)
                     // <ScheduleContainer2 key={x.id}
                     //                     schedule={x}
