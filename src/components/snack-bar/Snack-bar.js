@@ -30,17 +30,21 @@ export default function SnackBar(props) {
                        color:theme.onInverseSurface
                    }}
             >
-                <div className='headline-container'>
-                    { props.headline }
-                </div>
-                <div className='icon'>
-                    { props.closeAffordance
-                        ? <Close onClick={handleClose}
-                                 fill={theme.onInverseSurface}
+                { props.headline
+                    ? <div className='headline-container'>
+                        { props.headline }
+                    </div>
+                    : ''
+                }
+                { props.closeAffordance
+                    ? <div className='icon'>
+                        ? <Close onClick={ handleClose }
+                                 fill={ theme.onInverseSurface }
                         />
                         : ''
-                    }
-                </div>
+                    </div>
+                    : ''
+                }
                 { typeof props.supportingText !== "undefined"
                     ? <div className='s-text-container'>
                         { props.supportingText }
