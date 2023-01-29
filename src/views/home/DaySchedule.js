@@ -6,6 +6,7 @@ import ScheduleContainer2 from "../../components/scheduleContainer/ScheduleConta
 import {normalizeDate} from "../../utilities/utilities.js";
 import {useParams} from "react-router-dom";
 import ListItem from "../../components/lists/list-item/List-item.js";
+import { ReactComponent as ThreeDots } from "../../scss/icons/threeDots.svg";
 
 export default function DaySchedule () {
     const todayTimestamp = dayTimestamp.getTimeStamp();
@@ -125,6 +126,7 @@ export default function DaySchedule () {
                               key={ x.id }
                               supportingText={ 'time here'}
                               leading={ <input type={ "checkbox" } checked={ x.done }/>}
+                              trailing={ <ThreeDots/> }
                     />)
                     // <ScheduleContainer2 key={x.id}
                     //                     schedule={x}
