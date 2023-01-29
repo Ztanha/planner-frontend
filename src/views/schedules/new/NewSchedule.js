@@ -60,17 +60,11 @@ export default function NewSchedule() {
     }
     function handleTimeChange(sValue,eValue) {
 
-        let text;
         setStartTimeValue( sValue );
         setEndTimeValue( eValue );
-         if( sValue.length === 4 && eValue.length === 4) {
-
-             text =`From ${ sValue.slice(0,2) }:${ sValue.slice(2) } to ${ eValue.slice(0,2) }:${ eValue.slice(2) }`
-         }else if( sValue.length === 4 ) {
-             text = `At ${ sValue.slice(0,2) }:${ sValue.slice(2) }`
-         }
-         if(text)setTimingText(text)
-         setTimeHandlerShow(false)
+        const text  = timeDurationToText(sValue,eValue);
+        if(text)setTimingText(text)
+        setTimeHandlerShow(false)
     }
     function loadSnackbar(msg) {
         setSnackBarMsg(msg)
