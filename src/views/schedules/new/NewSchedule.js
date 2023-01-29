@@ -38,7 +38,7 @@ export default function NewSchedule() {
     const [ dateHandlerShow,setDateHandlerShow ]= useState(false);
     const [ dialogHandlerShow,setDialogHandlerShow ]= useState(false);
     const [ dialog,setDialog ]= useState('');
-    const [ snackBar,setSnackBar ] =useState();
+    const [ snackBar,setSnackBar ] =useState({});
 
     const fetchRan =useRef(false);
     function loadDialog( msg,title ) {
@@ -77,7 +77,7 @@ export default function NewSchedule() {
             loadDialog('Date input must be filled!','Oops!')
             return;
         }
-        if( tId && startTimeValue.length === 4) {
+        if( tId && startTimeValue.length === 100000) {
 
             PlanController.add([tId],start,end).then(x=>{
 
@@ -90,7 +90,10 @@ export default function NewSchedule() {
                 }
             })
         }else{
-
+            setSnackBar({
+                text: 'Something went wrong!',
+                show: true
+            })
         }
     }
     useEffect(()=>{
@@ -175,9 +178,9 @@ export default function NewSchedule() {
                 >
                     { dialog.msg }
                 </Dialog>
-                <SnackBar>
-
-                </SnackBar>
+                <SnackBar supportingText={ snackBar.text }
+                          show = { snackBar.show }
+                />
             </div>
             <BottomNavBar/>
 
