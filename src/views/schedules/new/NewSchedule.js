@@ -82,7 +82,7 @@ export default function NewSchedule() {
             loadDialog('Date input must be filled!','Oops!')
             return;
         }
-        if( tId && startTimeValue.length === 100000) {
+        if( tId ) {
 
             PlanController.add([tId],start,end).then(x=>{
 
