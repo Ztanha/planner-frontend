@@ -56,7 +56,7 @@ export default function NewSchedule() {
 
         setStartTimeValue( sValue );
         setEndTimeValue( eValue );
-         if( sValue !== '0000' && eValue !== '0000') {
+         if( sValue.length === 4 && eValue.length === 4) {
              setTimingText(`From ${ sValue.slice(0,3) }:${ sValue.slice(2) } to ${ eValue.slice(0,3) }:${ eValue.slice(2) }}`)
          }else if( sValue !== '0000') {
              setTimingText( `At ${ sValue.slice(0,3) }:${ sValue.slice(2) }`)
