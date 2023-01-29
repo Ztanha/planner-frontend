@@ -14,6 +14,7 @@ function TimeHandler(props){
     function handleSave(){
         props.onChange(tempStartValue.current,tempEndValue.current)
         setSecondClockDisplay(false)
+        setFirstClockDisplay(false)
     }
 
     useEffect(()=>{
@@ -39,7 +40,7 @@ function TimeHandler(props){
                             buttons={[
                                 {
                                     label:'Done',
-                                    onClick:()=>handleSave
+                                    onClick:handleSave
                                 },
                                 {
                                     label:'Next',
