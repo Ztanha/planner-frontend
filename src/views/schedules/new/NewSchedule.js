@@ -61,7 +61,7 @@ export default function NewSchedule() {
 
              text =`From ${ sValue.slice(0,2) }:${ sValue.slice(2) } to ${ eValue.slice(0,2) }:${ eValue.slice(2) }`
          }else if( sValue.length === 4 ) {
-             text = `At ${ sValue.slice(0,3) }:${ sValue.slice(2) }`
+             text = `At ${ sValue.slice(0,2) }:${ sValue.slice(2) }`
          }
          if(text)setTimingText(text)
          setTimeHandlerShow(false)
