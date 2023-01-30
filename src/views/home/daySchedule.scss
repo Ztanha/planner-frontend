@@ -2,10 +2,15 @@
 .page-day-schedule{
   @include main;
   .date{
-    svg{
+    .calendar-icon-wrapper{
+      border-radius: 100px;
       background-color: red;
-      fill: #7A7289;
-      width: 24px;
+      padding: .4em;
+      vertical-align: center;
+      svg{
+        fill: #7A7289;
+        width: 24px;
+      }
     }
   }
   .dots-icon-wrapper{
