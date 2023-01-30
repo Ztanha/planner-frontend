@@ -65,6 +65,7 @@ export default function Home() {
     return(<motion.div initial={{ width: 0 }}
                        animate={{ width:'100%' }}
                        exit={{ x: window.innerWidth ,transition:{ duration: 0.1}}}
+                       className='home'
     ><div className='home-page-background'>
         <div className='first'></div>
         <div className='sec'></div>
@@ -79,6 +80,7 @@ export default function Home() {
                            url:'/home'
                        },
                    ]}
+                   style={{}}
         />
         <div className='home-page-2'>
             <div className='cards-structure'>
