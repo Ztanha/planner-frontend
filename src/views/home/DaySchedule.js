@@ -9,6 +9,7 @@ import { ReactComponent as ThreeDots } from "../../scss/icons/threeDots.svg";
 import { ReactComponent as Calendar } from "../../scss/icons/calendar.svg";
 import {motion} from "framer-motion";
 import TopNavBar from "../../components/navbars/top-nav-bar/Top-nav-bar.js";
+import BottomNavBar from "../../components/navbars/bottom-nav-bar/Bottom-nav-bar.js";
 
 export default function DaySchedule () {
     const { date } = useParams();
@@ -147,7 +148,7 @@ export default function DaySchedule () {
                 Add a New Task
             </button>
             <button onClick={()=>redirect('/performance/')}>Day performance</button>
-            {/*<NavigationBar/>*/}
         </div>
+        <BottomNavBar/>
     </motion.div>)
 }
