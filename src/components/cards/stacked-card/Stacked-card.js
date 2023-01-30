@@ -4,9 +4,12 @@ import Card from "../Card.js";
 import Button from "../../buttons/common-buttons/Button.js";
 
 export default function StackedCard(props) {
-    const cardType = props.style || 'elevated'
+    const cardType = props.type || 'elevated'
     return (
-        <Card type={cardType} classes={props.classes}>
+        <Card style={props.style}
+              type={cardType}
+              classes={props.classes}
+        >
              <ListItem   trailing = {props.trailing}
                          leading={props.leading}
                          headline = {props.title}
