@@ -34,6 +34,8 @@ export default function Home() {
     const [theme] =useTheme();
     const user = useUser();
 
+    console.log(user)
+
     function getTime(start,end){
         const s = Time.decode(start);
         const e = Time.decode(end)
