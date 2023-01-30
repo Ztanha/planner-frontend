@@ -115,37 +115,39 @@ export default function DaySchedule () {
     return (<motion.div initial={{ width: 0 }}
                         animate={{ width:'100%' }}
                         exit={{ x: window.innerWidth,transition:{ duration: 0.1} }}
-                        className='page day-schedule'
+                        className='page'
     >
-        <>
-            <div id='title'>
-                Your Plans For<br/>
-                <label>date:</label>
-                {input}
-            </div>
-        </>
-        <ListItem overline={ 'Date'}
-                  divider={ true }
-                  supportingText={ timestampToDay(dayTimestamp) }
-                  trailing={ <Calendar/> }
-        />
-        <div id='plans-container'>
-            {state.schedules?.length >0
-                ? state.schedules.map(x=>
-                    <ListItem headline={ x.subject }
-                              key={ x.id }
-                              supportingText={ timeDurationToText(x.start,x.end) }
-                              leading={ <input type={ "checkbox" } checked={ x.done }/>}
-                              trailing={ <ThreeDots/> }
-                    />)
+        <div className={'page-day-schedule'}>
+            <>
+                <div id='title'>
+                    Your Plans For<br/>
+                    <label>date:</label>
+                    {input}
+                </div>
+            </>
+            <ListItem overline={ 'Date'}
+                      divider={ true }
+                      supportingText={ timestampToDay(dayTimestamp) }
+                      trailing={ <Calendar/> }
+            />
+            <div id='plans-container'>
+                {state.schedules?.length >0
+                    ? state.schedules.map(x=>
+                        <ListItem headline={ x.subject }
+                                  key={ x.id }
+                                  supportingText={ timeDurationToText(x.start,x.end) }
+                                  leading={ <input type={ "checkbox" } checked={ x.done }/>}
+                                  trailing={ <ThreeDots/> }
+                        />)
 
-                :'Empty'
-            }
+                    :'Empty'
+                }
+            </div>
+            <button onClick={()=>{redirect('/plan/new/'+date)}}>
+                Add a New Task
+            </button>
+            <button onClick={()=>redirect('/performance/')}>Day performance</button>
+            {/*<NavigationBar/>*/}
         </div>
-        <button onClick={()=>{redirect('/plan/new/'+date)}}>
-            Add a New Task
-        </button>
-        <button onClick={()=>redirect('/performance/')}>Day performance</button>
-        {/*<NavigationBar/>*/}
     </motion.div>)
 }
