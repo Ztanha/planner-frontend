@@ -19,6 +19,10 @@ export default function DaySchedule () {
     const dayTimestamp = date ? new Date(date * 1000) : new Date().getTime();
     const initialState = { schedules :[] }
     const [ state,dispatch ] = useReducer( reducer,initialState );
+    function onCheckBoxChange(value) {
+        console.log(value)
+    }
+    const Input = props=><input type='checkbox' checked={props.checked} onChange={ ()=>onCheckBoxChange(props.checked) } />
 
     function reducer(state,action) {
         function sortSchedules(arr)
@@ -137,7 +141,8 @@ export default function DaySchedule () {
                         <ListItem headline={ x.subject }
                                   key={ x.id }
                                   supportingText={ timeDurationToText(x.start,x.end) }
-                                  leading={ <input type={ "checkbox" } checked={ x.done }/>}
+                                  // leading={ <input type={ "checkbox" } checked={ x.done }/>}
+                                  leading={ <Input checked={x.done}/>}
                                   trailing={ <span className={'dots-icon-wrapper'}><ThreeDots /></span> }
                         />)
 
