@@ -32,7 +32,7 @@ export default function Home() {
     const dispatch = useDispatch();
     const today = dayTimestamp.getTimeStamp();
     const [theme] =useTheme();
-    const user = useUser();
+    const [user] = useUser();
 
     console.log(user)
 
