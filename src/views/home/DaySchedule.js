@@ -121,7 +121,6 @@ export default function DaySchedule () {
             </div>
         </>
         <ListItem overline={ 'Date'}
-                  leading={ <EventIcon /> }
                   divider={ true }
                   supportingText={ timestampToDay(dayTimestamp) }
                   trailing={ <Calendar/> }
