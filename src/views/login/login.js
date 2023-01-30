@@ -9,12 +9,9 @@ export default function Login(){
 
         const uname =document.getElementById('username-inp').value;
         const password = document.getElementById('password-inp').value;
-        const resp = await LoginController.login(uname,password);
-        if(resp.status === 'success'){
-            setUser(resp.user)
-        }else{
-            alert(resp.error)
-        }
+        const result =  await LoginController.login(uname,password);
+        setUser(result);
+
     }
     return (<div id='page-login'>
         <div id='title'></div>

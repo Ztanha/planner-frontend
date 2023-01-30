@@ -3,7 +3,7 @@ import {useResource} from "./useResource.js";
 
 const UserContext = createContext(null);
 const UserProvider= (props)=>{
-    const [user,setUser] = useState({});
+    const [user,setUser] = useState(null);
 
     // useEffect(()=>{
     //     ( async ()=>{
