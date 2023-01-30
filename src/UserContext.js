@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {useResource} from "./useResource.js";
 
-export const UserInfo = () =>{
+export const UserContext = () =>{
 
     const [user,setUser] = useState(null);
     useEffect(()=>{
