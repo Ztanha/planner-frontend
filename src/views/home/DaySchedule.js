@@ -1,8 +1,8 @@
 import {useEffect, useReducer, useRef, useState} from "react";
 import ScheduleController from "../../controllers/ScheduleController.js";
 import redirect from "../../utilities/redirect.js";
+import './daySchedule.scss'
 import dayTimestamp from "../../utilities/dayTimestamp.js";
-import ScheduleContainer2 from "../../components/scheduleContainer/ScheduleContainer2.js";
 import {normalizeDate, timeDurationToText, timestampToDay} from "../../utilities/utilities.js";
 import {useParams} from "react-router-dom";
 import ListItem from "../../components/lists/list-item/List-item.js";
@@ -127,6 +127,7 @@ export default function DaySchedule () {
         </TopNavBar>
         <div className={'page-day-schedule'}>
             <ListItem overline={ 'Date'}
+                      className={'salam'}
                       divider={ true }
                       supportingText={ timestampToDay(dayTimestamp) }
                       trailing={ <Calendar/> }

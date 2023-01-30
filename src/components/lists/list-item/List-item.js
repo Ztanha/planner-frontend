@@ -46,7 +46,7 @@ export default function ListItem(props) {
     const borderStyle = {...(props.divider ? dividers[props.borderType || 'full'] : {})}
 
     return (<>
-        <div className={ classes }
+        <div className={[props.className, classes].join(' ')}
              onClick={ props.click }
              onMouseEnter={ ()=>setState('hovered') }
              onMouseLeave={ ()=>setState('default') }
