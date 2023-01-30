@@ -34,7 +34,7 @@ export default function TopNavBar(props) {
         }
     }
 
-    const headerStyle = headers[style]
+    const headerStyle = {...props.style,...headers[style]}
     const onscroll = useCallback((e)=>{
         let scrollNumber=scrollElement.scrollTop;
 
