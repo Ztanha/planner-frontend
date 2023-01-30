@@ -23,7 +23,7 @@ import {Time} from "../../utilities/time.js";
 import StackedCard from "../../components/cards/stacked-card/Stacked-card.js";
 import redirect from '../../utilities/redirect.js'
 import {useTheme} from "../../ThemeContext.js";
-import {useCurrentUser} from "../../useUser.js";
+import {useCurrentUser} from "../../userInfo.js";
 
 export default function Home() {
     let fetchRan  = useRef(false);
@@ -32,7 +32,7 @@ export default function Home() {
     const dispatch = useDispatch();
     const today = dayTimestamp.getTimeStamp();
     const [theme] =useTheme();
-    const user = useCurrentUser();
+    // const user = useCurrentUser();
 
     function getTime(start,end){
         const s = Time.decode(start);
