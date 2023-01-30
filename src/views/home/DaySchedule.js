@@ -130,7 +130,7 @@ export default function DaySchedule () {
                       className={'date'}
                       divider={ true }
                       supportingText={ timestampToDay(dayTimestamp) }
-                      trailing={ <Calendar/> }
+                      trailing={ <span className='calendar-icon-wrapper'><Calendar/></span> }
             />
             <div id='plans-container'>
                 {state.schedules?.length >0
@@ -139,7 +139,7 @@ export default function DaySchedule () {
                                   key={ x.id }
                                   supportingText={ timeDurationToText(x.start,x.end) }
                                   leading={ <input type={ "checkbox" } checked={ x.done }/>}
-                                  trailing={ <ThreeDots className={'dots-icon'}/> }
+                                  trailing={ <span className={'dots-icon-container'}><ThreeDots /></span> }
                         />)
 
                     :'Empty'

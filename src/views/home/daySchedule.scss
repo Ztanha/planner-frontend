@@ -8,4 +8,9 @@
       width: 24px;
     }
   }
+  .dots-icon-container{
+    svg{
+      transform: rotate(90deg);
+    }
+  }
 }
