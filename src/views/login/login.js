@@ -3,21 +3,18 @@ import {useUser} from "../../UserContext.js";
 
 export default function Login(){
 
+    const [user,setUser] = useUser();
+
     async function login() {
 
         const uname =document.getElementById('username-inp').value;
         const password = document.getElementById('password-inp').value;
-        const [user,setUser] = useUser();
-
-        LoginController.login(uname,password).then(resp=>{
-
-            if(resp?.error){
-                alert(resp.error)
-            }else{
-                setUser(resp.data)
-            }
-        })
-
+        const resp = await LoginController.login(uname,password);
+        if(resp?.error){
+            alert(resp.error)
+        }else{
+            setUser(resp.data)
+        }
     }
     return (<div id='page-login'>
         <div id='title'></div>
