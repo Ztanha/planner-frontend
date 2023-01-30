@@ -22,7 +22,7 @@ export default function DaySchedule () {
     function onCheckBoxChange(value) {
         console.log(value)
     }
-    const Input = props=><input type='checkbox' checked={props.checked} onChange={ ()=>onCheckBoxChange(props.checked) } />
+    const Input = props=><input type='checkbox' checked={props.checked} onChange={ ()=>tickSchedule(props.schedule) } />
 
     function reducer(state,action) {
         function sortSchedules(arr)
@@ -142,7 +142,7 @@ export default function DaySchedule () {
                                   key={ x.id }
                                   supportingText={ timeDurationToText(x.start,x.end) }
                                   // leading={ <input type={ "checkbox" } checked={ x.done }/>}
-                                  leading={ <Input checked={x.done}/>}
+                                  leading={ <Input checked={x.done} schedule={x}/>}
                                   trailing={ <span className={'dots-icon-wrapper'}><ThreeDots /></span> }
                         />)
 
