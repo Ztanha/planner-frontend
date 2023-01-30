@@ -9,6 +9,8 @@ import ListItem from "../../components/lists/list-item/List-item.js";
 import { ReactComponent as ThreeDots } from "../../scss/icons/threeDots.svg";
 import { ReactComponent as Calendar } from "../../scss/icons/calendar.svg";
 import {motion} from "framer-motion";
+import TopNavBar from "../../components/navbars/top-nav-bar/Top-nav-bar.js";
+import Button from "../../components/buttons/common-buttons/Button.js";
 
 export default function DaySchedule () {
     const { date } = useParams();
@@ -117,14 +119,12 @@ export default function DaySchedule () {
                         exit={{ x: window.innerWidth,transition:{ duration: 0.1} }}
                         className='page'
     >
+        <TopNavBar headline={ 'Your tasks for today' }>
+            <ListItem headline={'something'}
+                      leading={ <Button type={'text'} >Add a task</Button> }
+            />
+        </TopNavBar>
         <div className={'page-day-schedule'}>
-            <>
-                <div id='title'>
-                    Your Plans For<br/>
-                    <label>date:</label>
-                    {input}
-                </div>
-            </>
             <ListItem overline={ 'Date'}
                       divider={ true }
                       supportingText={ timestampToDay(dayTimestamp) }
