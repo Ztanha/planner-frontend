@@ -22,6 +22,7 @@ import {ReactComponent as ClockIcon} from "../../scss/icons/clock.svg";
 import {Time} from "../../utilities/time.js";
 import StackedCard from "../../components/cards/stacked-card/Stacked-card.js";
 import redirect from '../../utilities/redirect.js'
+import {useTheme} from "../../ThemeContext.js";
 
 export default function Home() {
     let fetchRan  = useRef(false);
@@ -29,6 +30,7 @@ export default function Home() {
     const schedules = useSelector((state) => state.schedules)
     const dispatch = useDispatch();
     const today = dayTimestamp.getTimeStamp();
+    const [theme] =useTheme();
 
     function getTime(start,end){
         const s = Time.decode(start);
@@ -109,6 +111,7 @@ export default function Home() {
                                  leading={<Leading type={'icon'}
                                                    icon={<IconAndBackground icon={<OnGoingTaskIcon/>}/>}
                                  />}
+                                 style={{ backgroundColor:theme.surface}}
                                  title={'Ongoing Tasks'}
                                  trailing={
                                     <Button type={'text'}
