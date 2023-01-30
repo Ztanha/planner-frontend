@@ -6,7 +6,10 @@ export const UserInfo = () =>{
     const [user,setUser] = useState(null);
     useEffect(()=>{
         ( async ()=>{
-            const user = await useResource({url:'users/get/',data: {}})
+            const result = await useResource({url:'users/get/',data: {}})
+            if(result.status === 'success') {
+                setUser( result.data)
+            }
 
         })();
     },[])

@@ -32,7 +32,7 @@ export default function Home() {
     const dispatch = useDispatch();
     const today = dayTimestamp.getTimeStamp();
     const [theme] =useTheme();
-    // const user = useCurrentUser();
+    const user = useCurrentUser();
 
     function getTime(start,end){
         const s = Time.decode(start);

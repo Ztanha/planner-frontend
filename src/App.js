@@ -6,15 +6,18 @@ import './scss/App.scss';
 import './App.css';
 
 import AnimatedRoutes from "./components/animatedRoutes/AnimatedRoutes.js";
+import {UserInfo} from "./UserInfo.js";
 
 function App() {
 
     return (
         <div className="app">
             <ThemeProvider>
-                <HashRouter>
-                    <AnimatedRoutes/>
-                </HashRouter>
+                <UserInfo>
+                    <HashRouter>
+                        <AnimatedRoutes/>
+                    </HashRouter>
+                </UserInfo>
             </ThemeProvider>
         </div>
     )
