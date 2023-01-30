@@ -11,10 +11,8 @@
         width: size(icons,big);
       }
       &:hover{
-        background-color: $primary;
-        svg{
-          fill: $on-primary;
-        }
+        background-color: $secondary-container;
+
       }
     }
   }
@@ -26,10 +24,8 @@
       transform: rotate(90deg);
     }
     &:hover{
-      background-color: $primary;
-      svg{
-        fill: $on-primary !important;
-      }
+      background-color: $secondary-container;
+
     }
   }
 }
