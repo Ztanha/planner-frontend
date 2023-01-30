@@ -1,4 +1,11 @@
 @import '../../scss/App';
 .page-day-Schedule {
   @include main;
+  .date{
+    svg{
+      background-color: red;
+      fill: #7A7289;
+      width: 24px;
+    }
+  }
 }
