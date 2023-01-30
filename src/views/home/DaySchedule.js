@@ -139,7 +139,7 @@ export default function DaySchedule () {
                                   key={ x.id }
                                   supportingText={ timeDurationToText(x.start,x.end) }
                                   leading={ <input type={ "checkbox" } checked={ x.done }/>}
-                                  trailing={ <span className={'dots-icon-container'}><ThreeDots /></span> }
+                                  trailing={ <span className={'dots-icon-wrapper'}><ThreeDots /></span> }
                         />)
 
                     :'Empty'
