@@ -2,15 +2,13 @@ import {useEffect, useReducer, useRef, useState} from "react";
 import ScheduleController from "../../controllers/ScheduleController.js";
 import redirect from "../../utilities/redirect.js";
 import './daySchedule.scss'
-import dayTimestamp from "../../utilities/dayTimestamp.js";
-import {normalizeDate, timeDurationToText, timestampToDay} from "../../utilities/utilities.js";
+import {timeDurationToText, timestampToDay} from "../../utilities/utilities.js";
 import {useParams} from "react-router-dom";
 import ListItem from "../../components/lists/list-item/List-item.js";
 import { ReactComponent as ThreeDots } from "../../scss/icons/threeDots.svg";
 import { ReactComponent as Calendar } from "../../scss/icons/calendar.svg";
 import {motion} from "framer-motion";
 import TopNavBar from "../../components/navbars/top-nav-bar/Top-nav-bar.js";
-import Button from "../../components/buttons/common-buttons/Button.js";
 
 export default function DaySchedule () {
     const { date } = useParams();

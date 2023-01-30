@@ -4,18 +4,32 @@
   .date{
     .calendar-icon-wrapper{
       border-radius: 100px;
-      background-color: red;
       padding: .4em;
       vertical-align: center;
       svg{
-        fill: #7A7289;
-        width: 24px;
+        fill: $on-surface-variant;
+        width: size(icons,big);
+      }
+      &:hover{
+        background-color: $primary;
+        svg{
+          fill: $on-primary;
+        }
       }
     }
   }
   .dots-icon-wrapper{
+    border-radius: 100px;
+    padding: .4em;
     svg{
+      width: size(icons,big);
       transform: rotate(90deg);
+    }
+    &:hover{
+      background-color: $primary;
+      svg{
+        fill: $on-primary !important;
+      }
     }
   }
 }
