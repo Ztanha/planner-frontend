@@ -7,8 +7,8 @@ import {normalizeDate, timeDurationToText, timestampToDay} from "../../utilities
 import {useParams} from "react-router-dom";
 import ListItem from "../../components/lists/list-item/List-item.js";
 import { ReactComponent as ThreeDots } from "../../scss/icons/threeDots.svg";
-import { ReactComponent as EventIcon } from "../../scss/icons/event_repeat.svg";
 import { ReactComponent as Calendar } from "../../scss/icons/calendar.svg";
+import {motion} from "framer-motion";
 
 export default function DaySchedule () {
     const { date } = useParams();
@@ -112,7 +112,11 @@ export default function DaySchedule () {
         }
     },[ date,fetchRan.current ])
 
-    return (<div id='page-home'>
+    return (<motion.div initial={{ width: 0 }}
+                        animate={{ width:'100%' }}
+                        exit={{ x: window.innerWidth,transition:{ duration: 0.1} }}
+                        className='page day-schedule'
+    >
         <>
             <div id='title'>
                 Your Plans For<br/>
@@ -143,5 +147,5 @@ export default function DaySchedule () {
         </button>
         <button onClick={()=>redirect('/performance/')}>Day performance</button>
         {/*<NavigationBar/>*/}
-    </div>)
+    </motion.div>)
 }
