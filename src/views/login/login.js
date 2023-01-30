@@ -1,5 +1,6 @@
 import LoginController from "../../controllers/LoginController.js";
 import {useUser} from "../../UserContext.js";
+import redirect from "../../utilities/redirect.js";
 
 export default function Login(){
 
@@ -11,8 +12,10 @@ export default function Login(){
         const password = document.getElementById('password-inp').value;
         const result =  await LoginController.login(uname,password);
         setUser(result);
+        redirect('/home/')
 
     }
+    console.log(user);
     return (<div id='page-login'>
         <div id='title'></div>
         <div id='inputs-container'>
