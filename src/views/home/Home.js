@@ -23,45 +23,47 @@ import {Time} from "../../utilities/time.js";
 import StackedCard from "../../components/cards/stacked-card/Stacked-card.js";
 import redirect from '../../utilities/redirect.js'
 import {useTheme} from "../../ThemeContext.js";
+import {useCurrentUser} from "../../useUser.js";
 
 export default function Home() {
     let fetchRan  = useRef(false);
-    const user = useSelector((state)=>state.user)
+    // const user = useSelector((state)=>state.user)
     const schedules = useSelector((state) => state.schedules)
     const dispatch = useDispatch();
     const today = dayTimestamp.getTimeStamp();
     const [theme] =useTheme();
+    const user = useCurrentUser();
 
     function getTime(start,end){
         const s = Time.decode(start);
         const e = Time.decode(end)
         return s.hour+':'+s.minute+ ' - '+ e.hour+':'+e.minute
     }
-    useEffect(()=>{
-
-        if( fetchRan.current === false ) {
-            if(user.id === '' ){
-                UserController.getName().then(resp=> {
-
-                    if(resp.status === 'success') {
-                        const user = resp.data;
-                        dispatch(userLoaded({
-                            id : user.id,
-                            email : user.email,
-                            name : user.name
-                        }))
-                    }
-                });
-            }
-            ScheduleController.get(today).then(resp=>{
-                if(resp.status==='success' && resp.data.length >0){
-                    dispatch(schedulesLoaded(resp.data));
-                }
-            })
-            fetchRan.current = true;
-        }
-
-    },[user])
+    // useEffect(()=>{
+    //
+    //     if( fetchRan.current === false ) {
+    //         if(user.id === '' ){
+    //             UserController.getName().then(resp=> {
+    //
+    //                 if(resp.status === 'success') {
+    //                     const user = resp.data;
+    //                     dispatch(userLoaded({
+    //                         id : user.id,
+    //                         email : user.email,
+    //                         name : user.name
+    //                     }))
+    //                 }
+    //             });
+    //         }
+    //         ScheduleController.get(today).then(resp=>{
+    //             if(resp.status==='success' && resp.data.length >0){
+    //                 dispatch(schedulesLoaded(resp.data));
+    //             }
+    //         })
+    //         fetchRan.current = true;
+    //     }
+    //
+    // },[user])
     return(<motion.div initial={{ width: 0 }}
                        animate={{ width:'100%' }}
                        exit={{ x: window.innerWidth ,transition:{ duration: 0.1}}}
