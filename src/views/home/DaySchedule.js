@@ -120,9 +120,9 @@ export default function DaySchedule () {
                         className='page'
     >
         <TopNavBar headline={ 'Your tasks for today' }>
-            <ListItem headline={'something'}
-                      leading={ <Button type={'text'} >Add a task</Button> }
-            />
+            {/*<ListItem headline={'something'}*/}
+            {/*          leading={  }*/}
+            {/*/>*/}
         </TopNavBar>
         <div className={'page-day-schedule'}>
             <ListItem overline={ 'Date'}

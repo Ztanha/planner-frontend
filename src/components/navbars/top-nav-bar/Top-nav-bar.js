@@ -88,7 +88,7 @@ export default function TopNavBar(props) {
                     { props.overline || '' }
                 </div>
                 <div className='headline'>
-                    { capitalizeFirstChar(props.headline) }
+                    { props.headline ? capitalizeFirstChar(props.headline) : '' }
                 </div>
             </div>
         </div>
