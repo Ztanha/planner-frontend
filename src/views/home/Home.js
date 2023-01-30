@@ -76,8 +76,8 @@ export default function Home() {
         <div className='third'></div>
     </div>
     <div className='page'>
-        <TopNavBar headline={'Xara joon'}
-                   overline={'Morning!'+(user.name || '')}
+        <TopNavBar headline={user.name || ''}
+                   overline={'Morning!'}
                    sideMenuItems={[
                        {
                            title: 'Test',
