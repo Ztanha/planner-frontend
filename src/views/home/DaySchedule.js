@@ -127,7 +127,7 @@ export default function DaySchedule () {
         </TopNavBar>
         <div className={'page-day-schedule'}>
             <ListItem overline={ 'Date'}
-                      className={'salam'}
+                      className={'date'}
                       divider={ true }
                       supportingText={ timestampToDay(dayTimestamp) }
                       trailing={ <Calendar/> }
