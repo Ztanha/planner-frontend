@@ -21,6 +21,7 @@ export default function DaySchedule () {
     const initialState = { schedules :[] }
     const [ state,dispatch ] = useReducer( reducer,initialState );
     const [ checked,setChecked ] = useState([]);
+    const [ schedules,setSchedules ]= useState();
 
     function reducer(state,action) {
         function sortSchedules(arr)
@@ -94,8 +95,8 @@ export default function DaySchedule () {
     {
         ScheduleController.get(date).then(resp=>{
             if( resp.status === 'success' ){
-                console.log(resp.data)
-                dispatch({ type:'loaded',payload : resp.data })
+                setSchedules(resp.data);
+                // dispatch({ type:'loaded',payload : resp.data })
             }
             else alert(resp.error);
         })
