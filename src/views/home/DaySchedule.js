@@ -10,6 +10,7 @@ import { ReactComponent as Calendar } from "../../scss/icons/calendar.svg";
 import {motion} from "framer-motion";
 import TopNavBar from "../../components/navbars/top-nav-bar/Top-nav-bar.js";
 import BottomNavBar from "../../components/navbars/bottom-nav-bar/Bottom-nav-bar.js";
+import DatePicker from "react-date-picker-material";
 
 export default function DaySchedule () {
     const { date } = useParams();
@@ -19,7 +20,8 @@ export default function DaySchedule () {
     const dayTimestamp = date ? new Date(date * 1000) : new Date().getTime();
     const [ checked,setChecked ] = useState([]);
     const [ schedules,setSchedules ]= useState([]);
-
+    const [ dateToLoad, setDateToLoad ] = useState('');
+    const [ datePickerShow,setDatePickerShow ] = useState(false);
 
     function getSchedules(date)
     {
@@ -29,6 +31,10 @@ export default function DaySchedule () {
             }
             else alert(resp.error);
         })
+    }
+    function onDateChange() {
+        fetchRan.current = false;
+        navigate('/day-schedule/'+dayTimestamp.inpFormatToTimeStamp(dateToLoad))
     }
     async function handleCheckedBoxesChange(schedule) {
         const resp = await ScheduleController.markSchedule( schedule.id , Number(!schedule.done))
@@ -103,6 +109,12 @@ export default function DaySchedule () {
             {/*</button>*/}
             {/*<button onClick={()=>navigate('/performance/')}>Day performance</button>*/}
         </div>
+        <DatePicker date={ dateToLoad }
+                    // show={ datePickerShow }
+                    // hide={ setDatePickerShow}
+                    setDate={ setDateToLoad }
+                    selectDate={ onDateChange }
+        />
         <BottomNavBar/>
     </motion.div>)
 }
