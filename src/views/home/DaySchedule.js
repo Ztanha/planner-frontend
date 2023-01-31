@@ -10,7 +10,6 @@ import { ReactComponent as Calendar } from "../../scss/icons/calendar.svg";
 import {motion} from "framer-motion";
 import TopNavBar from "../../components/navbars/top-nav-bar/Top-nav-bar.js";
 import BottomNavBar from "../../components/navbars/bottom-nav-bar/Bottom-nav-bar.js";
-import CheckBox from "../../components/checkBox/CheckBox.js";
 
 export default function DaySchedule () {
     const { date } = useParams();
@@ -18,85 +17,15 @@ export default function DaySchedule () {
     const dateInp = useRef();
     const fetchRan = useRef(false);
     const dayTimestamp = date ? new Date(date * 1000) : new Date().getTime();
-    const initialState = { schedules :[] }
-    const [ state,dispatch ] = useReducer( reducer,initialState );
     const [ checked,setChecked ] = useState([]);
     const [ schedules,setSchedules ]= useState([]);
 
-    function reducer(state,action) {
-        function sortSchedules(arr)
-        {
-            arr =arr.sort(function (a,b) {
-                if(a.id > b.id) return 1
-                return -1
-            })
-            return arr
-        }
-
-        function filterSchedules(id) {
-            return state.schedules.filter(x => x.id !== id);
-        }
-
-        function completeSchedule ( schedule )
-        {
-            schedule.done = Number( !schedule.done );
-            return schedule
-        }
-
-        switch (action.type) {
-            case 'loaded':
-                return {
-                    schedules : action.payload
-                }
-            case 'edited':
-                return {
-                    schedules: sortSchedules(
-                        [...filterSchedules( action.payload.id ),action.payload]
-                    )
-                }
-            case 'markedAsCompleted':
-                return {
-                    schedules: sortSchedules(
-                        [...filterSchedules( action.payload.id ),completeSchedule( action.payload )]
-                    )
-                }
-            case 'deleted':
-                return {
-                    schedules: filterSchedules( action.payload )
-                }
-            default:
-                break;
-
-        }
-    }
-
-    function handleDateChange()
-    {
-        let d = dateInp.current.value;
-        fetchRan.current = false;
-        redirect('/day-schedule/'+dayTimestamp.inpFormatToTimeStamp(d))
-    }
-
-    function tickSchedule(e,sObj)
-    {
-        ScheduleController.markSchedule( sObj.id , Number(!sObj.done)).then( resp=>
-        {
-            if( resp.status === 'success' ){
-                e.target.checked = !sObj.done
-                // dispatch({type :'markedAsCompleted' ,payload : sObj })
-
-            }else{
-                alert('Something wrong happened!')
-            }
-        })
-    }
 
     function getSchedules(date)
     {
         ScheduleController.get(date).then(resp=>{
             if( resp.status === 'success' ){
                 setSchedules(resp.data);
-                // dispatch({ type:'loaded',payload : resp.data })
             }
             else alert(resp.error);
         })
@@ -125,7 +54,7 @@ export default function DaySchedule () {
             setChecked(getCompletedTasks(schedules))
         }
     },[schedules])
-    console.log('checked:',checked)
+
     useEffect(()=>{
 
         if( fetchRan.current === false )
