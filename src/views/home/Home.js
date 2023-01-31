@@ -41,31 +41,18 @@ export default function Home() {
         const e = Time.decode(end)
         return s.hour+':'+s.minute+ ' - '+ e.hour+':'+e.minute
     }
-    // useEffect(()=>{
-    //
-    //     if( fetchRan.current === false ) {
-    //         if(user.id === '' ){
-    //             UserController.getName().then(resp=> {
-    //
-    //                 if(resp.status === 'success') {
-    //                     const user = resp.data;
-    //                     dispatch(userLoaded({
-    //                         id : user.id,
-    //                         email : user.email,
-    //                         name : user.name
-    //                     }))
-    //                 }
-    //             });
-    //         }
-    //         ScheduleController.get(today).then(resp=>{
-    //             if(resp.status==='success' && resp.data.length >0){
-    //                 dispatch(schedulesLoaded(resp.data));
-    //             }
-    //         })
-    //         fetchRan.current = true;
-    //     }
-    //
-    // },[user])
+    useEffect(()=>{
+
+        if( fetchRan.current === false ) {
+            ScheduleController.get(today).then(resp=>{
+                if(resp.status==='success' && resp.data.length >0){
+                    dispatch(schedulesLoaded(resp.data));
+                }
+            })
+            fetchRan.current = true;
+        }
+
+    },[user])
     return(<motion.div initial={{ width: 0 }}
                        animate={{ width:'100%' }}
                        exit={{ x: window.innerWidth ,transition:{ duration: 0.1}}}

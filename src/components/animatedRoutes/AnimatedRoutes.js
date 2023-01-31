@@ -1,4 +1,4 @@
-import {Route, Routes, useLocation} from "react-router-dom";
+import {Navigate, Route, Routes, useLocation} from "react-router-dom";
 import Login from "../../views/login/login.js";
 import Home from "../../views/home/Home.js";
 import DaySchedule from "../../views/home/DaySchedule.js";
@@ -11,15 +11,27 @@ import Automations from "../../views/automations/automations.js";
 import Performance from "../../views/performance/Performance.js";
 import React from "react";
 import { AnimatePresence } from 'framer-motion';
+import {useUser} from "../../UserContext.js";
 
 function AnimatedRoutes() {
     const location = useLocation();
+    const [user] = useUser();
+    const ProtectedRoute = ({ user ,children }) => {
+        if (!user) {
+            return <Navigate to="/login" replace />;
+        }
+        return children;
+    };
     return(
         <AnimatePresence>
             <Routes location={ location } key={ location.pathname }>
                 <Route path='/' element={<Login/>}/>
-                <Route path='/home' element={<Home/>}/>
                 <Route path='/login' element={<Login/>}/>
+                <Route path='/home'
+                       element={<ProtectedRoute user={user}>
+                            <Home/>
+                        </ProtectedRoute>}>
+                </Route>
                 <Route path='/day-schedule/:date' element={<DaySchedule/>}/>
                 <Route path='/day-schedule/' element={<DaySchedule/>}/>
                 <Route path='/tasks' element={<Tasks/>}/>
