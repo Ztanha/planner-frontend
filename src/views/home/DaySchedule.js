@@ -21,7 +21,7 @@ export default function DaySchedule () {
     const initialState = { schedules :[] }
     const [ state,dispatch ] = useReducer( reducer,initialState );
     const [ checked,setChecked ] = useState([]);
-    const [ schedules,setSchedules ]= useState();
+    const [ schedules,setSchedules ]= useState([]);
 
     function reducer(state,action) {
         function sortSchedules(arr)
@@ -115,7 +115,17 @@ export default function DaySchedule () {
         }
 
     }
+    const getCompletedTasks = (tasks) => {
+        const filteredData = tasks.filter((item) => item.done === 1);
+        return (filteredData.map((item) => item.id));
+    };
 
+    useEffect(()=>{
+        if( schedules.length > 0 ) {
+            setChecked(getCompletedTasks(schedules))
+        }
+    },[schedules])
+    console.log('checked:',checked)
     useEffect(()=>{
 
         if( fetchRan.current === false )
