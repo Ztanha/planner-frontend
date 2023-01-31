@@ -4,7 +4,6 @@ import schedulesReducer from "../features/schedules/scheduleSlice.js"
 
 export const store = configureStore({
     reducer: {
-        user: userReducer,
         schedules : schedulesReducer,
         // performance : performanceReducer
     },
