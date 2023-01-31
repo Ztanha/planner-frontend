@@ -15,7 +15,6 @@ import DatePicker from "react-date-picker-material";
 export default function DaySchedule () {
     const { date } = useParams();
     const navigate = useNavigate();
-    const dateInp = useRef();
     const fetchRan = useRef(false);
     const dayTimestamp = date ? new Date(date * 1000) : new Date().getTime();
     const [ checked,setChecked ] = useState([]);
@@ -33,8 +32,10 @@ export default function DaySchedule () {
         })
     }
     function onDateChange() {
-        fetchRan.current = false;
-        navigate('/day-schedule/'+dayTimestamp.inpFormatToTimeStamp(dateToLoad))
+        setDatePickerShow(false);
+        console.log(dateToLoad)
+        // fetchRan.current = false;
+        // navigate('/day-schedule/'+dayTimestamp.inpFormatToTimeStamp(dateToLoad))
     }
     async function handleCheckedBoxesChange(schedule) {
         const resp = await ScheduleController.markSchedule( schedule.id , Number(!schedule.done))
@@ -86,7 +87,11 @@ export default function DaySchedule () {
                       className={'date'}
                       divider={ true }
                       supportingText={ timestampToDay(dayTimestamp) }
-                      trailing={ <span className='calendar-icon-wrapper'><Calendar/></span> }
+                      trailing={ <span className='calendar-icon-wrapper'
+                                       onClick={ ()=>setDatePickerShow(true)}
+                      >
+                          <Calendar/>
+                        </span> }
             />
             <div id='plans-container'>
                 { schedules?.length >0
@@ -111,9 +116,10 @@ export default function DaySchedule () {
         </div>
         <DatePicker date={ dateToLoad }
                     show={ datePickerShow }
-                    hide={ setDatePickerShow}
+                    hide={ ()=>setDatePickerShow(false)}
                     setDate={ setDateToLoad }
                     selectDate={ onDateChange }
+                    style={{zIndex:1003}}
         />
         <BottomNavBar/>
     </motion.div>)

@@ -31,6 +31,7 @@ function AnimatedRoutes() {
         <AnimatePresence>
             <Routes location={ location } key={ location.pathname }>
                 <Route path='/' element={<Login/>}/>
+                <Route path='/login' element={<Login/>}/>
                 <Route element={<ProtectedRoute user={user} />}>
                     <Route path="home" element={<Home />} />
                     <Route path='/day-schedule/:date' element={<DaySchedule/>}/>
