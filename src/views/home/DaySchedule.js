@@ -133,18 +133,17 @@ export default function DaySchedule () {
                         <ListItem headline={ x.subject }
                                   key={ x.id }
                                   supportingText={ timeDurationToText(x.start,x.end) }
-                                  leading={ <CheckBox onChange={e=>tickSchedule(e,x)}
-                                  />}
+                                  leading={ ''}
                                   trailing={ <span className={'dots-icon-wrapper'}><ThreeDots /></span> }
                         />)
 
                     :'Empty'
                 }
             </div>
-            <button onClick={()=>{navigate('/plan/new/'+date)}}>
-                Add a New Task
-            </button>
-            <button onClick={()=>navigate('/performance/')}>Day performance</button>
+            {/*<button onClick={()=>{navigate(`/plan/new/${date}`)}}>*/}
+            {/*    Add a New Task*/}
+            {/*</button>*/}
+            {/*<button onClick={()=>navigate('/performance/')}>Day performance</button>*/}
         </div>
         <BottomNavBar/>
     </motion.div>)
