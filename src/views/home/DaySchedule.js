@@ -1,6 +1,5 @@
-import {useEffect, useReducer, useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import ScheduleController from "../../controllers/ScheduleController.js";
-import redirect from "../../utilities/redirect.js";
 import './daySchedule.scss'
 import {timeDurationToText, timestampToDay} from "../../utilities/utilities.js";
 import {useNavigate, useParams} from "react-router-dom";
