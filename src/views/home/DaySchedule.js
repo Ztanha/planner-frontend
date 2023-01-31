@@ -110,8 +110,8 @@ export default function DaySchedule () {
             {/*<button onClick={()=>navigate('/performance/')}>Day performance</button>*/}
         </div>
         <DatePicker date={ dateToLoad }
-                    // show={ datePickerShow }
-                    // hide={ setDatePickerShow}
+                    show={ datePickerShow }
+                    hide={ setDatePickerShow}
                     setDate={ setDateToLoad }
                     selectDate={ onDateChange }
         />

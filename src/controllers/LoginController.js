@@ -34,7 +34,7 @@ export default class LoginController {
     static async checkAuthentication() {
 
         const res = await fetchWithToken('users/get',{
-            sessionId: localStorage.getItem('sessionId')
+            // sessionId: localStorage.getItem('sessionId')
         })
         if(res.status === 'success')return res.data
         return null;
