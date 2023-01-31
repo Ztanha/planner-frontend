@@ -154,8 +154,8 @@ export default function DaySchedule () {
                       trailing={ <span className='calendar-icon-wrapper'><Calendar/></span> }
             />
             <div id='plans-container'>
-                {state.schedules?.length >0
-                    ? state.schedules.map(x=>
+                { schedules?.length >0
+                    ? schedules.map(x=>
                         <ListItem headline={ x.subject }
                                   key={ x.id }
                                   supportingText={ timeDurationToText(x.start,x.end) }
