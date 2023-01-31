@@ -4,15 +4,15 @@ import './top-nav-bar.scss';
 import {ReactComponent as DotsIcon} from "../../../scss/icons/threeDots.svg";
 import {ReactComponent as HomeIcon} from "../../../scss/icons/home.svg";
 import {ReactComponent as BackIcon} from "../../../scss/icons/back.svg";
-import redirect from "../../../utilities/redirect.js";
 import {capitalizeFirstChar} from "../../../utilities/utilities.js";
 import {useTheme} from "../../../ThemeContext.js";
-import {goBack} from "../../../utilities/redirect.js";
+import {useNavigate} from "react-router-dom";
 
 export default function TopNavBar(props) {
     const isHome = useRef((location.hash.slice(2).includes('home')))
     const [ menuShow,setMenuShow ]= useState(false);
     const main= useRef();
+    const navigate = useNavigate();
     const [ theme ]= useTheme();
     const scrollElement= document.querySelector("html");
     const [ style,setStyle ]= useState('medium');
@@ -65,7 +65,7 @@ export default function TopNavBar(props) {
         >
             <div className='left-icons'>
                 <span id='backIcon'
-                      onClick={()=>goBack()}
+                      onClick={()=>navigate(-1)}
                 >
                     <BackIcon />
                 </span>
@@ -73,7 +73,7 @@ export default function TopNavBar(props) {
             <div className='right-icons'>
                 { !isHome.current
                     ? <span id='homeIcon'
-                        onClick={ ()=>redirect('/home')}>
+                        onClick={ ()=>navigate('/home')}>
                         <HomeIcon/>
                     </span>
                     : ''
