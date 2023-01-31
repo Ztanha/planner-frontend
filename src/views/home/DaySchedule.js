@@ -20,6 +20,7 @@ export default function DaySchedule () {
     const dayTimestamp = date ? new Date(date * 1000) : new Date().getTime();
     const initialState = { schedules :[] }
     const [ state,dispatch ] = useReducer( reducer,initialState );
+    const [ checked,setChecked ] = useState([]);
 
     function reducer(state,action) {
         function sortSchedules(arr)
@@ -99,6 +100,20 @@ export default function DaySchedule () {
             else alert(resp.error);
         })
     }
+    async function handleCheckedBoxesChange(schedule) {
+        const resp = await ScheduleController.markSchedule( schedule.id , Number(!schedule.done))
+        if (resp.status === 'success') {
+
+            if (checked.includes(schedule.id)) {
+                setChecked(checked.filter((c) => c !== schedule.id));
+            } else {
+                setChecked([...checked, schedule.id]);
+            }
+        } else {
+            //todo
+        }
+
+    }
 
     useEffect(()=>{
 
@@ -133,7 +148,10 @@ export default function DaySchedule () {
                         <ListItem headline={ x.subject }
                                   key={ x.id }
                                   supportingText={ timeDurationToText(x.start,x.end) }
-                                  leading={ ''}
+                                  leading={ <input type ='checkbox'
+                                                   checked={ checked.includes(x.id) }
+                                                   onChange={ ()=>handleCheckedBoxesChange(x) }
+                                  />}
                                   trailing={ <span className={'dots-icon-wrapper'}><ThreeDots /></span> }
                         />)
 
