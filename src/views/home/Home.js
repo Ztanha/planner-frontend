@@ -7,7 +7,6 @@ import {useEffect, useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import dayTimestamp from "../../utilities/dayTimestamp.js";
 import UserController from "../../controllers/UserController.js";
-import {userLoaded} from "../../features/userInfo/userInfoSlice.js";
 import ScheduleController from "../../controllers/ScheduleController.js";
 import {schedulesLoaded} from "../../features/schedules/scheduleSlice.js";
 import Card from "../../components/cards/Card.js";
@@ -21,11 +20,12 @@ import IconText from "../../components/icon/icon&text/Icon&text.js";
 import {ReactComponent as ClockIcon} from "../../scss/icons/clock.svg";
 import {Time} from "../../utilities/time.js";
 import StackedCard from "../../components/cards/stacked-card/Stacked-card.js";
-import redirect from '../../utilities/redirect.js'
 import {useTheme} from "../../ThemeContext.js";
 import {useUser} from "../../UserContext.js";
+import {useNavigate} from "react-router-dom";
 
 export default function Home() {
+    const navigate= useNavigate();
     let fetchRan  = useRef(false);
     const schedules = useSelector((state) => state.schedules)
     const dispatch = useDispatch();
@@ -105,7 +105,7 @@ export default function Home() {
                                  title={'Ongoing Tasks'}
                                  trailing={
                                     <Button type={'text'}
-                                           click={ ()=>redirect('/day-schedule/') }
+                                           click={ ()=>navigate('/day-schedule/') }
                                     >
                                         See all
                                     </Button>

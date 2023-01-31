@@ -1,5 +1,5 @@
 import {Navigate, Outlet, Route, Routes, useLocation} from "react-router-dom";
-import Login from "../../views/login/login.js";
+import Login from "../../views/login/Login.js";
 import Home from "../../views/home/Home.js";
 import DaySchedule from "../../views/home/DaySchedule.js";
 import Tasks from "../../views/tasks/Tasks.js";
@@ -16,18 +16,15 @@ import { useUser } from "../../UserContext.js";
 function AnimatedRoutes() {
     const location = useLocation();
     const [user] = useUser();
-    const Dashboard = () => {
-        return <h2>Dashboard (Protected: authenticated user required)</h2>;
-    };
+
     const ProtectedRoute = ({
         user,
         redirectPath = '/login',
-        children,
     }) => {
         if (!user) {
             return <Navigate to={redirectPath} replace />;
         }
-        return children ? children : <Outlet />;
+        return <Outlet />;
     };
 
     return(
@@ -48,7 +45,6 @@ function AnimatedRoutes() {
                     <Route path='/plan/new/:date' element={<NewPlan/>}/>
                     <Route path='/automations' element={<Automations/>}/>
                     <Route path='/performance/' element={<Performance/>}/>
-                    <Route path="dashboard" element={<Dashboard />} />
                 </Route>
             </Routes>
         </AnimatePresence>
