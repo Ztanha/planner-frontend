@@ -21,16 +21,12 @@ export default function TopNavBar(props) {
         small:{
             backgroundColor: theme.surface,
             color: theme.onSurface,
-            // boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15)',
-            // gridTemplateAreas: `'left-icons title right-icons'`,
-            // gridTemplateColumns: 'auto auto 1fr',
+
         },
         medium:{
             backgroundColor: (!isHome.current)  ? `${theme.surface}` : '',
             color:(isHome.current) ? theme.onPrimary : theme.onSurface,
-            // gridTemplateAreas: `'left-icons right-icons'
-            //                     'title title'`,
-            // gridTemplateColumns: 'auto auto'
+
         }
     }
 
