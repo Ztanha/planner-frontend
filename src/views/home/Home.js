@@ -27,14 +27,11 @@ import {useUser} from "../../UserContext.js";
 
 export default function Home() {
     let fetchRan  = useRef(false);
-    // const user = useSelector((state)=>state.user)
     const schedules = useSelector((state) => state.schedules)
     const dispatch = useDispatch();
     const today = dayTimestamp.getTimeStamp();
     const [theme] =useTheme();
     const [user] = useUser();
-
-    console.log(user)
 
     function getTime(start,end){
         const s = Time.decode(start);
