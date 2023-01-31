@@ -15,13 +15,10 @@ export default function DaySchedule () {
     const { date } = useParams();
     const dateInp = useRef();
     const fetchRan = useRef(false);
-    const [ input,setInput ] = useState('');
     const dayTimestamp = date ? new Date(date * 1000) : new Date().getTime();
     const initialState = { schedules :[] }
     const [ state,dispatch ] = useReducer( reducer,initialState );
-    function onCheckBoxChange(value) {
-        console.log(value)
-    }
+
     const Input = props=><input type='checkbox' checked={props.checked} onChange={ ()=>tickSchedule(props.schedule) } />
 
     function reducer(state,action) {
@@ -70,7 +67,6 @@ export default function DaySchedule () {
 
         }
     }
-    // console.log(state.schedules)
 
     function handleDateChange()
     {
@@ -107,11 +103,6 @@ export default function DaySchedule () {
 
         if( fetchRan.current === false )
         {
-            // setInput(<input type='date'
-            //                 value={day.getFullYear()+'-'+normalizeDate(day.getMonth()+1)+'-'+normalizeDate(day.getDate())}
-            //                 ref={dateInp}
-            //                 onChange={handleDateChange}
-            // />)
             fetchRan.current = true;
             getSchedules(dayTimestamp );
         }
@@ -141,7 +132,6 @@ export default function DaySchedule () {
                         <ListItem headline={ x.subject }
                                   key={ x.id }
                                   supportingText={ timeDurationToText(x.start,x.end) }
-                                  // leading={ <input type={ "checkbox" } checked={ x.done }/>}
                                   leading={ <Input checked={x.done} schedule={x}/>}
                                   trailing={ <span className={'dots-icon-wrapper'}><ThreeDots /></span> }
                         />)
