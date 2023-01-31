@@ -3,23 +3,23 @@ import ScheduleController from "../../controllers/ScheduleController.js";
 import redirect from "../../utilities/redirect.js";
 import './daySchedule.scss'
 import {timeDurationToText, timestampToDay} from "../../utilities/utilities.js";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import ListItem from "../../components/lists/list-item/List-item.js";
 import { ReactComponent as ThreeDots } from "../../scss/icons/threeDots.svg";
 import { ReactComponent as Calendar } from "../../scss/icons/calendar.svg";
 import {motion} from "framer-motion";
 import TopNavBar from "../../components/navbars/top-nav-bar/Top-nav-bar.js";
 import BottomNavBar from "../../components/navbars/bottom-nav-bar/Bottom-nav-bar.js";
+import CheckBox from "../../components/checkBox/CheckBox.js";
 
 export default function DaySchedule () {
     const { date } = useParams();
+    const navigate = useNavigate();
     const dateInp = useRef();
     const fetchRan = useRef(false);
     const dayTimestamp = date ? new Date(date * 1000) : new Date().getTime();
     const initialState = { schedules :[] }
     const [ state,dispatch ] = useReducer( reducer,initialState );
-
-    const Input = props=><input type='checkbox' checked={props.checked} onChange={ ()=>tickSchedule(props.schedule) } />
 
     function reducer(state,action) {
         function sortSchedules(arr)
@@ -75,12 +75,13 @@ export default function DaySchedule () {
         redirect('/day-schedule/'+dayTimestamp.inpFormatToTimeStamp(d))
     }
 
-    function tickSchedule(sObj)
+    function tickSchedule(e,sObj)
     {
         ScheduleController.markSchedule( sObj.id , Number(!sObj.done)).then( resp=>
         {
             if( resp.status === 'success' ){
-                dispatch({type :'markedAsCompleted' ,payload : sObj })
+                e.target.checked = !sObj.done
+                // dispatch({type :'markedAsCompleted' ,payload : sObj })
 
             }else{
                 alert('Something wrong happened!')
@@ -132,17 +133,18 @@ export default function DaySchedule () {
                         <ListItem headline={ x.subject }
                                   key={ x.id }
                                   supportingText={ timeDurationToText(x.start,x.end) }
-                                  leading={ <Input checked={x.done} schedule={x}/>}
+                                  leading={ <CheckBox onChange={e=>tickSchedule(e,x)}
+                                  />}
                                   trailing={ <span className={'dots-icon-wrapper'}><ThreeDots /></span> }
                         />)
 
                     :'Empty'
                 }
             </div>
-            <button onClick={()=>{redirect('/plan/new/'+date)}}>
+            <button onClick={()=>{navigate('/plan/new/'+date)}}>
                 Add a New Task
             </button>
-            <button onClick={()=>redirect('/performance/')}>Day performance</button>
+            <button onClick={()=>navigate('/performance/')}>Day performance</button>
         </div>
         <BottomNavBar/>
     </motion.div>)
