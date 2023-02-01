@@ -3,6 +3,7 @@ import redirect from "../../utilities/redirect.js";
 import {useState} from "react";
 import {formatColor} from "../../utilities/colors.js";
 import {useTheme} from "../../ThemeContext.js";
+import {useNavigate} from "react-router-dom";
 
 
 
@@ -10,6 +11,7 @@ export default function Card(props) {
 
     const [ state,setState ]=useState('default');
     const [theme] = useTheme();
+    const navigate=useNavigate()
     const styles={
         filled:{
             default:{
@@ -61,7 +63,7 @@ export default function Card(props) {
             <div className={classes}
                  style={ cardStyle }
             >
-                <div onClick={()=>redirect(url)}>
+                <div onClick={()=>navigate(url)}>
                     <div className='content'>
                         {props.children}
                     </div>

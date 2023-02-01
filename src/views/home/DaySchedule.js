@@ -34,7 +34,7 @@ export default function DaySchedule () {
         setDatePickerShow(false);
         console.log(dateToLoad)
         // fetchRan.current = false;
-        // navigate('/day-schedule/'+dayTimestamp.inpFormatToTimeStamp(dateToLoad))
+        navigate('/day-schedule/'+dateToLoad)
     }
     async function handleCheckedBoxesChange(schedule) {
         const resp = await ScheduleController.markSchedule( schedule.id , Number(!schedule.done))
@@ -112,14 +112,15 @@ export default function DaySchedule () {
             {/*    Add a New Task*/}
             {/*</button>*/}
             {/*<button onClick={()=>navigate('/performance/')}>Day performance</button>*/}
+            <DatePicker date={ dateToLoad }
+                        show={ datePickerShow }
+                        hide={ ()=>setDatePickerShow(false)}
+                        setDate={ setDateToLoad }
+                        selectDate={ onDateChange }
+                        // style={{zIndex:1003,top:0}}
+            />
         </div>
-        <DatePicker date={ dateToLoad }
-                    show={ datePickerShow }
-                    hide={ ()=>setDatePickerShow(false)}
-                    setDate={ setDateToLoad }
-                    selectDate={ onDateChange }
-                    style={{zIndex:1003}}
-        />
+
         <BottomNavBar/>
     </motion.div>)
 }
