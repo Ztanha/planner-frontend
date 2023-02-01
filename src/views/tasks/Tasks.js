@@ -15,7 +15,7 @@ import SnackBar from "../../components/snack-bar/Snack-bar.js";
 import {useTheme} from "../../ThemeContext.js";
 import {useNavigate} from "react-router-dom";
 import {ResourceLoader} from "../../components/ResourceLoader.js";
-import {TaskInfo} from "../../components/TaskInfo.js";
+import {TaskListItems} from "../../components/TaskListItems.js";
 
 export default function tasks(){
     const [ tasks,setTasks ] = useState();
@@ -28,9 +28,7 @@ export default function tasks(){
     const [ snackBarMsg , setSnackBarMsg ] = useState('');
     const [ showSnackBar,setShowSnackBar ] = useState(false);
     const navigate = useNavigate();
-    const handleClick = (id) =>{
-        navigate('/task/'+id)
-    }
+
     async function handleSaveNewTask(){
 
         const similar = tasks.find( x => x.subject === newTaskValue.trim() )
@@ -53,22 +51,6 @@ export default function tasks(){
         }
     }
 
-    useEffect(()=>{
-
-        if( fetchRan.current === false ){
-
-            // TaskController.getAll().then(resp=>{
-            //     if(resp.status === 'success') {
-            //         setTasks(resp.data);
-            //     }else{
-            //         setTasks([])
-            //     }
-            // })
-            // fetchRan.current = true;
-
-        }
-    },[ fetchRan.current ])
-
     return (<motion.div initial={{ width: 0 }}
                         animate={{ width:'100%' }}
                         exit={{ x: window.innerWidth,transition:{ duration: 0.1} }}
@@ -80,18 +62,8 @@ export default function tasks(){
             />
         </TopNavBar>
         <div className='tasks-page'>
-            {/* { tasks?.length > 0*/}
-            {/*    ? tasks.map(x=>*/}
-            {/*        <ListItem key = { x['id'] }*/}
-            {/*                  headline = { x['subject'] }*/}
-            {/*                  effects = { true }*/}
-            {/*                  divider = { true }*/}
-            {/*                  click = { ()=> handleClick( x['id'] ) }*/}
-            {/*        />)*/}
-            {/*    : ''*/}
-            {/*}*/}
             <ResourceLoader resourceUrl={'tasks/'} resourceName={'task'}>
-                <TaskInfo />
+                <TaskListItems />
             </ResourceLoader>
             <FAB icon={
                 <Plus style={{fill: `${theme.primary}`}}/>
@@ -114,13 +86,14 @@ export default function tasks(){
                         Save
                     </Button>
                 </>}
-        ><TextField leading = { false }
+        >
+            <TextField leading = { false }
                     label = { 'subject' }
                     supportingText = { msg }
                     trailing = { savingStatus }
                     value = { newTaskValue }
                     setValue = { setNewTaskValue }
-        />
+            />
         </Dialog>
         <SnackBar show={ showSnackBar }
                   setShow= { setShowSnackBar }
