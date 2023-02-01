@@ -1,7 +1,6 @@
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useRef, useState} from "react";
 import TaskController from "../../controllers/TasksController.js";
-import redirect, {goBack} from "../../utilities/redirect.js";
 import TopNavBar from "../../components/navbars/top-nav-bar/Top-nav-bar.js";
 import ListItem from "../../components/lists/list-item/List-item.js";
 import './task.scss'
@@ -28,6 +27,7 @@ export default function Task(){
     const [ msgModal, setMsgModal ] = useState(false);
     const [ msg,setMsg ] = useState('');
     const [ status,setStatus ] = useState('');
+    const navigate = useNavigate();
     const [ msgModalContent,setMsgModalContent ] = useState('');
 
     function getTasks() {
@@ -111,14 +111,14 @@ export default function Task(){
                   headline={ 'Add a schedule' }
                   divider = { true }
                   effects={true}
-                  click={ ()=>redirect('/schedule/task/'+tId) }
+                  click={ ()=>navigate('/schedule/task/'+tId) }
         />
 
         <ListItem leading={ <Plus/> }
                   headline={ 'Add automations' }
                   divider = { true }
                   effects={true}
-                  click = { ()=>redirect('/automation/task/'+tId) }
+                  click = { ()=>navigate('/automation/task/'+tId) }
         />
 
         <ListItem leading={ <Trash/> }
