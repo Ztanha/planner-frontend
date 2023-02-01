@@ -3,7 +3,7 @@ import {Modal} from "../modal/Modal.js";
 
 export default function Dialog(props) {
 
-    return (<div id='dialog-component'>
+    return (<div className='dialog-component'>
         <Modal show={ props.show } hide={ props.hide } >
                  <div className='dialog-container'>
                      { props.icon || '' }

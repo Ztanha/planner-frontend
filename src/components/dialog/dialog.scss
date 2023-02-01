@@ -1,5 +1,5 @@
 @import "../../scss/App";
-#dialog-component{
+.dialog-component{
   z-index: z-index(global,dialog);
   .dialog-container {
     text-align: center;
