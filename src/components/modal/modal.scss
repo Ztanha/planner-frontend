@@ -1,17 +1,17 @@
-//@import '../../scss/App';
+@import '../../scss/App';
 //
-//.modal-component {
-//  position: absolute;
+.modal-comp {
+  position: absolute;
 //  top : 10%;
 //  .scrim {
 //    position: fixed;
-//    top: 0;
-//    left: 0;
-//    width: 100%;
-//    height: 100%;
-//    z-index: z-index(global,modal);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  z-index: z-index(global,modal);
 //  }
-//  #modal-container{
+  .modal-cont{
 //    position:fixed;
 //    z-index: z-index(global,modal);
 //    border-radius: 28px;
@@ -23,5 +23,5 @@
 //    padding-right: 24px;
 //    @include font-body-medium;
 //    text-align: left;
-//  }
-//}
+  }
+}
