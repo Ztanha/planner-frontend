@@ -1,15 +1,15 @@
 import { useEffect,useState } from "react";
 import {fetchWithToken} from "../utilities/fetch.js";
 
-export const ResourceLoader = ({ resourceUrl, resourceName, children })=>{
+export const ResourceLoader = ({ resourceUrl, resourceName, children, data={}, methodType })=>{
     const [ state,setState ]= useState(null)
 
     useEffect( ()=>{
         (async ()=> {
-            const response = await fetchWithToken(resourceUrl,{});
+            const response = await fetchWithToken( resourceUrl, data, methodType);
             setState( response.data )
         })();
-    },[resourceUrl])
+    },[ resourceUrl ])
     return ( state
         ? state.map(x=>
         <>

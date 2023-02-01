@@ -23,6 +23,8 @@ import StackedCard from "../../components/cards/stacked-card/Stacked-card.js";
 import {useTheme} from "../../ThemeContext.js";
 import {useUser} from "../../UserContext.js";
 import {useNavigate} from "react-router-dom";
+import {ResourceLoader} from "../../components/ResourceLoader.js";
+import {ScheduleListItems} from "../../components/ScheduleListItems.js";
 
 export default function Home() {
     const navigate= useNavigate();
@@ -33,23 +35,23 @@ export default function Home() {
     const [theme] =useTheme();
     const [user] = useUser();
 
-    function getTime(start,end){
-        const s = Time.decode(start);
-        const e = Time.decode(end)
-        return s.hour+':'+s.minute+ ' - '+ e.hour+':'+e.minute
-    }
-    useEffect(()=>{
-
-        if( fetchRan.current === false ) {
-            ScheduleController.get(today).then(resp=>{
-                if(resp.status==='success' && resp.data.length >0){
-                    dispatch(schedulesLoaded(resp.data));
-                }
-            })
-            fetchRan.current = true;
-        }
-
-    },[user])
+    // function getTime(start,end){
+    //     const s = Time.decode(start);
+    //     const e = Time.decode(end)
+    //     return s.hour+':'+s.minute+ ' - '+ e.hour+':'+e.minute
+    // }
+    // useEffect(()=>{
+    //
+    //     if( fetchRan.current === false ) {
+    //         ScheduleController.get(today).then(resp=>{
+    //             if(resp.status==='success' && resp.data.length >0){
+    //                 dispatch(schedulesLoaded(resp.data));
+    //             }
+    //         })
+    //         fetchRan.current = true;
+    //     }
+    //
+    // },[user])
     return(<motion.div initial={{ width: 0 }}
                        animate={{ width:'100%' }}
                        exit={{ x: window.innerWidth ,transition:{ duration: 0.1}}}
@@ -112,21 +114,29 @@ export default function Home() {
                                 }
                                  buttons={[]}
                     >
-                        { schedules.data.length >0
+                        {/*{ schedules.data.length >0*/}
 
-                            ? schedules.data.map(schedule=>
-                                <ListItem headline={schedule.subject}
-                                          key={schedule.id}
-                                          trailing={' '}
-                                          supportingText={<IconText
-                                              icon={<ClockIcon/>}
-                                              text={getTime(schedule.start,schedule.end)}
-                                          />}
-                                />)
-                            : <ListItem supportingText={'No task yet'}
-                                        trailing={' '}
-                            />
-                        }
+                        {/*    ? schedules.data.map(schedule=>*/}
+                        {/*        <ListItem headline={schedule.subject}*/}
+                        {/*                  key={schedule.id}*/}
+                        {/*                  trailing={' '}*/}
+                        {/*                  supportingText={<IconText*/}
+                        {/*                      icon={<ClockIcon/>}*/}
+                        {/*                      text={getTime(schedule.start,schedule.end)}*/}
+                        {/*                  />}*/}
+                        {/*        />)*/}
+                        {/*    : <ListItem supportingText={'No task yet'}*/}
+                        {/*                trailing={' '}*/}
+                        {/*    />*/}
+                        {/*}*/}
+                        <ResourceLoader resourceUrl={'schedules/'}
+                                        resourceName={'schedule'}
+                                        data={{
+                                                date: Math.floor(today/1000),
+                                        }}
+                        >
+                            <ScheduleListItems />
+                        </ResourceLoader>
                     </StackedCard>
                 </div>
             </div>
