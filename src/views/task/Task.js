@@ -184,7 +184,7 @@ export default function Task(){
                   setShow = { setMsgModal }
                   headline = { msgModalContent }
                   closeAffordance = {true}
-                  onAfterShow = { ()=>goBack() }
+                  onAfterShow = { ()=>navigate(-1) }
         />
         <BottomNavBar />
     </motion.div>)
