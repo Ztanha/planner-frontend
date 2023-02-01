@@ -6,18 +6,22 @@ export const ResourceLoader = ({ resourceUrl, resourceName, children })=>{
 
     useEffect( ()=>{
         (async ()=> {
-            const response = await fetchWithToken(resourceUrl);
+            const response = await fetchWithToken(resourceUrl,{});
             setState( response.data )
         })();
     },[resourceUrl])
-    return (
+    return ( state
+        ? state.map(x=>
         <>
-            {React.Children.map(children, child =>{
+            { React.Children.map(children, child =>{
                 if(React.isValidElement(child)) {
-                    return React.cloneElement(child, { [resourceName]: state })
+                    return <React.Fragment key={children}>
+                        { React.cloneElement(child, { [resourceName]: x }) }
+                    </React.Fragment>
                 }
                 return child;
             })}
-        </>
+        </>)
+            : ''
     )
 }

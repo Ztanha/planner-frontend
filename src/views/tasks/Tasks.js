@@ -14,6 +14,8 @@ import Button from "../../components/buttons/common-buttons/Button.js";
 import SnackBar from "../../components/snack-bar/Snack-bar.js";
 import {useTheme} from "../../ThemeContext.js";
 import {useNavigate} from "react-router-dom";
+import {ResourceLoader} from "../../components/ResourceLoader.js";
+import {TaskInfo} from "../../components/TaskInfo.js";
 
 export default function tasks(){
     const [ tasks,setTasks ] = useState();
@@ -55,14 +57,14 @@ export default function tasks(){
 
         if( fetchRan.current === false ){
 
-            TaskController.getAll().then(resp=>{
-                if(resp.status === 'success') {
-                    setTasks(resp.data);
-                }else{
-                    setTasks([])
-                }
-            })
-            fetchRan.current = true;
+            // TaskController.getAll().then(resp=>{
+            //     if(resp.status === 'success') {
+            //         setTasks(resp.data);
+            //     }else{
+            //         setTasks([])
+            //     }
+            // })
+            // fetchRan.current = true;
 
         }
     },[ fetchRan.current ])
@@ -78,16 +80,19 @@ export default function tasks(){
             />
         </TopNavBar>
         <div className='tasks-page'>
-             { tasks?.length > 0
-                ? tasks.map(x=>
-                    <ListItem key = { x['id'] }
-                              headline = { x['subject'] }
-                              effects = { true }
-                              divider = { true }
-                              click = { ()=> handleClick( x['id'] ) }
-                    />)
-                : ''
-            }
+            {/* { tasks?.length > 0*/}
+            {/*    ? tasks.map(x=>*/}
+            {/*        <ListItem key = { x['id'] }*/}
+            {/*                  headline = { x['subject'] }*/}
+            {/*                  effects = { true }*/}
+            {/*                  divider = { true }*/}
+            {/*                  click = { ()=> handleClick( x['id'] ) }*/}
+            {/*        />)*/}
+            {/*    : ''*/}
+            {/*}*/}
+            <ResourceLoader resourceUrl={'tasks/'} resourceName={'task'}>
+                <TaskInfo />
+            </ResourceLoader>
             <FAB icon={
                 <Plus style={{fill: `${theme.primary}`}}/>
                 }
