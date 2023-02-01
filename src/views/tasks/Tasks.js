@@ -13,6 +13,7 @@ import TextField from "../../components/text-field/TextField.js";
 import Button from "../../components/buttons/common-buttons/Button.js";
 import SnackBar from "../../components/snack-bar/Snack-bar.js";
 import {useTheme} from "../../ThemeContext.js";
+import {useNavigate} from "react-router-dom";
 
 export default function tasks(){
     const [ tasks,setTasks ] = useState();
@@ -24,9 +25,9 @@ export default function tasks(){
     const [ msg , setMsg ] = useState('Ex. Yoga');
     const [ snackBarMsg , setSnackBarMsg ] = useState('');
     const [ showSnackBar,setShowSnackBar ] = useState(false);
-
+    const navigate = useNavigate();
     const handleClick = (id) =>{
-        redirect('/task/'+id)
+        navigate('/task/'+id)
     }
     async function handleSaveNewTask(){
 
