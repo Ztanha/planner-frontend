@@ -1,7 +1,6 @@
 import {useEffect, useRef, useState} from "react";
 import TaskController from "../../controllers/TasksController.js";
 import './tasks.scss'
-import redirect from "../../utilities/redirect.js";
 import TopNavBar from "../../components/navbars/top-nav-bar/Top-nav-bar.js";
 import ListItem from "../../components/lists/list-item/List-item.js";
 import BottomNavBar from "../../components/navbars/bottom-nav-bar/Bottom-nav-bar.js";

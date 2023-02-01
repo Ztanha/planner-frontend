@@ -61,14 +61,14 @@ export default function DaySchedule () {
         }
     },[schedules])
 
-    useEffect(()=>{
-
-        if( fetchRan.current === false )
-        {
-            fetchRan.current = true;
-            getSchedules(dayTimestamp );
-        }
-    },[ date,fetchRan.current ])
+    // useEffect(()=>{
+    //
+    //     if( fetchRan.current === false )
+    //     {
+    //         fetchRan.current = true;
+    //         getSchedules(dayTimestamp );
+    //     }
+    // },[ date,fetchRan.current ])
 
     return (<motion.div initial={{ width: 0 }}
                         animate={{ width:'100%' }}
