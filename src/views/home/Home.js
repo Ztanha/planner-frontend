@@ -16,9 +16,6 @@ import {ReactComponent as AutomationsIcon} from "../../scss/icons/event_repeat.s
 import Leading from "../../components/leading/Leading.js";
 import {ReactComponent as OnGoingTaskIcon} from "../../scss/icons/upcoming.svg";
 import Button from "../../components/buttons/common-buttons/Button.js";
-import IconText from "../../components/icon/icon&text/Icon&text.js";
-import {ReactComponent as ClockIcon} from "../../scss/icons/clock.svg";
-import {Time} from "../../utilities/time.js";
 import StackedCard from "../../components/cards/stacked-card/Stacked-card.js";
 import {useTheme} from "../../ThemeContext.js";
 import {useUser} from "../../UserContext.js";
@@ -28,30 +25,10 @@ import {ScheduleListItems} from "../../components/ScheduleListItems.js";
 
 export default function Home() {
     const navigate= useNavigate();
-    let fetchRan  = useRef(false);
-    const schedules = useSelector((state) => state.schedules)
-    const dispatch = useDispatch();
     const today = dayTimestamp.getTimeStamp();
     const [theme] =useTheme();
     const [user] = useUser();
 
-    // function getTime(start,end){
-    //     const s = Time.decode(start);
-    //     const e = Time.decode(end)
-    //     return s.hour+':'+s.minute+ ' - '+ e.hour+':'+e.minute
-    // }
-    // useEffect(()=>{
-    //
-    //     if( fetchRan.current === false ) {
-    //         ScheduleController.get(today).then(resp=>{
-    //             if(resp.status==='success' && resp.data.length >0){
-    //                 dispatch(schedulesLoaded(resp.data));
-    //             }
-    //         })
-    //         fetchRan.current = true;
-    //     }
-    //
-    // },[user])
     return(<motion.div initial={{ width: 0 }}
                        animate={{ width:'100%' }}
                        exit={{ x: window.innerWidth ,transition:{ duration: 0.1}}}
@@ -114,21 +91,6 @@ export default function Home() {
                                 }
                                  buttons={[]}
                     >
-                        {/*{ schedules.data.length >0*/}
-
-                        {/*    ? schedules.data.map(schedule=>*/}
-                        {/*        <ListItem headline={schedule.subject}*/}
-                        {/*                  key={schedule.id}*/}
-                        {/*                  trailing={' '}*/}
-                        {/*                  supportingText={<IconText*/}
-                        {/*                      icon={<ClockIcon/>}*/}
-                        {/*                      text={getTime(schedule.start,schedule.end)}*/}
-                        {/*                  />}*/}
-                        {/*        />)*/}
-                        {/*    : <ListItem supportingText={'No task yet'}*/}
-                        {/*                trailing={' '}*/}
-                        {/*    />*/}
-                        {/*}*/}
                         <ResourceLoader resourceUrl={'schedules/'}
                                         resourceName={'schedule'}
                                         data={{
