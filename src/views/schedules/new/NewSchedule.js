@@ -145,7 +145,7 @@ export default function NewSchedule() {
                 <DatePicker show={ dateHandlerShow }
                             hide={ setDateHandlerShow }
                             date={ date }
-                            style={{ top:'10px', fontFamily:'Roboto' ,zIndex:1003 }}
+                            style={{ top:'10px', fontFamily:'Roboto' ,zIndex:3000 }}
                             setDate={ setDate }
                             selectDate={ onDateChange }
                 />
