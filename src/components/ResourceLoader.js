@@ -11,8 +11,8 @@ export const ResourceLoader = ({ resourceUrl, resourceName, children, data={}, m
         })();
     },[ resourceUrl ])
     return ( state
-        ? state.map(x=>
-        <>
+        ? state.map((x,index)=>
+        <div key={index}>
             { React.Children.map(children, child =>{
                 if(React.isValidElement(child)) {
                     return <React.Fragment key={children}>
@@ -21,7 +21,7 @@ export const ResourceLoader = ({ resourceUrl, resourceName, children, data={}, m
                 }
                 return child;
             })}
-        </>)
+        </div>)
             : ''
     )
 }
