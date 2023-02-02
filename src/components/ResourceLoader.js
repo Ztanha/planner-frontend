@@ -4,7 +4,7 @@ import withLoading from "./hocs/withLoading.js";
 
 export const ResourceLoader = ({ resourceUrl, resourceName, children, postData={}, methodType })=>{
     const [ respData,setRespData ]= useState(null)
-    const WrappedData = withLoading(PrintComponent, respData);
+    const WrappedData = withLoading( PrintComponent, respData );
     useEffect( ()=>{
         (async ()=> {
             try {
