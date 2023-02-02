@@ -16,18 +16,18 @@ export const ResourceLoader = ({ resourceUrl, resourceName, children, postData={
         })();
     },[ resourceUrl ]);
 
-    return <WrappedData data={respData}
-                        resourceName={resourceName} >
-        {children}
+    return <WrappedData data={ respData }
+                        resourceName={ resourceName } >
+        { children }
     </WrappedData>
 }
 
 
-function PrintComponent({data, resourceName, children}){
+function PrintComponent({ data, resourceName, children }){
 
-    return React.Children.map(children, child =>{
-        return (React.isValidElement(child))
-            ? React.cloneElement(child, { [resourceName]: data })
+    return React.Children.map( children, child =>{
+        return ( React.isValidElement( child ) )
+            ? React.cloneElement(child, { [ resourceName ]: data })
             : child;
     });
 }
