@@ -1,24 +1,29 @@
 import { useEffect,useState } from "react";
 import {fetchWithToken} from "../utilities/fetch.js";
+import withLoading from "./hocs/withLoading.js";
 
-export const ResourceLoader = ({ resourceUrl, resourceName, children, data={}, methodType })=>{
-    const [ state,setState ]= useState(null)
-
+export const ResourceLoader = ({ resourceUrl, resourceName, children, postData={}, methodType })=>{
+    const [ respData,setRespData ]= useState(null)
+    const WrappedData = withLoading(PrintComponent, respData);
     useEffect( ()=>{
         (async ()=> {
-            const response = await fetchWithToken( resourceUrl, data, methodType);
-            setState( response.data )
+            try {
+                const response = await fetchWithToken(resourceUrl, postData, methodType);
+                setRespData(response.data)
+            }catch (e) {
+                setRespData({error: e.message});
+            }
         })();
-    },[ resourceUrl ])
-    return (
-        state ? React.Children.map(children, child =>{
-                        if(React.isValidElement(child)) {
-                            return <React.Fragment key={children}>
-                                { React.cloneElement(child, { [resourceName]: state }) }
-                            </React.Fragment>
-                        }
-                        return child;
-                    })
-                : ''
-    )
+    },[ resourceUrl ]);
+
+    return <WrappedData data={respData} resourceName={resourceName} >{children}</WrappedData>
+}
+
+
+function PrintComponent({data, resourceName, children}){
+    return React.Children.map(children, child =>{
+        return (React.isValidElement(child))
+            ? React.cloneElement(child, { [resourceName]: data })
+            : child;
+    });
 }

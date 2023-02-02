@@ -7,11 +7,11 @@ export const TaskListItems = ({ tasks })=>{
         navigate('/task/'+id)
     }
     return (
-        tasks ? tasks.map(task => <ListItem key = { task['id'] }
-                          headline = { task['subject'] }
-                          effects = { true }
-                          divider = { true }
-                          click = { ()=> handleClick( task['id'] ) }
+        tasks ? tasks.map(task => <ListItem   key={ task['id'] }
+                                              headline={ task['subject'] }
+                                              effects={ true }
+                                              divider={ true }
+                                              click={ ()=> handleClick( task['id'] ) }
         />)
             : ''
     )

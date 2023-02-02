@@ -15,6 +15,7 @@ import {useTheme} from "../../ThemeContext.js";
 import {useNavigate} from "react-router-dom";
 import {ResourceLoader} from "../../components/ResourceLoader.js";
 import {TaskListItems} from "../../components/TaskListItems.js";
+import {NewTaskModal} from "../../components/NewTaskModal.js";
 
 export default function tasks(){
     const [ tasks,setTasks ] = useState();
@@ -61,8 +62,9 @@ export default function tasks(){
             />
         </TopNavBar>
         <div className='tasks-page'>
-            <ResourceLoader resourceUrl={'tasks/'} resourceName={'task'}>
+            <ResourceLoader resourceUrl={'tasks/'} resourceName={'tasks'}>
                 <TaskListItems />
+                <NewTaskModal />
             </ResourceLoader>
             <FAB icon={
                 <Plus style={{fill: `${theme.primary}`}}/>
