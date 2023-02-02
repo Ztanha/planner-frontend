@@ -10,18 +10,15 @@ export const ResourceLoader = ({ resourceUrl, resourceName, children, data={}, m
             setState( response.data )
         })();
     },[ resourceUrl ])
-    return ( state
-        ? state.map((x,index)=>
-        <div key={index}>
-            { React.Children.map(children, child =>{
-                if(React.isValidElement(child)) {
-                    return <React.Fragment key={children}>
-                        { React.cloneElement(child, { [resourceName]: x }) }
-                    </React.Fragment>
-                }
-                return child;
-            })}
-        </div>)
-            : ''
+    return (
+        state ? React.Children.map(children, child =>{
+                        if(React.isValidElement(child)) {
+                            return <React.Fragment key={children}>
+                                { React.cloneElement(child, { [resourceName]: state }) }
+                            </React.Fragment>
+                        }
+                        return child;
+                    })
+                : ''
     )
 }
