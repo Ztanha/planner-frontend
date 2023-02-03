@@ -16,6 +16,8 @@ import {useNavigate} from "react-router-dom";
 import {ResourceLoader} from "../../components/ResourceLoader.js";
 import {TaskListItems} from "../../components/TaskListItems.js";
 import {withNewTask} from "../../components/withNewTask.js";
+import {withSaveButton} from "../../components/hocs/withSaveButton.js";
+import {withModal} from "../../components/hocs/withModal.js";
 
 
 export default function tasks(){
@@ -28,57 +30,36 @@ export default function tasks(){
     const [ msg , setMsg ] = useState('Ex. Yoga');
     const [ snackBarMsg , setSnackBarMsg ] = useState('');
     const [ showSnackBar,setShowSnackBar ] = useState(false);
-    const navigate = useNavigate();
 
-    const Felan = (<Dialog show = { newTaskModal }
-                           setShow = { setNewTaskModal }
-                           title = { 'Add a new task'}
-                           buttons = {<>
-                               <Button type = { 'text' }
-                                       click={ ()=>setNewTaskModal(false)}
-                               >
-                                   Cancel
-                               </Button>
-                               <Button type = { 'text' }
-                                       click = { handleSaveNewTask }
-                               >
-                                   Save
-                               </Button>
-                           </>}
-                    >
-                        <TextField leading = { false }
-                                   label = { 'subject' }
-                                   supportingText = { msg }
-                                   trailing = { savingStatus }
-                                   value = { newTaskValue }
-                                   setValue = { setNewTaskValue }
-                        />
-                    </Dialog>)
+    const NewTaskInput =  ()=><TextField leading = { false }
+                                    label = { 'subject' }
+                                    supportingText = { msg }
+                                    trailing = { savingStatus }
+                                    value = { newTaskValue }
+                                    setValue = { setNewTaskValue }
+                            />
+    async function handleSaveNewTask(tasks){
 
-    const NewTaskModalWrapped = withNewTask(<Felan/>)
+        const similar = tasks.find( x => x.subject === newTaskValue.trim() )
+        if ( typeof similar !== 'undefined' ) {
+            setMsg('There already is a task with this name!')
+            setSavingStatus('error')
+        }else {
+            const resp = await TaskController.add(newTaskValue,'');
+            if (resp.status === 'success') {
 
-    //
-    // async function handleSaveNewTask(){
-    //
-    //     const similar = tasks.find( x => x.subject === newTaskValue.trim() )
-    //     if ( typeof similar !== 'undefined' ) {
-    //         setMsg('There already is a task with this name!')
-    //         setSavingStatus('error')
-    //     }else {
-    //         const resp = await TaskController.add(newTaskValue,'');
-    //         if (resp.status === 'success') {
-    //
-    //             setSavingStatus('done');
-    //             setSnackBarMsg('Saved!');
-    //             setShowSnackBar (true);
-    //             setNewTaskModal(false);
-    //             fetchRan.current = false;
-    //
-    //         } else {
-    //             setMsg(resp.error)
-    //         }
-    //     }
-    // }
+                setSavingStatus('done');
+                setSnackBarMsg('Saved!');
+                setShowSnackBar (true);
+                setNewTaskModal(false);
+                fetchRan.current = false;
+
+            } else {
+                setMsg(resp.error)
+            }
+        }
+    }
+    const ModalWrapped = withModal( withSaveButton( NewTaskInput ,tasks => handleSaveNewTask(tasks) ))
 
     return (<motion.div initial={{ width: 0 }}
                         animate={{ width:'100%' }}
@@ -95,7 +76,7 @@ export default function tasks(){
                             resourceName={'tasks'}
             >
                 <TaskListItems />
-                <NewTaskModalWrapped />
+                <ModalWrapped />
             </ResourceLoader>
             <FAB icon={
                 <Plus style={{fill: `${theme.primary}`}}/>
