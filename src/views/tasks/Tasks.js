@@ -15,7 +15,8 @@ import {useTheme} from "../../ThemeContext.js";
 import {useNavigate} from "react-router-dom";
 import {ResourceLoader} from "../../components/ResourceLoader.js";
 import {TaskListItems} from "../../components/TaskListItems.js";
-import {NewTaskModal} from "../../components/NewTaskModal.js";
+import {withNewTask} from "../../components/withNewTask.js";
+
 
 export default function tasks(){
     const [ tasks,setTasks ] = useState();
@@ -29,27 +30,55 @@ export default function tasks(){
     const [ showSnackBar,setShowSnackBar ] = useState(false);
     const navigate = useNavigate();
 
-    async function handleSaveNewTask(){
+    const Felan = (<Dialog show = { newTaskModal }
+                           setShow = { setNewTaskModal }
+                           title = { 'Add a new task'}
+                           buttons = {<>
+                               <Button type = { 'text' }
+                                       click={ ()=>setNewTaskModal(false)}
+                               >
+                                   Cancel
+                               </Button>
+                               <Button type = { 'text' }
+                                       click = { handleSaveNewTask }
+                               >
+                                   Save
+                               </Button>
+                           </>}
+                    >
+                        <TextField leading = { false }
+                                   label = { 'subject' }
+                                   supportingText = { msg }
+                                   trailing = { savingStatus }
+                                   value = { newTaskValue }
+                                   setValue = { setNewTaskValue }
+                        />
+                    </Dialog>)
 
-        const similar = tasks.find( x => x.subject === newTaskValue.trim() )
-        if ( typeof similar !== 'undefined' ) {
-            setMsg('There already is a task with this name!')
-            setSavingStatus('error')
-        }else {
-            const resp = await TaskController.add(newTaskValue,'');
-            if (resp.status === 'success') {
+    const NewTaskModalWrapped = withNewTask(<Felan/>)
 
-                setSavingStatus('done');
-                setSnackBarMsg('Saved!');
-                setShowSnackBar (true);
-                setNewTaskModal(false);
-                fetchRan.current = false;
-
-            } else {
-                setMsg(resp.error)
-            }
-        }
-    }
+    //
+    // async function handleSaveNewTask(){
+    //
+    //     const similar = tasks.find( x => x.subject === newTaskValue.trim() )
+    //     if ( typeof similar !== 'undefined' ) {
+    //         setMsg('There already is a task with this name!')
+    //         setSavingStatus('error')
+    //     }else {
+    //         const resp = await TaskController.add(newTaskValue,'');
+    //         if (resp.status === 'success') {
+    //
+    //             setSavingStatus('done');
+    //             setSnackBarMsg('Saved!');
+    //             setShowSnackBar (true);
+    //             setNewTaskModal(false);
+    //             fetchRan.current = false;
+    //
+    //         } else {
+    //             setMsg(resp.error)
+    //         }
+    //     }
+    // }
 
     return (<motion.div initial={{ width: 0 }}
                         animate={{ width:'100%' }}
@@ -62,9 +91,11 @@ export default function tasks(){
             />
         </TopNavBar>
         <div className='tasks-page'>
-            <ResourceLoader resourceUrl={'tasks/'} resourceName={'tasks'}>
+            <ResourceLoader resourceUrl={'tasks/'}
+                            resourceName={'tasks'}
+            >
                 <TaskListItems />
-                <NewTaskModal />
+                <NewTaskModalWrapped />
             </ResourceLoader>
             <FAB icon={
                 <Plus style={{fill: `${theme.primary}`}}/>
@@ -72,30 +103,30 @@ export default function tasks(){
                  click={ ()=>{ setNewTaskModal(true) }}
             />
         </div>
-        <Dialog show = { newTaskModal }
-                setShow = { setNewTaskModal }
-                title = { 'Add a new task'}
-                buttons = {<>
-                    <Button type = { 'text' }
-                            click={ ()=>setNewTaskModal(false)}
-                    >
-                        Cancel
-                    </Button>
-                    <Button type = { 'text' }
-                            click = { handleSaveNewTask }
-                    >
-                        Save
-                    </Button>
-                </>}
-        >
-            <TextField leading = { false }
-                    label = { 'subject' }
-                    supportingText = { msg }
-                    trailing = { savingStatus }
-                    value = { newTaskValue }
-                    setValue = { setNewTaskValue }
-            />
-        </Dialog>
+        {/*<Dialog show = { newTaskModal }*/}
+        {/*        setShow = { setNewTaskModal }*/}
+        {/*        title = { 'Add a new task'}*/}
+        {/*        buttons = {<>*/}
+        {/*            <Button type = { 'text' }*/}
+        {/*                    click={ ()=>setNewTaskModal(false)}*/}
+        {/*            >*/}
+        {/*                Cancel*/}
+        {/*            </Button>*/}
+        {/*            <Button type = { 'text' }*/}
+        {/*                    click = { handleSaveNewTask }*/}
+        {/*            >*/}
+        {/*                Save*/}
+        {/*            </Button>*/}
+        {/*        </>}*/}
+        {/*>*/}
+        {/*    <TextField leading = { false }*/}
+        {/*            label = { 'subject' }*/}
+        {/*            supportingText = { msg }*/}
+        {/*            trailing = { savingStatus }*/}
+        {/*            value = { newTaskValue }*/}
+        {/*            setValue = { setNewTaskValue }*/}
+        {/*    />*/}
+        {/*</Dialog>*/}
         <SnackBar show={ showSnackBar }
                   setShow= { setShowSnackBar }
                   headline = { snackBarMsg }

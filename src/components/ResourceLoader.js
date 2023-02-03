@@ -3,8 +3,10 @@ import {fetchWithToken} from "../utilities/fetch.js";
 import withLoading from "./hocs/withLoading.js";
 
 export const ResourceLoader = ({ resourceUrl, resourceName, children, postData={}, methodType })=>{
+
     const [ respData,setRespData ]= useState(null)
     const WrappedData = withLoading( PrintComponent, respData );
+
     useEffect( ()=>{
         (async ()=> {
             try {
@@ -18,10 +20,9 @@ export const ResourceLoader = ({ resourceUrl, resourceName, children, postData={
 
     return <WrappedData data={ respData }
                         resourceName={ resourceName } >
-        { children }
-    </WrappedData>
+                { children }
+            </WrappedData>
 }
-
 
 function PrintComponent({ data, resourceName, children }){
 
