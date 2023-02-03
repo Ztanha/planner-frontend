@@ -21,7 +21,6 @@ import {withModal} from "../../components/hocs/withModal.js";
 
 
 export default function tasks(){
-    const [ tasks,setTasks ] = useState();
     const [theme] = useTheme();
     const fetchRan = useRef(false);
     const [ newTaskModal,setNewTaskModal ] = useState(false);
