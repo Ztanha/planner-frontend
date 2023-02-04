@@ -58,7 +58,7 @@ export default function tasks(){
             }
         }
     }
-    const ModalWrapped = withModal( withSaveButton( NewTaskInput ,tasks => handleSaveNewTask(tasks) ))
+    const ModalWrapped = withModal( withSaveButton( NewTaskInput ,tasks => handleSaveNewTask(tasks) ),newTaskModal)
 
     return (<motion.div initial={{ width: 0 }}
                         animate={{ width:'100%' }}
