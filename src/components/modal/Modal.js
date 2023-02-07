@@ -12,7 +12,8 @@ function Modal( props ) {
                  style={{ backgroundColor:colors.scrim }}
             >
                 <div className='modal-cont'
-                    style={{ background : colors.surface3,
+                     onClick={ e=>e.stopPropagation() }
+                     style={{ background : colors.surface3,
                              color : colors.onSurface,
                              width:props.width+'px'
                     }}
